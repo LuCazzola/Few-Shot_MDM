@@ -3,7 +3,7 @@
 Contains intructions for the ranking strategy adoped in the selection process for low-represented categories in NTU RGB+D w.r.t.
 the HumanML3D dataset.
 
-Before executing, make sure you have text data according to !
+Before executing, make sure you have text data according to ![Here](https://github.com/GuyTevet/motion-diffusion-model?tab=readme-ov-file#a-the-easy-way-text-only).
 ```
 python3 rank.py --texts-root ../motion-diffusion-model/dataset/HumanML3D/texts
 ```
