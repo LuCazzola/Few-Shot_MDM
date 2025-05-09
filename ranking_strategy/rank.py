@@ -41,6 +41,7 @@ def get_or_compute_embeddings(text_list, model, device, args, out_file="humanml3
     else:
         print(f"Computing embeddings and saving to: {cached_embeddigs}")
         embeddings = encode_texts(text_list, model, device)
+        os.makedirs(args.cache_dir, exist_ok=True)
         torch.save(embeddings, cached_embeddigs)
         return embeddings
 
@@ -54,7 +55,7 @@ def compute_knn_stats(
     nn = NearestNeighbors(n_neighbors=args.k, metric='cosine')
     nn.fit(humanml3d_embeds)
 
-    ntu_label_stats = {}
+    label_stats = []
 
     for idx, label_embed in enumerate(ntu_label_embeds):
         label_embed = label_embed.unsqueeze(0)
@@ -62,26 +63,30 @@ def compute_knn_stats(
         distances = distances.flatten()
         indices = indices.flatten()
 
-        rk = distances[-1]  # distance to the k-th nearest neighbor
         mean_dist = float(np.mean(distances))
         density = 1.0 / mean_dist if mean_dist > 0 else float('inf')
 
-        ntu_label_stats[idx] = {
+        top_5 = sorted(zip(distances, indices))[:5]
+        top_5_closest = [
+            {"distance": float(d), "text": descriptions[i]} for d, i in top_5
+        ]
+
+        label_stats.append({
             "action_label": ntu_action_labels[idx],
             "density_score": density,
-            "k": args.k,
-            "kth_distance": float(rk),
-            "top_5_closest": [
-                {"distance": float(d), "text": descriptions[i]} for d, i in sorted(zip(distances, indices))[:5]
-            ]
-        }
+            "top_5_closest": top_5_closest
+        })
+    # Final JSON structure
+    result = {
+        "k": args.k,
+        "labels": label_stats
+    }
+    # Optionally save to a file
+    out_file = os.path.join(args.save_dir, f"ntu_density_k{args.k}_{'action-label-only' if args.use_action_label else ''}.json")
+    with open(out_file, "w") as f:
+        json.dump(result, f, indent=4)
 
-    # Save JSON only
-    json_path = os.path.join(args.save_dir, f"ntu_density_k{args.k}_{'label-only' if args.use_action_label else ''}.json")
-    with open(json_path, 'w') as f:
-        json.dump(ntu_label_stats, f, indent=4)
-    print(f"Saved density scores to: {json_path}")
-
+    return result
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compute k-NN stats between NTU actions and HumanML3D descriptions.")
@@ -102,7 +107,7 @@ if __name__ == "__main__":
         help="Directory to save results."
     )
     parser.add_argument(
-        "--use-action-label", action="store_true", default=True,
+        "--use-action-label", action="store_true", default=False,
         help="Use action label directly as text prompt for action classes, otherwise use natural language adaptation (default: False)."
     )
 
