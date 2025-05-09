@@ -1,9 +1,11 @@
 import os
 import json
-import torch
-import clip
+import argparse
+
 import numpy as np
+import torch
 from tqdm import tqdm
+import clip
 from sklearn.neighbors import NearestNeighbors
 
 def load_humanml3d_descriptions(root_folder):
@@ -29,24 +31,27 @@ def encode_texts(text_list, model, device, batch_size=32):
             all_embeddings.append(embeddings.cpu())
     return torch.cat(all_embeddings, dim=0)
 
-def get_or_compute_embeddings(text_list, model, device, cache_path):
-    if os.path.exists(cache_path):
-        print(f"Loading cached embeddings from: {cache_path}")
-        return torch.load(cache_path, map_location='cpu')
+def get_or_compute_embeddings(text_list, model, device, args, out_file="humanml3d_clip_embeddings.pt"):
+
+    cached_embeddigs = os.path.join(args.cache_dir, out_file)
+    
+    if os.path.exists(cached_embeddigs):
+        print(f"Loading cached embeddings from: {cached_embeddigs}")
+        return torch.load(cached_embeddigs, map_location='cpu')
     else:
-        print(f"Computing embeddings and saving to: {cache_path}")
+        print(f"Computing embeddings and saving to: {cached_embeddigs}")
         embeddings = encode_texts(text_list, model, device)
-        torch.save(embeddings, cache_path)
+        torch.save(embeddings, cached_embeddigs)
         return embeddings
 
 def compute_knn_stats(
     ntu_label_embeds, ntu_action_labels, humanml3d_embeds,
-    descriptions, save_dir="results", k=200
+    descriptions, args
 ):
-    print(f"Computing density using K={k} nearest neighbors...")
-    os.makedirs(save_dir, exist_ok=True)
+    print(f"Computing density using K={args.k} nearest neighbors...")
+    os.makedirs(args.save_dir, exist_ok=True)
 
-    nn = NearestNeighbors(n_neighbors=k, metric='cosine')
+    nn = NearestNeighbors(n_neighbors=args.k, metric='cosine')
     nn.fit(humanml3d_embeds)
 
     ntu_label_stats = {}
@@ -64,7 +69,7 @@ def compute_knn_stats(
         ntu_label_stats[idx] = {
             "action_label": ntu_action_labels[idx],
             "density_score": density,
-            "k": k,
+            "k": args.k,
             "kth_distance": float(rk),
             "top_5_closest": [
                 {"distance": float(d), "text": descriptions[i]} for d, i in sorted(zip(distances, indices))[:5]
@@ -72,28 +77,51 @@ def compute_knn_stats(
         }
 
     # Save JSON only
-    json_path = os.path.join(save_dir, f"ntu_density_k{k}.json")
+    json_path = os.path.join(args.save_dir, f"ntu_density_k{args.k}_{'label-only' if args.use_action_label else ''}.json")
     with open(json_path, 'w') as f:
         json.dump(ntu_label_stats, f, indent=4)
     print(f"Saved density scores to: {json_path}")
 
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Compute k-NN stats between NTU actions and HumanML3D descriptions.")
+    parser.add_argument(
+        "--texts-root", type=str, required=True,
+        help="Path to the folder containing HumanML3D .txt description files."
+    )
+    parser.add_argument(
+        "--k", type=int, default=200,
+        help="Number of nearest neighbors to consider."
+    )
+    parser.add_argument(
+        "--cache-dir", type=str, default="cache",
+        help="Directory to save cached embeddings."
+    )
+    parser.add_argument(
+        "--save-dir", type=str, default="results",
+        help="Directory to save results."
+    )
+    parser.add_argument(
+        "--use-action-label", action="store_true", default=True,
+        help="Use action label directly as text prompt for action classes, otherwise use natural language adaptation (default: False)."
+    )
+
+    args = parser.parse_args()
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, preprocess = clip.load("ViT-B/32", device=device)
 
-    root_folder = '/teamspace/studios/this_studio/motion-diffusion-model/dataset/HumanML3D/texts'
-    print(f"Loading & formatting HumanML3D descriptions from {root_folder}...")
-    humanml3d_descriptions = load_humanml3d_descriptions(root_folder)
+    texts_root = args.texts_root
+    print(f"Loading & formatting HumanML3D descriptions from {texts_root}...")
+    humanml3d_descriptions = load_humanml3d_descriptions(texts_root)
 
     print("Encoding HumanML3D descriptions and NTU action labels...")
     humanml3d_embeds = get_or_compute_embeddings(
-        humanml3d_descriptions, model, device, "humanml3d_clip_embeddings.pt"
+        humanml3d_descriptions, model, device, args
     )
 
-    NATURAL_LANGUAGE = True
     ntu_action_labels = {}
-    
-    if not NATURAL_LANGUAGE :
+    if args.use_action_label :
         # Use directly the labels from the NTU RGB+D dataset
         ntu_action_labels = {
             0: "drink water", 1: "eat meal", 2: "brush teeth", 3: "brush hair", 4: "drop", 5: "pick up", 6: "throw", 7: "sit down", 8: "stand up", 9: "clapping",
@@ -135,6 +163,5 @@ if __name__ == "__main__":
         ntu_action_labels,
         humanml3d_embeds,
         humanml3d_descriptions,
-        k = 200,
-        save_dir="."
+        args
     )
