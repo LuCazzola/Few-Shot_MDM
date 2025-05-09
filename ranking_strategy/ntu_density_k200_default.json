@@ -1,0 +1,3362 @@
+{
+    "0": {
+        "action_label": "drink water",
+        "density_score": 8.468656971144403,
+        "k": 200,
+        "kth_distance": 0.13200970312111815,
+        "top_5_closest": [
+            {
+                "distance": 0.08416758464320095,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.08416758464320095,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.08416758464320095,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.08416758464320095,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.08817215494091446,
+                "text": "a person sips a drink two times."
+            }
+        ]
+    },
+    "1": {
+        "action_label": "eat meal",
+        "density_score": 8.067255976772868,
+        "k": 200,
+        "kth_distance": 0.1295102406754456,
+        "top_5_closest": [
+            {
+                "distance": 0.09403336232952586,
+                "text": "a person is eating something."
+            },
+            {
+                "distance": 0.09403336232952586,
+                "text": "a person is eating something."
+            },
+            {
+                "distance": 0.09403336232952586,
+                "text": "a person is eating something."
+            },
+            {
+                "distance": 0.09403336232952586,
+                "text": "a person is eating something."
+            },
+            {
+                "distance": 0.10091456643809493,
+                "text": "a person is cutting his meal, then eats it."
+            }
+        ]
+    },
+    "2": {
+        "action_label": "brush teeth",
+        "density_score": 4.78145996992377,
+        "k": 200,
+        "kth_distance": 0.22397794021931916,
+        "top_5_closest": [
+            {
+                "distance": 0.10411563936462032,
+                "text": "the person is brushing his teeth."
+            },
+            {
+                "distance": 0.10411563936462032,
+                "text": "the person is brushing his teeth."
+            },
+            {
+                "distance": 0.10954587744445399,
+                "text": "getting ready to brush their teeth."
+            },
+            {
+                "distance": 0.10954587744445399,
+                "text": "getting ready to brush their teeth."
+            },
+            {
+                "distance": 0.12917077875933125,
+                "text": "a perosn brushes their teeth, spits, and then sets their toothbrush down."
+            }
+        ]
+    },
+    "3": {
+        "action_label": "brush hair",
+        "density_score": 5.249489161463902,
+        "k": 200,
+        "kth_distance": 0.20298087911028417,
+        "top_5_closest": [
+            {
+                "distance": 0.11889146022004138,
+                "text": "the man picks up a brushes nd brushes someone's hair then puts the brush back down."
+            },
+            {
+                "distance": 0.11889146022004138,
+                "text": "the man picks up a brushes nd brushes someone's hair then puts the brush back down."
+            },
+            {
+                "distance": 0.14350551573331594,
+                "text": "a person who seems to dry their hair"
+            },
+            {
+                "distance": 0.14350551573331594,
+                "text": "a person who seems to dry their hair"
+            },
+            {
+                "distance": 0.1438497444637017,
+                "text": "someone pulls their hair back"
+            }
+        ]
+    },
+    "4": {
+        "action_label": "drop",
+        "density_score": 8.304396349181149,
+        "k": 200,
+        "kth_distance": 0.12721550493110068,
+        "top_5_closest": [
+            {
+                "distance": 0.10770060223753763,
+                "text": "person is reaching down."
+            },
+            {
+                "distance": 0.10770060223753763,
+                "text": "person is reaching down."
+            },
+            {
+                "distance": 0.11055332905307202,
+                "text": "the person took a small jump forward."
+            },
+            {
+                "distance": 0.11055332905307202,
+                "text": "the person took a small jump forward."
+            },
+            {
+                "distance": 0.11055332905307202,
+                "text": "the person took a small jump forward."
+            }
+        ]
+    },
+    "5": {
+        "action_label": "pick up",
+        "density_score": 9.897445556725142,
+        "k": 200,
+        "kth_distance": 0.10591132703047934,
+        "top_5_closest": [
+            {
+                "distance": 0.08511785266363991,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.08511785266363991,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.092826863180546,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.092826863180546,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.09300174530846161,
+                "text": "jumping forward one time quickly."
+            }
+        ]
+    },
+    "6": {
+        "action_label": "throw",
+        "density_score": 10.098203313446794,
+        "k": 200,
+        "kth_distance": 0.10886072156125948,
+        "top_5_closest": [
+            {
+                "distance": 0.0748543684785451,
+                "text": "the person is the throwing some thing."
+            },
+            {
+                "distance": 0.0748543684785451,
+                "text": "the person is the throwing some thing."
+            },
+            {
+                "distance": 0.07803015876073405,
+                "text": "the person is throwing hard."
+            },
+            {
+                "distance": 0.07803015876073405,
+                "text": "the person is throwing hard."
+            },
+            {
+                "distance": 0.08024782555553622,
+                "text": "someone trying to throw something"
+            }
+        ]
+    },
+    "7": {
+        "action_label": "sit down",
+        "density_score": 12.024880494011507,
+        "k": 200,
+        "kth_distance": 0.09319280566892119,
+        "top_5_closest": [
+            {
+                "distance": 0.05000601530264548,
+                "text": "sitting down one time."
+            },
+            {
+                "distance": 0.05000601530264548,
+                "text": "sitting down one time."
+            },
+            {
+                "distance": 0.05759869588787658,
+                "text": "the person is going to sit down"
+            },
+            {
+                "distance": 0.05759869588787658,
+                "text": "the person is going to sit down"
+            },
+            {
+                "distance": 0.05983383947679788,
+                "text": "the man is sitting down"
+            }
+        ]
+    },
+    "8": {
+        "action_label": "stand up",
+        "density_score": 10.610750307786999,
+        "k": 200,
+        "kth_distance": 0.10075037690058886,
+        "top_5_closest": [
+            {
+                "distance": 0.07344978674666902,
+                "text": "standing up from ground."
+            },
+            {
+                "distance": 0.07344978674666902,
+                "text": "standing up from ground."
+            },
+            {
+                "distance": 0.07603939503100499,
+                "text": "stand up straight and bring your right arm out."
+            },
+            {
+                "distance": 0.07819287090074067,
+                "text": "stand up straight and bring your left arm out."
+            },
+            {
+                "distance": 0.07824774118775335,
+                "text": "a person turns and stands still"
+            }
+        ]
+    },
+    "9": {
+        "action_label": "clapping",
+        "density_score": 11.840783861255183,
+        "k": 200,
+        "kth_distance": 0.0985757441482451,
+        "top_5_closest": [
+            {
+                "distance": 0.052988610909905254,
+                "text": "a person is clapping quickly."
+            },
+            {
+                "distance": 0.052988610909905254,
+                "text": "a person is clapping quickly."
+            },
+            {
+                "distance": 0.061557488087590095,
+                "text": "a person is clapping for a long time"
+            },
+            {
+                "distance": 0.061557488087590095,
+                "text": "a person is clapping for a long time"
+            },
+            {
+                "distance": 0.06311104554734814,
+                "text": "a person is clapping their hands together"
+            }
+        ]
+    },
+    "10": {
+        "action_label": "reading",
+        "density_score": 7.623793856887263,
+        "k": 200,
+        "kth_distance": 0.13697280062543526,
+        "top_5_closest": [
+            {
+                "distance": 0.10304718543164548,
+                "text": "he takes a book with right hand"
+            },
+            {
+                "distance": 0.10423830195854022,
+                "text": "a person reading a book"
+            },
+            {
+                "distance": 0.10423830195854022,
+                "text": "a person reading a book"
+            },
+            {
+                "distance": 0.10942401925941603,
+                "text": "kicking something hard and having a look"
+            },
+            {
+                "distance": 0.10942401925941603,
+                "text": "kicking something hard and having a look"
+            }
+        ]
+    },
+    "11": {
+        "action_label": "writing",
+        "density_score": 8.846976330027218,
+        "k": 200,
+        "kth_distance": 0.11987697701410005,
+        "top_5_closest": [
+            {
+                "distance": 0.07489693731412772,
+                "text": "the person is workin on something."
+            },
+            {
+                "distance": 0.07489693731412772,
+                "text": "the person is workin on something."
+            },
+            {
+                "distance": 0.08177098351334111,
+                "text": "a person who is writing something"
+            },
+            {
+                "distance": 0.08177098351334111,
+                "text": "a person who is writing something"
+            },
+            {
+                "distance": 0.08466088980695696,
+                "text": "person is working on something."
+            }
+        ]
+    },
+    "12": {
+        "action_label": "tear up paper",
+        "density_score": 7.582740296306612,
+        "k": 200,
+        "kth_distance": 0.1377457929538165,
+        "top_5_closest": [
+            {
+                "distance": 0.11755341383897111,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.11755341383897111,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.11958813728391715,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.11958813728391715,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.11974257087871176,
+                "text": "the person is upset and crying."
+            }
+        ]
+    },
+    "13": {
+        "action_label": "put on jacket",
+        "density_score": 5.840120043350641,
+        "k": 200,
+        "kth_distance": 0.17814061947527438,
+        "top_5_closest": [
+            {
+                "distance": 0.06889360883458628,
+                "text": "someone putting a jacket slowly"
+            },
+            {
+                "distance": 0.06889360883458628,
+                "text": "someone putting a jacket slowly"
+            },
+            {
+                "distance": 0.11776278523698613,
+                "text": "a person puts on a coat then buttons it"
+            },
+            {
+                "distance": 0.11776278523698613,
+                "text": "a person puts on a coat then buttons it"
+            },
+            {
+                "distance": 0.12833732011887788,
+                "text": "a person zips up their jacket then spreads their arms out."
+            }
+        ]
+    },
+    "14": {
+        "action_label": "take off jacket",
+        "density_score": 5.304034884289921,
+        "k": 200,
+        "kth_distance": 0.19543074299120933,
+        "top_5_closest": [
+            {
+                "distance": 0.09665818211618205,
+                "text": "someone putting a jacket slowly"
+            },
+            {
+                "distance": 0.09665818211618205,
+                "text": "someone putting a jacket slowly"
+            },
+            {
+                "distance": 0.15647734966041493,
+                "text": "a person zips up their jacket then spreads their arms out."
+            },
+            {
+                "distance": 0.15647734966041493,
+                "text": "a person zips up their jacket then spreads their arms out."
+            },
+            {
+                "distance": 0.15856246128917717,
+                "text": "a person puts on a coat then buttons it"
+            }
+        ]
+    },
+    "15": {
+        "action_label": "put on a shoe",
+        "density_score": 10.394926760178336,
+        "k": 200,
+        "kth_distance": 0.10477921016154779,
+        "top_5_closest": [
+            {
+                "distance": 0.07255831793201706,
+                "text": "a man steps into his shoes with his right foot then his left"
+            },
+            {
+                "distance": 0.07350600356221659,
+                "text": "a man steps into his shoes with his left foot then his right"
+            },
+            {
+                "distance": 0.07572360319501126,
+                "text": "a person is stepping their foot up"
+            },
+            {
+                "distance": 0.07572360319501126,
+                "text": "a person is stepping their foot up"
+            },
+            {
+                "distance": 0.07794345345796816,
+                "text": "standing on one foot and kicking."
+            }
+        ]
+    },
+    "16": {
+        "action_label": "take off a shoe",
+        "density_score": 9.197649741196816,
+        "k": 200,
+        "kth_distance": 0.11584456427136591,
+        "top_5_closest": [
+            {
+                "distance": 0.08541789660928478,
+                "text": "someone kicks with a right foot"
+            },
+            {
+                "distance": 0.08627538204282104,
+                "text": "a man steps into his shoes with his right foot then his left"
+            },
+            {
+                "distance": 0.08948989336376512,
+                "text": "a man steps into his shoes with his left foot then his right"
+            },
+            {
+                "distance": 0.09182684799947027,
+                "text": "someone is kicking with one foot"
+            },
+            {
+                "distance": 0.09182684799947027,
+                "text": "someone is kicking with one foot"
+            }
+        ]
+    },
+    "17": {
+        "action_label": "put on glasses",
+        "density_score": 6.19788046228848,
+        "k": 200,
+        "kth_distance": 0.1659233243258582,
+        "top_5_closest": [
+            {
+                "distance": 0.14787551865533555,
+                "text": "a person is looking all over."
+            },
+            {
+                "distance": 0.14787551865533555,
+                "text": "a person is looking all over."
+            },
+            {
+                "distance": 0.1483897006748126,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.1483897006748126,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.15110535410281045,
+                "text": "someone looking over the left and right"
+            }
+        ]
+    },
+    "18": {
+        "action_label": "take off glasses",
+        "density_score": 6.560207005134405,
+        "k": 200,
+        "kth_distance": 0.15727420529702352,
+        "top_5_closest": [
+            {
+                "distance": 0.13742867525707858,
+                "text": "someone looking over the left and right"
+            },
+            {
+                "distance": 0.13784034191093653,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.13784034191093653,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.13992161821625848,
+                "text": "the person is taking off some thing."
+            },
+            {
+                "distance": 0.13992161821625848,
+                "text": "the person is taking off some thing."
+            }
+        ]
+    },
+    "19": {
+        "action_label": "put on a hat/cap",
+        "density_score": 6.613614149648649,
+        "k": 200,
+        "kth_distance": 0.15957433855256475,
+        "top_5_closest": [
+            {
+                "distance": 0.0979860424365595,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.0979860424365595,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.10821249009035594,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.10821249009035594,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.10936028971422429,
+                "text": "a person grabs a hat to his right with both hands, places it on his head, and adjusts it with both hands."
+            }
+        ]
+    },
+    "20": {
+        "action_label": "take off a hat/cap",
+        "density_score": 6.120170941978314,
+        "k": 200,
+        "kth_distance": 0.17039295652468023,
+        "top_5_closest": [
+            {
+                "distance": 0.12103878829180725,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.12103878829180725,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.13058805390424177,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.13058805390424177,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.13286623828841604,
+                "text": "a person casually adjusts the cap on his head."
+            }
+        ]
+    },
+    "21": {
+        "action_label": "cheer up",
+        "density_score": 8.587076486376136,
+        "k": 200,
+        "kth_distance": 0.12385043021863829,
+        "top_5_closest": [
+            {
+                "distance": 0.0954906307073995,
+                "text": "jumps up and down twice"
+            },
+            {
+                "distance": 0.0954906307073995,
+                "text": "jumps up and down twice"
+            },
+            {
+                "distance": 0.10451221138421951,
+                "text": "raises arms and points forward"
+            },
+            {
+                "distance": 0.10451221138421951,
+                "text": "raises arms and points forward"
+            },
+            {
+                "distance": 0.10541925473156144,
+                "text": "the person is upset and crying."
+            }
+        ]
+    },
+    "22": {
+        "action_label": "hand waving",
+        "density_score": 12.813192562534944,
+        "k": 200,
+        "kth_distance": 0.08818234556253302,
+        "top_5_closest": [
+            {
+                "distance": 0.04636094417312475,
+                "text": "waving hand near head."
+            },
+            {
+                "distance": 0.04636094417312475,
+                "text": "waving hand near head."
+            },
+            {
+                "distance": 0.046424762652149676,
+                "text": "waving hand in the air."
+            },
+            {
+                "distance": 0.046424762652149676,
+                "text": "waving hand in the air."
+            },
+            {
+                "distance": 0.046424762652149676,
+                "text": "waving hand in the air."
+            }
+        ]
+    },
+    "23": {
+        "action_label": "kicking something",
+        "density_score": 10.783417530044696,
+        "k": 200,
+        "kth_distance": 0.1078978440988696,
+        "top_5_closest": [
+            {
+                "distance": 0.036309081755696804,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.036309081755696804,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.055075330508401965,
+                "text": "kicking and fighting in place"
+            },
+            {
+                "distance": 0.055075330508401965,
+                "text": "kicking and fighting in place"
+            },
+            {
+                "distance": 0.057964918549407884,
+                "text": "kicking foot while standing."
+            }
+        ]
+    },
+    "24": {
+        "action_label": "reach into pocket",
+        "density_score": 8.339329024161138,
+        "k": 200,
+        "kth_distance": 0.1250994632140051,
+        "top_5_closest": [
+            {
+                "distance": 0.10165075174890426,
+                "text": "person is reaching down for something."
+            },
+            {
+                "distance": 0.10165075174890426,
+                "text": "person is reaching down for something."
+            },
+            {
+                "distance": 0.10227631040567264,
+                "text": "the person to reach down and pick something up."
+            },
+            {
+                "distance": 0.10227631040567264,
+                "text": "the person to reach down and pick something up."
+            },
+            {
+                "distance": 0.10386268419820999,
+                "text": "putting hand above head."
+            }
+        ]
+    },
+    "25": {
+        "action_label": "hopping",
+        "density_score": 9.909463596149902,
+        "k": 200,
+        "kth_distance": 0.11013111690397848,
+        "top_5_closest": [
+            {
+                "distance": 0.06624359271288749,
+                "text": "someone hopping forward, moving forward"
+            },
+            {
+                "distance": 0.06624359271288749,
+                "text": "someone hopping forward, moving forward"
+            },
+            {
+                "distance": 0.06929570605255253,
+                "text": "the person is hopping forward."
+            },
+            {
+                "distance": 0.06929570605255253,
+                "text": "the person is hopping forward."
+            },
+            {
+                "distance": 0.0743658858591486,
+                "text": "hopping up and down on one foot."
+            }
+        ]
+    },
+    "26": {
+        "action_label": "jump up",
+        "density_score": 14.167485195595498,
+        "k": 200,
+        "kth_distance": 0.07926943548831356,
+        "top_5_closest": [
+            {
+                "distance": 0.048725791314850775,
+                "text": "the man is jumping jump"
+            },
+            {
+                "distance": 0.048725791314850775,
+                "text": "the man is jumping jump"
+            },
+            {
+                "distance": 0.05180225159868901,
+                "text": "jumping up and down."
+            },
+            {
+                "distance": 0.05180225159868901,
+                "text": "jumping up and down."
+            },
+            {
+                "distance": 0.05180225159868901,
+                "text": "jumping up and down."
+            }
+        ]
+    },
+    "27": {
+        "action_label": "phone call",
+        "density_score": 8.572082390326614,
+        "k": 200,
+        "kth_distance": 0.15000378482425347,
+        "top_5_closest": [
+            {
+                "distance": 0.05456534549256453,
+                "text": "a person answers a phone call."
+            },
+            {
+                "distance": 0.05456534549256453,
+                "text": "a person answers a phone call."
+            },
+            {
+                "distance": 0.05736577980174351,
+                "text": "someone trying to receive a call"
+            },
+            {
+                "distance": 0.05736577980174351,
+                "text": "someone trying to receive a call"
+            },
+            {
+                "distance": 0.06761425647662045,
+                "text": "a person answers the phone and sets it down."
+            }
+        ]
+    },
+    "28": {
+        "action_label": "play with phone/tablet",
+        "density_score": 8.502938860755904,
+        "k": 200,
+        "kth_distance": 0.123831774583256,
+        "top_5_closest": [
+            {
+                "distance": 0.0891730355214666,
+                "text": "someone is talking on the cell phone"
+            },
+            {
+                "distance": 0.0891730355214666,
+                "text": "someone is talking on the cell phone"
+            },
+            {
+                "distance": 0.1015830460033974,
+                "text": "a man picks up a phone, dials a number, starts talking and then puts the phone down."
+            },
+            {
+                "distance": 0.1015830460033974,
+                "text": "a man picks up a phone, dials a number, starts talking and then puts the phone down."
+            },
+            {
+                "distance": 0.1028876764391844,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            }
+        ]
+    },
+    "29": {
+        "action_label": "type on a keyboard",
+        "density_score": 6.21403194096567,
+        "k": 200,
+        "kth_distance": 0.16692811353083759,
+        "top_5_closest": [
+            {
+                "distance": 0.12064868616128444,
+                "text": "a person opens a laptop and types on the keyboard."
+            },
+            {
+                "distance": 0.12064868616128444,
+                "text": "a person opens a laptop and types on the keyboard."
+            },
+            {
+                "distance": 0.1214325196156475,
+                "text": "someone types on a device in their right hand."
+            },
+            {
+                "distance": 0.13104414489330907,
+                "text": "the person is  sitting down and i think typing."
+            },
+            {
+                "distance": 0.13104414489330907,
+                "text": "the person is  sitting down and i think typing."
+            }
+        ]
+    },
+    "30": {
+        "action_label": "point to something",
+        "density_score": 12.314461212126485,
+        "k": 200,
+        "kth_distance": 0.08894414423209018,
+        "top_5_closest": [
+            {
+                "distance": 0.06763879185296773,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.06763879185296773,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.06763879185296773,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.06763879185296773,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.06763879185296773,
+                "text": "a person raised the right hand and pull it down"
+            }
+        ]
+    },
+    "31": {
+        "action_label": "taking a selfie",
+        "density_score": 5.3929116696394805,
+        "k": 200,
+        "kth_distance": 0.2004905683296494,
+        "top_5_closest": [
+            {
+                "distance": 0.10528432152152845,
+                "text": "taking a picture of the subject."
+            },
+            {
+                "distance": 0.10528432152152845,
+                "text": "taking a picture of the subject."
+            },
+            {
+                "distance": 0.122361719145061,
+                "text": "the person is taking a picture of something."
+            },
+            {
+                "distance": 0.122361719145061,
+                "text": "the person is taking a picture of something."
+            },
+            {
+                "distance": 0.122361719145061,
+                "text": "the person is taking a picture of something."
+            }
+        ]
+    },
+    "32": {
+        "action_label": "check time (from watch)",
+        "density_score": 8.29879223717437,
+        "k": 200,
+        "kth_distance": 0.13476987672931906,
+        "top_5_closest": [
+            {
+                "distance": 0.07260781349741363,
+                "text": "a person checks the time."
+            },
+            {
+                "distance": 0.07260781349741363,
+                "text": "a person checks the time."
+            },
+            {
+                "distance": 0.07487740785387742,
+                "text": "a person checks time on watch."
+            },
+            {
+                "distance": 0.07487740785387742,
+                "text": "a person checks time on watch."
+            },
+            {
+                "distance": 0.07517322448999075,
+                "text": "a person checks what time it is on their watch."
+            }
+        ]
+    },
+    "33": {
+        "action_label": "rub two hands",
+        "density_score": 9.56705166806263,
+        "k": 200,
+        "kth_distance": 0.11114440026682904,
+        "top_5_closest": [
+            {
+                "distance": 0.07828373687659318,
+                "text": "a person rubbing there hands together"
+            },
+            {
+                "distance": 0.07828373687659318,
+                "text": "a person rubbing there hands together"
+            },
+            {
+                "distance": 0.08252293575406777,
+                "text": "someone rubs their hands together in front of their body."
+            },
+            {
+                "distance": 0.08252293575406777,
+                "text": "someone rubs their hands together in front of their body."
+            },
+            {
+                "distance": 0.08277678968740232,
+                "text": "take the both the hands and put into the hand."
+            }
+        ]
+    },
+    "34": {
+        "action_label": "nod head/bow",
+        "density_score": 5.467047859044475,
+        "k": 200,
+        "kth_distance": 0.19409983005553,
+        "top_5_closest": [
+            {
+                "distance": 0.14437831106737442,
+                "text": "a person does a slight bow."
+            },
+            {
+                "distance": 0.14437831106737442,
+                "text": "a person does a slight bow."
+            },
+            {
+                "distance": 0.15832859364960206,
+                "text": "a person  takes a couple of bows."
+            },
+            {
+                "distance": 0.15832859364960206,
+                "text": "a person  takes a couple of bows."
+            },
+            {
+                "distance": 0.16418221178530912,
+                "text": "a person doing a slight bow"
+            }
+        ]
+    },
+    "35": {
+        "action_label": "shake head",
+        "density_score": 8.112757012136216,
+        "k": 200,
+        "kth_distance": 0.1299427523563279,
+        "top_5_closest": [
+            {
+                "distance": 0.10096316047112319,
+                "text": "a person is scratching their head."
+            },
+            {
+                "distance": 0.10096316047112319,
+                "text": "a person is scratching their head."
+            },
+            {
+                "distance": 0.10268587142480112,
+                "text": "man head in confusion yea"
+            },
+            {
+                "distance": 0.10268587142480112,
+                "text": "man head in confusion yea"
+            },
+            {
+                "distance": 0.10288230304031465,
+                "text": "the person is moving his head around"
+            }
+        ]
+    },
+    "36": {
+        "action_label": "wipe face",
+        "density_score": 7.22086561621608,
+        "k": 200,
+        "kth_distance": 0.144769557382881,
+        "top_5_closest": [
+            {
+                "distance": 0.0968069746453637,
+                "text": "using hands to wipe something"
+            },
+            {
+                "distance": 0.0968069746453637,
+                "text": "using hands to wipe something"
+            },
+            {
+                "distance": 0.10915960543801129,
+                "text": "the person look for it and started wiping some thing off."
+            },
+            {
+                "distance": 0.10915960543801129,
+                "text": "the person look for it and started wiping some thing off."
+            },
+            {
+                "distance": 0.11161307719217661,
+                "text": "the person was wiping off something."
+            }
+        ]
+    },
+    "37": {
+        "action_label": "salute",
+        "density_score": 10.855388337667556,
+        "k": 200,
+        "kth_distance": 0.10044992649273088,
+        "top_5_closest": [
+            {
+                "distance": 0.07151118711762872,
+                "text": "raises arms and points forward"
+            },
+            {
+                "distance": 0.07151118711762872,
+                "text": "raises arms and points forward"
+            },
+            {
+                "distance": 0.07356426582781506,
+                "text": "a person raised the hands and pul it down"
+            },
+            {
+                "distance": 0.07356426582781506,
+                "text": "a person raised the hands and pul it down"
+            },
+            {
+                "distance": 0.07400502763184447,
+                "text": "a person slowly raised the right hand"
+            }
+        ]
+    },
+    "38": {
+        "action_label": "put palms together",
+        "density_score": 5.666603055463228,
+        "k": 200,
+        "kth_distance": 0.18458473482027127,
+        "top_5_closest": [
+            {
+                "distance": 0.13655274106869986,
+                "text": "a person who is clapping there palms together"
+            },
+            {
+                "distance": 0.13655274106869986,
+                "text": "a person who is clapping there palms together"
+            },
+            {
+                "distance": 0.1463455366143981,
+                "text": "person steps forward slowly then palms their face dizzily."
+            },
+            {
+                "distance": 0.1463455366143981,
+                "text": "person steps forward slowly then palms their face dizzily."
+            },
+            {
+                "distance": 0.15136911053624835,
+                "text": "a person brigns their hands together, palms forward,"
+            }
+        ]
+    },
+    "39": {
+        "action_label": "cross hands in front",
+        "density_score": 10.624423489632987,
+        "k": 200,
+        "kth_distance": 0.10419807842950024,
+        "top_5_closest": [
+            {
+                "distance": 0.06784713467368009,
+                "text": "moving hands towards the side."
+            },
+            {
+                "distance": 0.06784713467368009,
+                "text": "moving hands towards the side."
+            },
+            {
+                "distance": 0.07717756905082884,
+                "text": "moving arms to the left and right."
+            },
+            {
+                "distance": 0.07822488384711868,
+                "text": "moving arms left and right"
+            },
+            {
+                "distance": 0.07890770303778594,
+                "text": "moving hands side to side."
+            }
+        ]
+    },
+    "40": {
+        "action_label": "sneeze/cough",
+        "density_score": 7.329811499030089,
+        "k": 200,
+        "kth_distance": 0.14598900108643575,
+        "top_5_closest": [
+            {
+                "distance": 0.09471839778669922,
+                "text": "the person is possibly coughing."
+            },
+            {
+                "distance": 0.09471839778669922,
+                "text": "the person is possibly coughing."
+            },
+            {
+                "distance": 0.09564647804137238,
+                "text": "the person is coughing very badly."
+            },
+            {
+                "distance": 0.09564647804137238,
+                "text": "the person is coughing very badly."
+            },
+            {
+                "distance": 0.1017927589598866,
+                "text": "the person sneezes into their right hand"
+            }
+        ]
+    },
+    "41": {
+        "action_label": "staggering",
+        "density_score": 15.369488251443363,
+        "k": 200,
+        "kth_distance": 0.07304034605147802,
+        "top_5_closest": [
+            {
+                "distance": 0.04520947597241731,
+                "text": "the person is scratching head."
+            },
+            {
+                "distance": 0.04520947597241731,
+                "text": "the person is scratching head."
+            },
+            {
+                "distance": 0.04520947597241731,
+                "text": "the person is scratching head."
+            },
+            {
+                "distance": 0.04520947597241731,
+                "text": "the person is scratching head."
+            },
+            {
+                "distance": 0.04951809813161667,
+                "text": "someone slowly taking a few steps forward"
+            }
+        ]
+    },
+    "42": {
+        "action_label": "falling down",
+        "density_score": 7.634414260814714,
+        "k": 200,
+        "kth_distance": 0.13714882364052405,
+        "top_5_closest": [
+            {
+                "distance": 0.09498252865559864,
+                "text": "falling down with a leg injury"
+            },
+            {
+                "distance": 0.09498252865559864,
+                "text": "falling down with a leg injury"
+            },
+            {
+                "distance": 0.11808023633865516,
+                "text": "person is reaching down."
+            },
+            {
+                "distance": 0.11808023633865516,
+                "text": "person is reaching down."
+            },
+            {
+                "distance": 0.12317099225931805,
+                "text": "jumping up and down."
+            }
+        ]
+    },
+    "43": {
+        "action_label": "headache",
+        "density_score": 8.113658848800801,
+        "k": 200,
+        "kth_distance": 0.13227172172179413,
+        "top_5_closest": [
+            {
+                "distance": 0.09783319317732586,
+                "text": "the person has pain in his head"
+            },
+            {
+                "distance": 0.09783319317732586,
+                "text": "the person has pain in his head"
+            },
+            {
+                "distance": 0.09887137643834953,
+                "text": "he sctratches his head"
+            },
+            {
+                "distance": 0.09887137643834953,
+                "text": "he sctratches his head"
+            },
+            {
+                "distance": 0.10065946328210973,
+                "text": "someone head itches and scratches"
+            }
+        ]
+    },
+    "44": {
+        "action_label": "chest pain",
+        "density_score": 10.583391656972735,
+        "k": 200,
+        "kth_distance": 0.108433117908592,
+        "top_5_closest": [
+            {
+                "distance": 0.035570893306518636,
+                "text": "a person slumps forward while sobbing violently."
+            },
+            {
+                "distance": 0.035570893306518636,
+                "text": "a person slumps forward while sobbing violently."
+            },
+            {
+                "distance": 0.04576209087840799,
+                "text": "jumps up and down twice"
+            },
+            {
+                "distance": 0.04576209087840799,
+                "text": "jumps up and down twice"
+            },
+            {
+                "distance": 0.04923345562591597,
+                "text": "a person flails arms and sways body counterclockwise 2 times"
+            }
+        ]
+    },
+    "45": {
+        "action_label": "back pain",
+        "density_score": 8.128403986475213,
+        "k": 200,
+        "kth_distance": 0.1306117262093338,
+        "top_5_closest": [
+            {
+                "distance": 0.0858103543238603,
+                "text": "the person is holding their back because of a backache."
+            },
+            {
+                "distance": 0.0858103543238603,
+                "text": "the person is holding their back because of a backache."
+            },
+            {
+                "distance": 0.10027607669013705,
+                "text": "a person backs into something and hurts their back."
+            },
+            {
+                "distance": 0.10027607669013705,
+                "text": "a person backs into something and hurts their back."
+            },
+            {
+                "distance": 0.10482520525250838,
+                "text": "a person steps back"
+            }
+        ]
+    },
+    "46": {
+        "action_label": "neck pain",
+        "density_score": 6.229981106284303,
+        "k": 200,
+        "kth_distance": 0.17087985140986783,
+        "top_5_closest": [
+            {
+                "distance": 0.11366519735243452,
+                "text": "person is exercising their neck"
+            },
+            {
+                "distance": 0.11366519735243452,
+                "text": "person is exercising their neck"
+            },
+            {
+                "distance": 0.12193935569821523,
+                "text": "a person is rotating their neck."
+            },
+            {
+                "distance": 0.12193935569821523,
+                "text": "a person is rotating their neck."
+            },
+            {
+                "distance": 0.1286720768250902,
+                "text": "a person takes one step forward and uses their neck to look around carefully."
+            }
+        ]
+    },
+    "47": {
+        "action_label": "nausea/vomiting",
+        "density_score": 11.917422259442633,
+        "k": 200,
+        "kth_distance": 0.09073638093977443,
+        "top_5_closest": [
+            {
+                "distance": 0.06686129812041108,
+                "text": "someone slowly taking a few steps forward"
+            },
+            {
+                "distance": 0.06686129812041108,
+                "text": "someone slowly taking a few steps forward"
+            },
+            {
+                "distance": 0.06927236862949326,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.06927236862949326,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.06992302123871541,
+                "text": "a person slumps forward while sobbing violently."
+            }
+        ]
+    },
+    "48": {
+        "action_label": "fan self",
+        "density_score": 8.725232344458021,
+        "k": 200,
+        "kth_distance": 0.1205735652724994,
+        "top_5_closest": [
+            {
+                "distance": 0.10117871733863693,
+                "text": "no idea i am sorry"
+            },
+            {
+                "distance": 0.10117871733863693,
+                "text": "no idea i am sorry"
+            },
+            {
+                "distance": 0.10343784969274372,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10343784969274372,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10400473882094685,
+                "text": "the person threw some thing forward."
+            }
+        ]
+    },
+    "49": {
+        "action_label": "punch/slap",
+        "density_score": 10.842017658650713,
+        "k": 200,
+        "kth_distance": 0.10353708104554304,
+        "top_5_closest": [
+            {
+                "distance": 0.061955462488869184,
+                "text": "the person is talking from a punch."
+            },
+            {
+                "distance": 0.061955462488869184,
+                "text": "the person is talking from a punch."
+            },
+            {
+                "distance": 0.0672742840500744,
+                "text": "the person defends themself from the punch"
+            },
+            {
+                "distance": 0.0672742840500744,
+                "text": "the person defends themself from the punch"
+            },
+            {
+                "distance": 0.06932691469764374,
+                "text": "someone deals a punch with their right hand."
+            }
+        ]
+    },
+    "50": {
+        "action_label": "kicking",
+        "density_score": 11.342067804762866,
+        "k": 200,
+        "kth_distance": 0.10194491529765526,
+        "top_5_closest": [
+            {
+                "distance": 0.04615442781398682,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.04615442781398682,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.052784615969778015,
+                "text": "kicking and fighting in place"
+            },
+            {
+                "distance": 0.052784615969778015,
+                "text": "kicking and fighting in place"
+            },
+            {
+                "distance": 0.05458259145660782,
+                "text": "kicking foot while standing."
+            }
+        ]
+    },
+    "51": {
+        "action_label": "pushing",
+        "density_score": 9.392349796472628,
+        "k": 200,
+        "kth_distance": 0.1133286774837945,
+        "top_5_closest": [
+            {
+                "distance": 0.08490197904678198,
+                "text": "pushing hands in and out."
+            },
+            {
+                "distance": 0.08490197904678198,
+                "text": "pushing hands in and out."
+            },
+            {
+                "distance": 0.08523514070860105,
+                "text": "pushing arms in and out."
+            },
+            {
+                "distance": 0.08523514070860105,
+                "text": "pushing arms in and out."
+            },
+            {
+                "distance": 0.08523514070860105,
+                "text": "pushing arms in and out."
+            }
+        ]
+    },
+    "52": {
+        "action_label": "pat on back",
+        "density_score": 10.53178661789162,
+        "k": 200,
+        "kth_distance": 0.10099955543801864,
+        "top_5_closest": [
+            {
+                "distance": 0.07926880570572759,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.07926880570572759,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.08010374254093167,
+                "text": "takes big side step to the left."
+            },
+            {
+                "distance": 0.08059488236264345,
+                "text": "a person steps back slightly."
+            },
+            {
+                "distance": 0.08059488236264345,
+                "text": "a person steps back slightly."
+            }
+        ]
+    },
+    "53": {
+        "action_label": "point finger",
+        "density_score": 9.638957226913853,
+        "k": 200,
+        "kth_distance": 0.11071278025694842,
+        "top_5_closest": [
+            {
+                "distance": 0.08310982835328273,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.08310982835328273,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.08691542037286859,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.08691542037286859,
+                "text": "a person raised the right hand and pull it down"
+            },
+            {
+                "distance": 0.08691542037286859,
+                "text": "a person raised the right hand and pull it down"
+            }
+        ]
+    },
+    "54": {
+        "action_label": "hugging",
+        "density_score": 5.948955170401529,
+        "k": 200,
+        "kth_distance": 0.18029677036362202,
+        "top_5_closest": [
+            {
+                "distance": 0.10623810263266453,
+                "text": "a figure hugs their arms."
+            },
+            {
+                "distance": 0.10623810263266453,
+                "text": "a figure hugs their arms."
+            },
+            {
+                "distance": 0.12089693910640276,
+                "text": "hugging the chest while standing."
+            },
+            {
+                "distance": 0.12089693910640276,
+                "text": "hugging the chest while standing."
+            },
+            {
+                "distance": 0.1217735163547562,
+                "text": "person is cold and hugging themselves to get warm"
+            }
+        ]
+    },
+    "55": {
+        "action_label": "giving object",
+        "density_score": 8.993839875785385,
+        "k": 200,
+        "kth_distance": 0.11725080726389425,
+        "top_5_closest": [
+            {
+                "distance": 0.08506227591068649,
+                "text": "a person pours something from an object into another object."
+            },
+            {
+                "distance": 0.08506227591068649,
+                "text": "a person pours something from an object into another object."
+            },
+            {
+                "distance": 0.09052597854935063,
+                "text": "someone appears to be playing with an object"
+            },
+            {
+                "distance": 0.09052597854935063,
+                "text": "someone appears to be playing with an object"
+            },
+            {
+                "distance": 0.09424893202470086,
+                "text": "a person picks up an object and holds it."
+            }
+        ]
+    },
+    "56": {
+        "action_label": "touch pocket",
+        "density_score": 6.593944790864797,
+        "k": 200,
+        "kth_distance": 0.15646619620751379,
+        "top_5_closest": [
+            {
+                "distance": 0.13395812552652153,
+                "text": "a person who seems to be grabbing  something from their pocket"
+            },
+            {
+                "distance": 0.13395812552652153,
+                "text": "a person who seems to be grabbing  something from their pocket"
+            },
+            {
+                "distance": 0.13645966201016746,
+                "text": "a man picks something up then touches his right arm."
+            },
+            {
+                "distance": 0.13947090321664324,
+                "text": "a person taking something from his/her pocket and gave it to something"
+            },
+            {
+                "distance": 0.13947090321664324,
+                "text": "a person taking something from his/her pocket and gave it to something"
+            }
+        ]
+    },
+    "57": {
+        "action_label": "shaking hands",
+        "density_score": 9.967789593364742,
+        "k": 200,
+        "kth_distance": 0.12999461048021,
+        "top_5_closest": [
+            {
+                "distance": 0.0453914350840543,
+                "text": "the person is shaking hands."
+            },
+            {
+                "distance": 0.0453914350840543,
+                "text": "the person is shaking hands."
+            },
+            {
+                "distance": 0.04589196989072042,
+                "text": "the person is shaking hands with someone"
+            },
+            {
+                "distance": 0.04589196989072042,
+                "text": "the person is shaking hands with someone"
+            },
+            {
+                "distance": 0.04619074929506917,
+                "text": "shaking hand side to side."
+            }
+        ]
+    },
+    "58": {
+        "action_label": "walking towards",
+        "density_score": 22.14645191358349,
+        "k": 200,
+        "kth_distance": 0.05124124011606623,
+        "top_5_closest": [
+            {
+                "distance": 0.02848448185488206,
+                "text": "walking to the side."
+            },
+            {
+                "distance": 0.02848448185488206,
+                "text": "walking to the side."
+            },
+            {
+                "distance": 0.034533117184799345,
+                "text": "walking forward, turning around and walking back"
+            },
+            {
+                "distance": 0.034533117184799345,
+                "text": "walking forward, turning around and walking back"
+            },
+            {
+                "distance": 0.0345692392453677,
+                "text": "walking back and forth."
+            }
+        ]
+    },
+    "59": {
+        "action_label": "walking apart",
+        "density_score": 13.369122697975543,
+        "k": 200,
+        "kth_distance": 0.07812583949585916,
+        "top_5_closest": [
+            {
+                "distance": 0.06686431073626298,
+                "text": "walking forward, turning around and walking back"
+            },
+            {
+                "distance": 0.06686431073626298,
+                "text": "walking forward, turning around and walking back"
+            },
+            {
+                "distance": 0.06742235287062825,
+                "text": "walking to the side then the other."
+            },
+            {
+                "distance": 0.06742235287062825,
+                "text": "walking to the side then the other."
+            },
+            {
+                "distance": 0.06764043240276685,
+                "text": "walking to the side."
+            }
+        ]
+    },
+    "60": {
+        "action_label": "hit with object",
+        "density_score": 9.934622309084652,
+        "k": 200,
+        "kth_distance": 0.10667626586857526,
+        "top_5_closest": [
+            {
+                "distance": 0.08388384934429471,
+                "text": "someone appears to be playing with an object"
+            },
+            {
+                "distance": 0.08388384934429471,
+                "text": "someone appears to be playing with an object"
+            },
+            {
+                "distance": 0.08561509888946062,
+                "text": "a person who seems to throw or hit something"
+            },
+            {
+                "distance": 0.08561509888946062,
+                "text": "a person who seems to throw or hit something"
+            },
+            {
+                "distance": 0.08745978300893376,
+                "text": "a person grabbed something and hit with it something"
+            }
+        ]
+    },
+    "61": {
+        "action_label": "put on headphone",
+        "density_score": 7.783865402178132,
+        "k": 200,
+        "kth_distance": 0.1347452079148077,
+        "top_5_closest": [
+            {
+                "distance": 0.08929494580819108,
+                "text": "the man is putting on headphones"
+            },
+            {
+                "distance": 0.08929494580819108,
+                "text": "the man is putting on headphones"
+            },
+            {
+                "distance": 0.09667347695170969,
+                "text": "a person acts like they put on headphones and are listening to music."
+            },
+            {
+                "distance": 0.09667347695170969,
+                "text": "a person acts like they put on headphones and are listening to music."
+            },
+            {
+                "distance": 0.10351526723663684,
+                "text": "the person is putting on their headphones."
+            }
+        ]
+    },
+    "62": {
+        "action_label": "take off headphone",
+        "density_score": 6.534856175164261,
+        "k": 200,
+        "kth_distance": 0.16006310173968452,
+        "top_5_closest": [
+            {
+                "distance": 0.11190920310958807,
+                "text": "the man is putting on headphones"
+            },
+            {
+                "distance": 0.11190920310958807,
+                "text": "the man is putting on headphones"
+            },
+            {
+                "distance": 0.1243331097186322,
+                "text": "a man puts on headphones and begins moving his body to the music."
+            },
+            {
+                "distance": 0.1243331097186322,
+                "text": "a man puts on headphones and begins moving his body to the music."
+            },
+            {
+                "distance": 0.12580932706441894,
+                "text": "the person is putting on their headphones."
+            }
+        ]
+    },
+    "63": {
+        "action_label": "shoot at basket",
+        "density_score": 6.024945468428278,
+        "k": 200,
+        "kth_distance": 0.1783715558399489,
+        "top_5_closest": [
+            {
+                "distance": 0.12073926661318735,
+                "text": "the man does a basketball shoot"
+            },
+            {
+                "distance": 0.12073926661318735,
+                "text": "the man does a basketball shoot"
+            },
+            {
+                "distance": 0.13236393207782715,
+                "text": "shooting a basketball then walking forward."
+            },
+            {
+                "distance": 0.13236393207782715,
+                "text": "shooting a basketball then walking forward."
+            },
+            {
+                "distance": 0.13406486277245877,
+                "text": "person is making a basketball move"
+            }
+        ]
+    },
+    "64": {
+        "action_label": "bounce ball",
+        "density_score": 3.8535855845131906,
+        "k": 200,
+        "kth_distance": 0.270065872708101,
+        "top_5_closest": [
+            {
+                "distance": 0.21553347532051226,
+                "text": "a person bounces a ball three times then takes a shot."
+            },
+            {
+                "distance": 0.21553347532051226,
+                "text": "a person bounces a ball three times then takes a shot."
+            },
+            {
+                "distance": 0.21559513006382647,
+                "text": "a person is bouncing up and down."
+            },
+            {
+                "distance": 0.21559513006382647,
+                "text": "a person is bouncing up and down."
+            },
+            {
+                "distance": 0.22667663089677326,
+                "text": "someone bounces a ball-like object with their right hand."
+            }
+        ]
+    },
+    "65": {
+        "action_label": "tennis bat swing",
+        "density_score": 6.429822530308211,
+        "k": 200,
+        "kth_distance": 0.17823196771431082,
+        "top_5_closest": [
+            {
+                "distance": 0.11074026902084644,
+                "text": "someone is swingnig a tennis racket"
+            },
+            {
+                "distance": 0.11074026902084644,
+                "text": "someone is swingnig a tennis racket"
+            },
+            {
+                "distance": 0.11196047749465565,
+                "text": "the person takes a swing with the baseball bat"
+            },
+            {
+                "distance": 0.11196047749465565,
+                "text": "the person takes a swing with the baseball bat"
+            },
+            {
+                "distance": 0.1143784611927896,
+                "text": "a person is swinging a tennis racket."
+            }
+        ]
+    },
+    "66": {
+        "action_label": "juggle table tennis ball",
+        "density_score": 4.634891837552894,
+        "k": 200,
+        "kth_distance": 0.22802640009235509,
+        "top_5_closest": [
+            {
+                "distance": 0.18004448776601234,
+                "text": "someone tossing a ball ball and forth"
+            },
+            {
+                "distance": 0.18004448776601234,
+                "text": "someone tossing a ball ball and forth"
+            },
+            {
+                "distance": 0.1832069887008182,
+                "text": "the person hits the tennis ball with the racket"
+            },
+            {
+                "distance": 0.1832069887008182,
+                "text": "the person hits the tennis ball with the racket"
+            },
+            {
+                "distance": 0.1838890039733444,
+                "text": "person is throwing a ball in various ways"
+            }
+        ]
+    },
+    "67": {
+        "action_label": "hush",
+        "density_score": 6.569301788850089,
+        "k": 200,
+        "kth_distance": 0.15805877901998966,
+        "top_5_closest": [
+            {
+                "distance": 0.137309561500089,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.137309561500089,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.13770650081133162,
+                "text": "the person is possibly coughing."
+            },
+            {
+                "distance": 0.13770650081133162,
+                "text": "the person is possibly coughing."
+            },
+            {
+                "distance": 0.13793054858673093,
+                "text": "punching the air slowly."
+            }
+        ]
+    },
+    "68": {
+        "action_label": "flick hair",
+        "density_score": 6.343260877165526,
+        "k": 200,
+        "kth_distance": 0.1649873406654816,
+        "top_5_closest": [
+            {
+                "distance": 0.11007196964134214,
+                "text": "someone pulls their hair back"
+            },
+            {
+                "distance": 0.11007196964134214,
+                "text": "someone pulls their hair back"
+            },
+            {
+                "distance": 0.1207792112380921,
+                "text": "someone casually runs their right hand through their hair."
+            },
+            {
+                "distance": 0.12978408202714697,
+                "text": "someone casually runs their left hand through their hair."
+            },
+            {
+                "distance": 0.13508231120432423,
+                "text": "a person runs their right hand through their hair."
+            }
+        ]
+    },
+    "69": {
+        "action_label": "thumb up",
+        "density_score": 8.683948868958861,
+        "k": 200,
+        "kth_distance": 0.12267547451207728,
+        "top_5_closest": [
+            {
+                "distance": 0.0978831987966301,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.0978831987966301,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.10137900500501817,
+                "text": "a person raised the right hand and shake it"
+            },
+            {
+                "distance": 0.10137900500501817,
+                "text": "a person raised the right hand and shake it"
+            },
+            {
+                "distance": 0.10289195033169529,
+                "text": "somebody is giving hand gestures."
+            }
+        ]
+    },
+    "70": {
+        "action_label": "thumb down",
+        "density_score": 9.336312399775542,
+        "k": 200,
+        "kth_distance": 0.11237310237107001,
+        "top_5_closest": [
+            {
+                "distance": 0.09183463175225592,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.09183463175225592,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.0936631339906504,
+                "text": "a person raisedthe hands and put it down"
+            },
+            {
+                "distance": 0.0936631339906504,
+                "text": "a person raisedthe hands and put it down"
+            },
+            {
+                "distance": 0.09485875489351814,
+                "text": "a person raised the right hand and pull it down"
+            }
+        ]
+    },
+    "71": {
+        "action_label": "make OK sign",
+        "density_score": 7.263276284546708,
+        "k": 200,
+        "kth_distance": 0.14662618935247052,
+        "top_5_closest": [
+            {
+                "distance": 0.11784650377154471,
+                "text": "somebody is giving hand gestures."
+            },
+            {
+                "distance": 0.11784650377154471,
+                "text": "somebody is giving hand gestures."
+            },
+            {
+                "distance": 0.11927006171745169,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.11927006171745169,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.12715162372439126,
+                "text": "the man is saying no and making gestures"
+            }
+        ]
+    },
+    "72": {
+        "action_label": "make victory sign",
+        "density_score": 8.718515881723933,
+        "k": 200,
+        "kth_distance": 0.124417241813776,
+        "top_5_closest": [
+            {
+                "distance": 0.0878748894085365,
+                "text": "somebody is giving hand gestures."
+            },
+            {
+                "distance": 0.0878748894085365,
+                "text": "somebody is giving hand gestures."
+            },
+            {
+                "distance": 0.09550558714335244,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.09550558714335244,
+                "text": "the person is making up and down hand gestures."
+            },
+            {
+                "distance": 0.09701543015669922,
+                "text": "he does a gesture directly"
+            }
+        ]
+    },
+    "73": {
+        "action_label": "staple book",
+        "density_score": 7.26406997372231,
+        "k": 200,
+        "kth_distance": 0.1442046086220946,
+        "top_5_closest": [
+            {
+                "distance": 0.09351564469278162,
+                "text": "the person for the book off the shelf."
+            },
+            {
+                "distance": 0.09351564469278162,
+                "text": "the person for the book off the shelf."
+            },
+            {
+                "distance": 0.11279581931009774,
+                "text": "he takes a book with right hand"
+            },
+            {
+                "distance": 0.12009773003190849,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.12009773003190849,
+                "text": "taking a couple of steps back"
+            }
+        ]
+    },
+    "74": {
+        "action_label": "counting money",
+        "density_score": 6.790436683885607,
+        "k": 200,
+        "kth_distance": 0.15385379409197653,
+        "top_5_closest": [
+            {
+                "distance": 0.06972490691791478,
+                "text": "the person is counting their money"
+            },
+            {
+                "distance": 0.06972490691791478,
+                "text": "the person is counting their money"
+            },
+            {
+                "distance": 0.12046231594210122,
+                "text": "a person is paying for something"
+            },
+            {
+                "distance": 0.12046231594210122,
+                "text": "a person is paying for something"
+            },
+            {
+                "distance": 0.13495162731903476,
+                "text": "kicking something hard and having a look"
+            }
+        ]
+    },
+    "75": {
+        "action_label": "cutting nails",
+        "density_score": 5.3540612749805225,
+        "k": 200,
+        "kth_distance": 0.19571831262175954,
+        "top_5_closest": [
+            {
+                "distance": 0.12979081124013692,
+                "text": "the person is filing their fingernails."
+            },
+            {
+                "distance": 0.12979081124013692,
+                "text": "the person is filing their fingernails."
+            },
+            {
+                "distance": 0.14209057824564164,
+                "text": "the person was hammering a nail"
+            },
+            {
+                "distance": 0.14209057824564164,
+                "text": "the person was hammering a nail"
+            },
+            {
+                "distance": 0.14581263574483883,
+                "text": "the person is hammering a nail."
+            }
+        ]
+    },
+    "76": {
+        "action_label": "cutting paper",
+        "density_score": 6.210062377922731,
+        "k": 200,
+        "kth_distance": 0.16719099337437304,
+        "top_5_closest": [
+            {
+                "distance": 0.12866760383493503,
+                "text": "a person is cutting something with a knife"
+            },
+            {
+                "distance": 0.12866760383493503,
+                "text": "a person is cutting something with a knife"
+            },
+            {
+                "distance": 0.14110690864899478,
+                "text": "picking up a tool and an object cutting and keeping it in the same place, where it has been taken from."
+            },
+            {
+                "distance": 0.14110690864899478,
+                "text": "picking up a tool and an object cutting and keeping it in the same place, where it has been taken from."
+            },
+            {
+                "distance": 0.14838154981018403,
+                "text": "the person look for it and started wiping some thing off."
+            }
+        ]
+    },
+    "77": {
+        "action_label": "snap fingers",
+        "density_score": 8.24256040559928,
+        "k": 200,
+        "kth_distance": 0.12617821737691803,
+        "top_5_closest": [
+            {
+                "distance": 0.10463599094437337,
+                "text": "the man puts both hands down"
+            },
+            {
+                "distance": 0.10463599094437337,
+                "text": "the man puts both hands down"
+            },
+            {
+                "distance": 0.10735205677893134,
+                "text": "a person slowly raised the right hand"
+            },
+            {
+                "distance": 0.107870355312645,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.107870355312645,
+                "text": "taking a couple of steps back"
+            }
+        ]
+    },
+    "78": {
+        "action_label": "open bottle",
+        "density_score": 7.967449624754644,
+        "k": 200,
+        "kth_distance": 0.14591861160290298,
+        "top_5_closest": [
+            {
+                "distance": 0.06584582243463166,
+                "text": "a person is opening a bottle and drinking from that"
+            },
+            {
+                "distance": 0.06584582243463166,
+                "text": "a person is opening a bottle and drinking from that"
+            },
+            {
+                "distance": 0.07375470021235497,
+                "text": "a person opens a bottle and drinks from it."
+            },
+            {
+                "distance": 0.07375470021235497,
+                "text": "a person opens a bottle and drinks from it."
+            },
+            {
+                "distance": 0.07375470021235497,
+                "text": "a person opens a bottle and drinks from it."
+            }
+        ]
+    },
+    "79": {
+        "action_label": "sniff/smell",
+        "density_score": 6.119715696074155,
+        "k": 200,
+        "kth_distance": 0.1687578541306054,
+        "top_5_closest": [
+            {
+                "distance": 0.14655695477268427,
+                "text": "person is looking around side to side and then nods."
+            },
+            {
+                "distance": 0.14655695477268427,
+                "text": "person is looking around side to side and then nods."
+            },
+            {
+                "distance": 0.14891353842612698,
+                "text": "person is scratching their nose."
+            },
+            {
+                "distance": 0.14891353842612698,
+                "text": "person is scratching their nose."
+            },
+            {
+                "distance": 0.1518991186770231,
+                "text": "the person is possibly coughing."
+            }
+        ]
+    },
+    "80": {
+        "action_label": "squat down",
+        "density_score": 7.650111351937523,
+        "k": 200,
+        "kth_distance": 0.14801712186774596,
+        "top_5_closest": [
+            {
+                "distance": 0.09390348421719907,
+                "text": "the body squats up and down."
+            },
+            {
+                "distance": 0.09390348421719907,
+                "text": "the body squats up and down."
+            },
+            {
+                "distance": 0.09589668770733362,
+                "text": "a person squats down"
+            },
+            {
+                "distance": 0.09589668770733362,
+                "text": "a person squats down"
+            },
+            {
+                "distance": 0.0982850682699179,
+                "text": "a person does a squat."
+            }
+        ]
+    },
+    "81": {
+        "action_label": "toss a coin",
+        "density_score": 7.179762175313564,
+        "k": 200,
+        "kth_distance": 0.14365892964650795,
+        "top_5_closest": [
+            {
+                "distance": 0.12578116582539145,
+                "text": "the person pick some thing up to toss."
+            },
+            {
+                "distance": 0.12578116582539145,
+                "text": "the person pick some thing up to toss."
+            },
+            {
+                "distance": 0.12745365222462457,
+                "text": "a person spin back real fast"
+            },
+            {
+                "distance": 0.12745365222462457,
+                "text": "a person spin back real fast"
+            },
+            {
+                "distance": 0.12768952055972516,
+                "text": "a person picks something up and puts it down to the right"
+            }
+        ]
+    },
+    "82": {
+        "action_label": "fold paper",
+        "density_score": 6.702630688882674,
+        "k": 200,
+        "kth_distance": 0.15511595236916176,
+        "top_5_closest": [
+            {
+                "distance": 0.13464989843739938,
+                "text": "turning body to one side."
+            },
+            {
+                "distance": 0.13464989843739938,
+                "text": "turning body to one side."
+            },
+            {
+                "distance": 0.1358527994337193,
+                "text": "folds arms and then puts them by side"
+            },
+            {
+                "distance": 0.1358527994337193,
+                "text": "folds arms and then puts them by side"
+            },
+            {
+                "distance": 0.13610638024680433,
+                "text": "the person folds their arms before then unfolding"
+            }
+        ]
+    },
+    "83": {
+        "action_label": "ball up paper",
+        "density_score": 8.194762594143327,
+        "k": 200,
+        "kth_distance": 0.12847496778587342,
+        "top_5_closest": [
+            {
+                "distance": 0.09821233952907682,
+                "text": "hopped on right foot swieled arms"
+            },
+            {
+                "distance": 0.10147735376505618,
+                "text": "movin  right hand upward"
+            },
+            {
+                "distance": 0.10412777659178807,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10412777659178807,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10533805830779541,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            }
+        ]
+    },
+    "84": {
+        "action_label": "play magic cube",
+        "density_score": 5.279923633352799,
+        "k": 200,
+        "kth_distance": 0.19429009612237724,
+        "top_5_closest": [
+            {
+                "distance": 0.15903337072854584,
+                "text": "the person who\u2019s acting out a magic trick."
+            },
+            {
+                "distance": 0.15903337072854584,
+                "text": "the person who\u2019s acting out a magic trick."
+            },
+            {
+                "distance": 0.16542485016370678,
+                "text": "figure picks a box up, moves it to their right, places it back"
+            },
+            {
+                "distance": 0.165776366327958,
+                "text": "figure picks a box up, moves it to their left, places it back"
+            },
+            {
+                "distance": 0.17012016764977733,
+                "text": "some thing on the hand and like play."
+            }
+        ]
+    },
+    "85": {
+        "action_label": "apply cream on face",
+        "density_score": 8.376073155176869,
+        "k": 200,
+        "kth_distance": 0.12499560826779899,
+        "top_5_closest": [
+            {
+                "distance": 0.10568839633359461,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10568839633359461,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            },
+            {
+                "distance": 0.10738375859855964,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.10738375859855964,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.10843776308194386,
+                "text": "person looks to be doing their make up or something on their face"
+            }
+        ]
+    },
+    "86": {
+        "action_label": "apply cream on hand",
+        "density_score": 10.787817791896058,
+        "k": 200,
+        "kth_distance": 0.09841851833410331,
+        "top_5_closest": [
+            {
+                "distance": 0.07799753392074893,
+                "text": "a person slowly raised the right hand"
+            },
+            {
+                "distance": 0.07933559687686731,
+                "text": "the man puts both hands down"
+            },
+            {
+                "distance": 0.07933559687686731,
+                "text": "the man puts both hands down"
+            },
+            {
+                "distance": 0.07983447750084927,
+                "text": "a person cries into their hands"
+            },
+            {
+                "distance": 0.07983447750084927,
+                "text": "a person cries into their hands"
+            }
+        ]
+    },
+    "87": {
+        "action_label": "put on bag",
+        "density_score": 7.676577418401535,
+        "k": 200,
+        "kth_distance": 0.13508993758145837,
+        "top_5_closest": [
+            {
+                "distance": 0.1158819243078838,
+                "text": "the person is carrying something behind back."
+            },
+            {
+                "distance": 0.1158819243078838,
+                "text": "the person is carrying something behind back."
+            },
+            {
+                "distance": 0.11735105144498603,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.11735105144498603,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.11849161809383846,
+                "text": "a person quickly steps back and to his left."
+            }
+        ]
+    },
+    "88": {
+        "action_label": "take off bag",
+        "density_score": 5.895443813414944,
+        "k": 200,
+        "kth_distance": 0.17493182086818126,
+        "top_5_closest": [
+            {
+                "distance": 0.14801208630638318,
+                "text": "the person is taking off some thing."
+            },
+            {
+                "distance": 0.14801208630638318,
+                "text": "the person is taking off some thing."
+            },
+            {
+                "distance": 0.14962265173337186,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.14962265173337186,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.15211854727973817,
+                "text": "the person is carrying something behind back."
+            }
+        ]
+    },
+    "89": {
+        "action_label": "put object into bag",
+        "density_score": 7.482133405494449,
+        "k": 200,
+        "kth_distance": 0.13996283184437985,
+        "top_5_closest": [
+            {
+                "distance": 0.11464982786444766,
+                "text": "person picked up an object."
+            },
+            {
+                "distance": 0.11464982786444766,
+                "text": "person picked up an object."
+            },
+            {
+                "distance": 0.11592703457286158,
+                "text": "person picked an object up."
+            },
+            {
+                "distance": 0.11592703457286158,
+                "text": "person picked an object up."
+            },
+            {
+                "distance": 0.11621041238875451,
+                "text": "the person picked up something and is carrying it"
+            }
+        ]
+    },
+    "90": {
+        "action_label": "take object out of bag",
+        "density_score": 7.056620519668636,
+        "k": 200,
+        "kth_distance": 0.1486340699335369,
+        "top_5_closest": [
+            {
+                "distance": 0.12109293964485612,
+                "text": "someone looks as if they picked up an object and put it away"
+            },
+            {
+                "distance": 0.12109293964485612,
+                "text": "someone looks as if they picked up an object and put it away"
+            },
+            {
+                "distance": 0.1248611227274613,
+                "text": "the person picked up something and is carrying it"
+            },
+            {
+                "distance": 0.1248611227274613,
+                "text": "the person picked up something and is carrying it"
+            },
+            {
+                "distance": 0.12534932359003037,
+                "text": "a preson grabbed something and throw it away"
+            }
+        ]
+    },
+    "91": {
+        "action_label": "open a box",
+        "density_score": 7.951823961074271,
+        "k": 200,
+        "kth_distance": 0.13429057068380734,
+        "top_5_closest": [
+            {
+                "distance": 0.09111588233007983,
+                "text": "the man puts the box down and runs"
+            },
+            {
+                "distance": 0.09111588233007983,
+                "text": "the man puts the box down and runs"
+            },
+            {
+                "distance": 0.09251246337630159,
+                "text": "picks up box and throws it out like trash"
+            },
+            {
+                "distance": 0.09251246337630159,
+                "text": "picks up box and throws it out like trash"
+            },
+            {
+                "distance": 0.09262399147310152,
+                "text": "a figure does a box step"
+            }
+        ]
+    },
+    "92": {
+        "action_label": "move heavy objects",
+        "density_score": 10.137269348749212,
+        "k": 200,
+        "kth_distance": 0.10463794884478883,
+        "top_5_closest": [
+            {
+                "distance": 0.06225224903216764,
+                "text": "a person moves heavy objects from one place to another."
+            },
+            {
+                "distance": 0.06225224903216764,
+                "text": "a person moves heavy objects from one place to another."
+            },
+            {
+                "distance": 0.07749542982978341,
+                "text": "a person picks up  a heavy object and moves it right."
+            },
+            {
+                "distance": 0.0796557074752805,
+                "text": "a person picks up  a heavy object and moves it left."
+            },
+            {
+                "distance": 0.08593575620104443,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            }
+        ]
+    },
+    "93": {
+        "action_label": "shake fist",
+        "density_score": 9.257758876162669,
+        "k": 200,
+        "kth_distance": 0.11733245780614343,
+        "top_5_closest": [
+            {
+                "distance": 0.07885748834272743,
+                "text": "a person raised the hand and start to shake"
+            },
+            {
+                "distance": 0.07885748834272743,
+                "text": "a person raised the hand and start to shake"
+            },
+            {
+                "distance": 0.08074302421384372,
+                "text": "a person raised the right hand and shake it"
+            },
+            {
+                "distance": 0.08074302421384372,
+                "text": "a person raised the right hand and shake it"
+            },
+            {
+                "distance": 0.08540437839282178,
+                "text": "a person raised the right hand and shake it someone"
+            }
+        ]
+    },
+    "94": {
+        "action_label": "throw up cap/hat",
+        "density_score": 5.305734792016479,
+        "k": 200,
+        "kth_distance": 0.19744196650967838,
+        "top_5_closest": [
+            {
+                "distance": 0.1357445198927988,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.1357445198927988,
+                "text": "a person picks something up and puts it on their head."
+            },
+            {
+                "distance": 0.137849884176375,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.137849884176375,
+                "text": "someone lifts both hands over their head to put on a hat."
+            },
+            {
+                "distance": 0.13928098123714094,
+                "text": "a person casually adjusts the cap on his head."
+            }
+        ]
+    },
+    "95": {
+        "action_label": "capitulate",
+        "density_score": 7.122287537000686,
+        "k": 200,
+        "kth_distance": 0.14531309934015113,
+        "top_5_closest": [
+            {
+                "distance": 0.12523227821513894,
+                "text": "a figure stands still tentatively"
+            },
+            {
+                "distance": 0.12523227821513894,
+                "text": "a figure stands still tentatively"
+            },
+            {
+                "distance": 0.12818372010523238,
+                "text": "a person jauntily skips forward."
+            },
+            {
+                "distance": 0.12818372010523238,
+                "text": "a person jauntily skips forward."
+            },
+            {
+                "distance": 0.13177495632160185,
+                "text": "a person cautiously steps backwards."
+            }
+        ]
+    },
+    "96": {
+        "action_label": "cross arms",
+        "density_score": 10.187933389121577,
+        "k": 200,
+        "kth_distance": 0.10763127672544459,
+        "top_5_closest": [
+            {
+                "distance": 0.08035133369270031,
+                "text": "crossing arms near face."
+            },
+            {
+                "distance": 0.08035133369270031,
+                "text": "crossing arms near face."
+            },
+            {
+                "distance": 0.08265000804163958,
+                "text": "moving arms left and right"
+            },
+            {
+                "distance": 0.08354501524287139,
+                "text": "moving arms in and out"
+            },
+            {
+                "distance": 0.08354501524287139,
+                "text": "moving arms in and out"
+            }
+        ]
+    },
+    "97": {
+        "action_label": "arm circles",
+        "density_score": 6.411593676394797,
+        "k": 200,
+        "kth_distance": 0.1720844281813303,
+        "top_5_closest": [
+            {
+                "distance": 0.08047207218720831,
+                "text": "a person is doing arm circles."
+            },
+            {
+                "distance": 0.08047207218720831,
+                "text": "a person is doing arm circles."
+            },
+            {
+                "distance": 0.09103858250092656,
+                "text": "a man does two arm circles"
+            },
+            {
+                "distance": 0.09103858250092656,
+                "text": "a man does two arm circles"
+            },
+            {
+                "distance": 0.10312747792052535,
+                "text": "person is doing wide arm circles."
+            }
+        ]
+    },
+    "98": {
+        "action_label": "arm swings",
+        "density_score": 5.3791108485335775,
+        "k": 200,
+        "kth_distance": 0.1971614660406067,
+        "top_5_closest": [
+            {
+                "distance": 0.15115908298050407,
+                "text": "a person puts both arms together and swings right."
+            },
+            {
+                "distance": 0.15213677233682932,
+                "text": "swings right arm up to head"
+            },
+            {
+                "distance": 0.15583036955376728,
+                "text": "the person swings both arms as a form of exercise"
+            },
+            {
+                "distance": 0.15583036955376728,
+                "text": "the person swings both arms as a form of exercise"
+            },
+            {
+                "distance": 0.15587790713026928,
+                "text": "swings left arm up to head"
+            }
+        ]
+    },
+    "99": {
+        "action_label": "run on the spot",
+        "density_score": 13.538547170386082,
+        "k": 200,
+        "kth_distance": 0.08463866291428612,
+        "top_5_closest": [
+            {
+                "distance": 0.042703989709710455,
+                "text": "person runs on the spot"
+            },
+            {
+                "distance": 0.042703989709710455,
+                "text": "person runs on the spot"
+            },
+            {
+                "distance": 0.045414869615333586,
+                "text": "a person runs on the spot."
+            },
+            {
+                "distance": 0.045414869615333586,
+                "text": "a person runs on the spot."
+            },
+            {
+                "distance": 0.045414869615333586,
+                "text": "a person runs on the spot."
+            }
+        ]
+    },
+    "100": {
+        "action_label": "butt kicks",
+        "density_score": 8.97701253100561,
+        "k": 200,
+        "kth_distance": 0.12118020701840004,
+        "top_5_closest": [
+            {
+                "distance": 0.07731962217329547,
+                "text": "subject kicks out right leg."
+            },
+            {
+                "distance": 0.08018308245552541,
+                "text": "a man does a big kick."
+            },
+            {
+                "distance": 0.08018308245552541,
+                "text": "a man does a big kick."
+            },
+            {
+                "distance": 0.08080712626667708,
+                "text": "subject kicks out left leg."
+            },
+            {
+                "distance": 0.08639395968709851,
+                "text": "the man kicks at something with his right leg."
+            }
+        ]
+    },
+    "101": {
+        "action_label": "cross toe touch",
+        "density_score": 6.748073755951281,
+        "k": 200,
+        "kth_distance": 0.15459675799263073,
+        "top_5_closest": [
+            {
+                "distance": 0.12899025078355142,
+                "text": "someone takes one big jump forward landing on both feet."
+            },
+            {
+                "distance": 0.12899025078355142,
+                "text": "someone takes one big jump forward landing on both feet."
+            },
+            {
+                "distance": 0.13349834950443384,
+                "text": "doing a cartwheel very quickly"
+            },
+            {
+                "distance": 0.13349834950443384,
+                "text": "doing a cartwheel very quickly"
+            },
+            {
+                "distance": 0.13388111348471876,
+                "text": "he is flying kick with his right leg"
+            }
+        ]
+    },
+    "102": {
+        "action_label": "side kick",
+        "density_score": 8.836711397523656,
+        "k": 200,
+        "kth_distance": 0.1199853702786865,
+        "top_5_closest": [
+            {
+                "distance": 0.09682682176469748,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.09682682176469748,
+                "text": "kicking something to the side."
+            },
+            {
+                "distance": 0.10037872205063736,
+                "text": "the man did a karate kick forward"
+            },
+            {
+                "distance": 0.10037872205063736,
+                "text": "the man did a karate kick forward"
+            },
+            {
+                "distance": 0.10068307035972068,
+                "text": "he run side to side"
+            }
+        ]
+    },
+    "103": {
+        "action_label": "yawn",
+        "density_score": 8.016871210723828,
+        "k": 200,
+        "kth_distance": 0.13112774218952028,
+        "top_5_closest": [
+            {
+                "distance": 0.11115204970954706,
+                "text": "a person who seems to be shouting out"
+            },
+            {
+                "distance": 0.11115204970954706,
+                "text": "a person who seems to be shouting out"
+            },
+            {
+                "distance": 0.11127854770222623,
+                "text": "a person calling out loud"
+            },
+            {
+                "distance": 0.11127854770222623,
+                "text": "a person calling out loud"
+            },
+            {
+                "distance": 0.11323875244065884,
+                "text": "the person is throwing a tantrum."
+            }
+        ]
+    },
+    "104": {
+        "action_label": "stretch oneself",
+        "density_score": 7.142161001650592,
+        "k": 200,
+        "kth_distance": 0.15637244411855522,
+        "top_5_closest": [
+            {
+                "distance": 0.0988409791004009,
+                "text": "a person does a stretch"
+            },
+            {
+                "distance": 0.0988409791004009,
+                "text": "a person does a stretch"
+            },
+            {
+                "distance": 0.10260003686104813,
+                "text": "the person is  stretching."
+            },
+            {
+                "distance": 0.10260003686104813,
+                "text": "the person is  stretching."
+            },
+            {
+                "distance": 0.10338657215829805,
+                "text": "the person is excercising stretching."
+            }
+        ]
+    },
+    "105": {
+        "action_label": "blow nose",
+        "density_score": 6.239424111298938,
+        "k": 200,
+        "kth_distance": 0.16680324256571932,
+        "top_5_closest": [
+            {
+                "distance": 0.11692109714526921,
+                "text": "person is scratching their nose."
+            },
+            {
+                "distance": 0.11692109714526921,
+                "text": "person is scratching their nose."
+            },
+            {
+                "distance": 0.1303448747077285,
+                "text": "a person blows a kiss."
+            },
+            {
+                "distance": 0.1303448747077285,
+                "text": "a person blows a kiss."
+            },
+            {
+                "distance": 0.13935274222612248,
+                "text": "the person is possibly coughing."
+            }
+        ]
+    },
+    "106": {
+        "action_label": "wield knife",
+        "density_score": 7.790044723155691,
+        "k": 200,
+        "kth_distance": 0.13505489309422614,
+        "top_5_closest": [
+            {
+                "distance": 0.09732423048066008,
+                "text": "a person is cutting something with a knife"
+            },
+            {
+                "distance": 0.09732423048066008,
+                "text": "a person is cutting something with a knife"
+            },
+            {
+                "distance": 0.09957131958431864,
+                "text": "the man is playing with a sword"
+            },
+            {
+                "distance": 0.09957131958431864,
+                "text": "the man is playing with a sword"
+            },
+            {
+                "distance": 0.10589276586739604,
+                "text": "the person is pulling out a gun."
+            }
+        ]
+    },
+    "107": {
+        "action_label": "knock over",
+        "density_score": 8.342796745135255,
+        "k": 200,
+        "kth_distance": 0.12544522347354958,
+        "top_5_closest": [
+            {
+                "distance": 0.10570488509575193,
+                "text": "a person gets down on their hands and knees."
+            },
+            {
+                "distance": 0.10570488509575193,
+                "text": "a person gets down on their hands and knees."
+            },
+            {
+                "distance": 0.1082404426658633,
+                "text": "person is on their knees."
+            },
+            {
+                "distance": 0.1082404426658633,
+                "text": "person is on their knees."
+            },
+            {
+                "distance": 0.11109768700523193,
+                "text": "the person got down and is crawling."
+            }
+        ]
+    },
+    "108": {
+        "action_label": "grab stuff",
+        "density_score": 9.7893336105809,
+        "k": 200,
+        "kth_distance": 0.10692014411257189,
+        "top_5_closest": [
+            {
+                "distance": 0.07990676637679672,
+                "text": "the person reached over and grab some thing from the right."
+            },
+            {
+                "distance": 0.09379190507189805,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.09379190507189805,
+                "text": "someone hold heads in hands and bend to the right, trying to dodge something"
+            },
+            {
+                "distance": 0.09387986772945878,
+                "text": "the person reached over and grab some thing from the left."
+            },
+            {
+                "distance": 0.09391138388793663,
+                "text": "someone hold heads in hands and bend to the left, trying to dodge something"
+            }
+        ]
+    },
+    "109": {
+        "action_label": "shoot with gun",
+        "density_score": 7.28785505929334,
+        "k": 200,
+        "kth_distance": 0.14320316751750117,
+        "top_5_closest": [
+            {
+                "distance": 0.09488968611612902,
+                "text": "the person takes a shot with the shotgun"
+            },
+            {
+                "distance": 0.09488968611612902,
+                "text": "the person takes a shot with the shotgun"
+            },
+            {
+                "distance": 0.09531425938962856,
+                "text": "the person is pulling out a gun."
+            },
+            {
+                "distance": 0.09531425938962856,
+                "text": "the person is pulling out a gun."
+            },
+            {
+                "distance": 0.10605508177387757,
+                "text": "someone cocked a large gun and then began firing from right to left in a fast motion."
+            }
+        ]
+    },
+    "110": {
+        "action_label": "step on foot",
+        "density_score": 11.0424304390123,
+        "k": 200,
+        "kth_distance": 0.09601621190805221,
+        "top_5_closest": [
+            {
+                "distance": 0.06690716351380677,
+                "text": "a person is stepping their foot up"
+            },
+            {
+                "distance": 0.06690716351380677,
+                "text": "a person is stepping their foot up"
+            },
+            {
+                "distance": 0.0735178441963078,
+                "text": "takes a step then takes one larger step with the other foot."
+            },
+            {
+                "distance": 0.0735178441963078,
+                "text": "takes a step then takes one larger step with the other foot."
+            },
+            {
+                "distance": 0.07442872430654246,
+                "text": "a person takes a step forward with their right foot"
+            }
+        ]
+    },
+    "111": {
+        "action_label": "high-five",
+        "density_score": 8.363521037451488,
+        "k": 200,
+        "kth_distance": 0.1335322555079469,
+        "top_5_closest": [
+            {
+                "distance": 0.05615086768649502,
+                "text": "a person gives a high five"
+            },
+            {
+                "distance": 0.05615086768649502,
+                "text": "a person gives a high five"
+            },
+            {
+                "distance": 0.05968332074116511,
+                "text": "a person gives high fives."
+            },
+            {
+                "distance": 0.05968332074116511,
+                "text": "a person gives high fives."
+            },
+            {
+                "distance": 0.062138842223826485,
+                "text": "a person lazily gives a high five."
+            }
+        ]
+    },
+    "112": {
+        "action_label": "cheers and drink",
+        "density_score": 9.438909417975676,
+        "k": 200,
+        "kth_distance": 0.12320588704863156,
+        "top_5_closest": [
+            {
+                "distance": 0.0680193950136585,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.0680193950136585,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.0680193950136585,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.0680193950136585,
+                "text": "the person is having a drink."
+            },
+            {
+                "distance": 0.06875536415786421,
+                "text": "drinking something using the right hands"
+            }
+        ]
+    },
+    "113": {
+        "action_label": "carry object",
+        "density_score": 7.567412668591801,
+        "k": 200,
+        "kth_distance": 0.13875861477409424,
+        "top_5_closest": [
+            {
+                "distance": 0.09714128735827088,
+                "text": "someone is carrying a heavy object"
+            },
+            {
+                "distance": 0.09714128735827088,
+                "text": "someone is carrying a heavy object"
+            },
+            {
+                "distance": 0.1079855432835013,
+                "text": "person picked up an object."
+            },
+            {
+                "distance": 0.1079855432835013,
+                "text": "person picked up an object."
+            },
+            {
+                "distance": 0.11314759430277777,
+                "text": "someone is sorting thorough things, and then carrying it somewhere"
+            }
+        ]
+    },
+    "114": {
+        "action_label": "take a photo",
+        "density_score": 8.134965771101127,
+        "k": 200,
+        "kth_distance": 0.12863588145087912,
+        "top_5_closest": [
+            {
+                "distance": 0.09454353332585153,
+                "text": "taking a picture of the subject."
+            },
+            {
+                "distance": 0.09454353332585153,
+                "text": "taking a picture of the subject."
+            },
+            {
+                "distance": 0.09590466903600292,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.09590466903600292,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.09908140342285421,
+                "text": "a person is taking a picture."
+            }
+        ]
+    },
+    "115": {
+        "action_label": "follow",
+        "density_score": 9.401314528210992,
+        "k": 200,
+        "kth_distance": 0.11075284542271757,
+        "top_5_closest": [
+            {
+                "distance": 0.09212882048075133,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.09212882048075133,
+                "text": "taking a couple of steps back"
+            },
+            {
+                "distance": 0.09327954740187627,
+                "text": "great opportunity to do things"
+            },
+            {
+                "distance": 0.09327954740187627,
+                "text": "great opportunity to do things"
+            },
+            {
+                "distance": 0.09377588268774939,
+                "text": "someone takes three steps forward"
+            }
+        ]
+    },
+    "116": {
+        "action_label": "whisper",
+        "density_score": 6.666053325187523,
+        "k": 200,
+        "kth_distance": 0.15516148317613665,
+        "top_5_closest": [
+            {
+                "distance": 0.1367699993916085,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.1367699993916085,
+                "text": "a person steps back"
+            },
+            {
+                "distance": 0.13710131018571348,
+                "text": "a person a little jumped forward"
+            },
+            {
+                "distance": 0.13710131018571348,
+                "text": "a person a little jumped forward"
+            },
+            {
+                "distance": 0.1379223076293088,
+                "text": "a person takes a slight step back"
+            }
+        ]
+    },
+    "117": {
+        "action_label": "exchange things",
+        "density_score": 10.359335875368094,
+        "k": 200,
+        "kth_distance": 0.10151319566766426,
+        "top_5_closest": [
+            {
+                "distance": 0.07987472875617319,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.07987472875617319,
+                "text": "take some thing and put it on the some other place."
+            },
+            {
+                "distance": 0.0822162235464663,
+                "text": "through some thing and chash some thing."
+            },
+            {
+                "distance": 0.0822162235464663,
+                "text": "through some thing and chash some thing."
+            },
+            {
+                "distance": 0.08510902690243505,
+                "text": "the person threw some thing forward."
+            }
+        ]
+    },
+    "118": {
+        "action_label": "support somebody",
+        "density_score": 7.6465582409220625,
+        "k": 200,
+        "kth_distance": 0.13656547921279105,
+        "top_5_closest": [
+            {
+                "distance": 0.11221523151885926,
+                "text": "the person takes one strong step forward"
+            },
+            {
+                "distance": 0.11221523151885926,
+                "text": "the person takes one strong step forward"
+            },
+            {
+                "distance": 0.11728526367917025,
+                "text": "a person slowly raised the right hand"
+            },
+            {
+                "distance": 0.11783307124853948,
+                "text": "a person takes a slight step back"
+            },
+            {
+                "distance": 0.11783307124853948,
+                "text": "a person takes a slight step back"
+            }
+        ]
+    },
+    "119": {
+        "action_label": "rock-paper-scissors",
+        "density_score": 5.261239135206253,
+        "k": 200,
+        "kth_distance": 0.19649690091367633,
+        "top_5_closest": [
+            {
+                "distance": 0.16759971325267797,
+                "text": "person brings hands together then claps"
+            },
+            {
+                "distance": 0.16759971325267797,
+                "text": "person brings hands together then claps"
+            },
+            {
+                "distance": 0.1755790635228336,
+                "text": "a person claps both of their hands together."
+            },
+            {
+                "distance": 0.1755790635228336,
+                "text": "a person claps both of their hands together."
+            },
+            {
+                "distance": 0.1756699049585344,
+                "text": "a person crossed the hands"
+            }
+        ]
+    }
+}
