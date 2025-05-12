@@ -4,7 +4,10 @@
 
 ## Setup
 
-* .
+To setup MDM dependancies (after you already created a Conda .env) run:
+```
+bash prep/mdm_env_init.sh
+```
 
 ## Data
 
