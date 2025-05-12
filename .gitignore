@@ -174,10 +174,10 @@ cython_debug/
 .pypirc
 
 ### --- CUSTOM ----
+!data/NTU_RGBD/ntu_desc.json
+
 *.gif
 *.pt
 *.pkl
 *.npy
 *.pth
-*.json
-*.npy

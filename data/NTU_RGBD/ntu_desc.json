@@ -1,0 +1,722 @@
+{
+    "0" : {
+        "action_label": "drink water",
+        "captions":  [
+            "A person drinks water."
+        ]
+    },
+    "1": {
+        "action_label": "eat meal",
+        "captions": [
+            "A person eats a meal."
+        ]
+    },
+    "2": {
+        "action_label": "brush teeth",
+        "captions": [
+            "A person brushes their teeth."
+        ]
+    },
+    "3": {
+        "action_label": "brush hair",
+        "captions": [
+            "A person brushes their hair."
+        ]
+    },
+    "4": {
+        "action_label": "drop",
+        "captions": [
+            "A person drops an object."
+        ]
+    },
+    "5": {
+        "action_label": "pick up",
+        "captions": [
+            "A person picks something up."
+        ]
+    },
+    "6": {
+        "action_label": "throw",
+        "captions": [
+            "A person throws something."
+        ]
+    },
+    "7": {
+        "action_label": "sit down",
+        "captions": [
+            "A person sits down."
+        ]
+    },
+    "8": {
+        "action_label": "stand up",
+        "captions": [
+            "A person stands up."
+        ]
+    },
+    "9": {
+        "action_label": "clapping",
+        "captions": [
+            "A person claps their hands."
+        ]
+    },
+    "10": {
+        "action_label": "reading",
+        "captions": [
+            "A person reads."
+        ]
+    },
+    "11": {
+        "action_label": "writing",
+        "captions": [
+            "A person writes."
+        ]
+    },
+    "12": {
+        "action_label": "tear up paper",
+        "captions": [
+            "A person tears up paper."
+        ]
+    },
+    "13": {
+        "action_label": "put on jacket",
+        "captions": [
+            "A person puts on a jacket."
+        ]
+    },
+    "14": {
+        "action_label": "take off jacket",
+        "captions": [
+            "A person takes off a jacket."
+        ]
+    },
+    "15": {
+        "action_label": "put on a shoe",
+        "captions": [
+            "A person puts on a shoe."
+        ]
+    },
+    "16": {
+        "action_label": "take off a shoe",
+        "captions": [
+            "A person takes off a shoe."
+        ]
+    },
+    "17": {
+        "action_label": "put on glasses",
+        "captions": [
+            "A person puts on glasses."
+        ]
+    },
+    "18": {
+        "action_label": "take off glasses",
+        "captions": [
+            "A person takes off glasses."
+        ]
+    },
+    "19": {
+        "action_label": "put on a hat/cap",
+        "captions": [
+            "A person puts on a hat or cap."
+        ]
+    },
+    "20": {
+        "action_label": "take off a hat/cap",
+        "captions": [
+            "A person takes off a hat or cap."
+        ]
+    },
+    "21": {
+        "action_label": "cheer up",
+        "captions": [
+            "A person cheers up."
+        ]
+    },
+    "22": {
+        "action_label": "hand waving",
+        "captions": [
+            "A person waves their hand."
+        ]
+    },
+    "23": {
+        "action_label": "kicking something",
+        "captions": [
+            "A person kicks something."
+        ]
+    },
+    "24": {
+        "action_label": "reach into pocket",
+        "captions": [
+            "A person reaches into their pocket."
+        ]
+    },
+    "25": {
+        "action_label": "hopping",
+        "captions": [
+            "A person hops."
+        ]
+    },
+    "26": {
+        "action_label": "jump up",
+        "captions": [
+            "A person jumps up."
+        ]
+    },
+    "27": {
+        "action_label": "phone call",
+        "captions": [
+            "A person makes a phone call."
+        ]
+    },
+    "28": {
+        "action_label": "play with phone/tablet",
+        "captions": [
+            "A person plays with a phone or tablet."
+        ]
+    },
+    "29": {
+        "action_label": "type on a keyboard",
+        "captions": [
+            "A person types on a keyboard."
+        ]
+    },
+    "30": {
+        "action_label": "point to something",
+        "captions": [
+            "A person points to something."
+        ]
+    },
+    "31": {
+        "action_label": "taking a selfie",
+        "captions": [
+            "A person takes a selfie."
+        ]
+    },
+    "32": {
+        "action_label": "check time (from watch)",
+        "captions": [
+            "A person checks the time on their watch."
+        ]
+    },
+    "33": {
+        "action_label": "rub two hands",
+        "captions": [
+            "A person rubs their hands together."
+        ]
+    },
+    "34": {
+        "action_label": "nod head/bow",
+        "captions": [
+            "A person nods or bows."
+        ]
+    },
+    "35": {
+        "action_label": "shake head",
+        "captions": [
+            "A person shakes their head."
+        ]
+    },
+    "36": {
+        "action_label": "wipe face",
+        "captions": [
+            "A person wipes their face."
+        ]
+    },
+    "37": {
+        "action_label": "salute",
+        "captions": [
+            "A person salutes."
+        ]
+    },
+    "38": {
+        "action_label": "put palms together",
+        "captions": [
+            "A person puts their palms together."
+        ]
+    },
+    "39": {
+        "action_label": "cross hands in front",
+        "captions": [
+            "A person crosses their hands in front."
+        ]
+    },
+    "40": {
+        "action_label": "sneeze/cough",
+        "captions": [
+            "A person sneezes or coughs."
+        ]
+    },
+    "41": {
+        "action_label": "staggering",
+        "captions": [
+            "A person staggers."
+        ]
+    },
+    "42": {
+        "action_label": "falling down",
+        "captions": [
+            "A person falls down."
+        ]
+    },
+    "43": {
+        "action_label": "headache",
+        "captions": [
+            "A person has a headache."
+        ]
+    },
+    "44": {
+        "action_label": "chest pain",
+        "captions": [
+            "A person experiences chest pain."
+        ]
+    },
+    "45": {
+        "action_label": "back pain",
+        "captions": [
+            "A person experiences back pain."
+        ]
+    },
+    "46": {
+        "action_label": "neck pain",
+        "captions": [
+            "A person experiences neck pain."
+        ]
+    },
+    "47": {
+        "action_label": "nausea/vomiting",
+        "captions": [
+            "A person feels nauseous or vomits."
+        ]
+    },
+    "48": {
+        "action_label": "fan self",
+        "captions": [
+            "A person fans themselves."
+        ]
+    },
+    "49": {
+        "action_label": "punch/slap",
+        "captions": [
+            "A person punches or slaps."
+        ]
+    },
+    "50": {
+        "action_label": "kicking",
+        "captions": [
+            "A person kicks."
+        ]
+    },
+    "51": {
+        "action_label": "pushing",
+        "captions": [
+            "A person pushes something."
+        ]
+    },
+    "52": {
+        "action_label": "pat on back",
+        "captions": [
+            "A person pats someone on the back."
+        ]
+    },
+    "53": {
+        "action_label": "point finger",
+        "captions": [
+            "A person points a finger."
+        ]
+    },
+    "54": {
+        "action_label": "hugging",
+        "captions": [
+            "A person hugs someone."
+        ]
+    },
+    "55": {
+        "action_label": "giving object",
+        "captions": [
+            "A person gives an object to someone."
+        ]
+    },
+    "56": {
+        "action_label": "touch pocket",
+        "captions": [
+            "A person touches their pocket."
+        ]
+    },
+    "57": {
+        "action_label": "shaking hands",
+        "captions": [
+            "A person shakes hands."
+        ]
+    },
+    "58": {
+        "action_label": "walking towards",
+        "captions": [
+            "A person walks towards something."
+        ]
+    },
+    "59": {
+        "action_label": "walking apart",
+        "captions": [
+            "A person walks away."
+        ]
+    },
+    "60": {
+        "action_label": "hit with object",
+        "captions": [
+            "A person hits something with an object."
+        ]
+    },
+    "61": {
+        "action_label": "put on headphone",
+        "captions": [
+            "A person puts on headphones."
+        ]
+    },
+    "62": {
+        "action_label": "take off headphone",
+        "captions": [
+            "A person takes off headphones."
+        ]
+    },
+    "63": {
+        "action_label": "shoot at basket",
+        "captions": [
+            "A person shoots a basketball."
+        ]
+    },
+    "64": {
+        "action_label": "bounce ball",
+        "captions": [
+            "A person bounces a ball."
+        ]
+    },
+    "65": {
+        "action_label": "tennis bat swing",
+        "captions": [
+            "A person swings a tennis bat."
+        ]
+    },
+    "66": {
+        "action_label": "juggle table tennis ball",
+        "captions": [
+            "A person juggles a table tennis ball."
+        ]
+    },
+    "67": {
+        "action_label": "hush",
+        "captions": [
+            "A person makes a hush gesture."
+        ]
+    },
+    "68": {
+        "action_label": "flick hair",
+        "captions": [
+            "A person flicks their hair."
+        ]
+    },
+    "69": {
+        "action_label": "thumb up",
+        "captions": [
+            "A person gives a thumbs up."
+        ]
+    },
+    "70": {
+        "action_label": "thumb down",
+        "captions": [
+            "A person gives a thumbs down."
+        ]
+    },
+    "71": {
+        "action_label": "make OK sign",
+        "captions": [
+            "A person makes an OK sign."
+        ]
+    },
+    "72": {
+        "action_label": "make victory sign",
+        "captions": [
+            "A person makes a victory sign."
+        ]
+    },
+    "73": {
+        "action_label": "staple book",
+        "captions": [
+            "A person staples a book."
+        ]
+    },
+    "74": {
+        "action_label": "counting money",
+        "captions": [
+            "A person counts money."
+        ]
+    },
+    "75": {
+        "action_label": "cutting nails",
+        "captions": [
+            "A person cuts their nails."
+        ]
+    },
+    "76": {
+        "action_label": "cutting paper",
+        "captions": [
+            "A person cuts paper."
+        ]
+    },
+    "77": {
+        "action_label": "snap fingers",
+        "captions": [
+            "A person snaps their fingers."
+        ]
+    },
+    "78": {
+        "action_label": "open bottle",
+        "captions": [
+            "A person opens a bottle."
+        ]
+    },
+    "79": {
+        "action_label": "sniff/smell",
+        "captions": [
+            "A person sniffs or smells something."
+        ]
+    },
+    "80": {
+        "action_label": "squat down",
+        "captions": [
+            "A person squats down."
+        ]
+    },
+    "81": {
+        "action_label": "toss a coin",
+        "captions": [
+            "A person tosses a coin."
+        ]
+    },
+    "82": {
+        "action_label": "fold paper",
+        "captions": [
+            "A person folds paper."
+        ]
+    },
+    "83": {
+        "action_label": "ball up paper",
+        "captions": [
+            "A person balls up paper."
+        ]
+    },
+    "84": {
+        "action_label": "play magic cube",
+        "captions": [
+            "A person plays with a magic cube."
+        ]
+    },
+    "85": {
+        "action_label": "apply cream on face",
+        "captions": [
+            "A person applies cream on their face."
+        ]
+    },
+    "86": {
+        "action_label": "apply cream on hand",
+        "captions": [
+            "A person applies cream on their hand."
+        ]
+    },
+    "87": {
+        "action_label": "put on bag",
+        "captions": [
+            "A person puts on a bag."
+        ]
+    },
+    "88": {
+        "action_label": "take off bag",
+        "captions": [
+            "A person takes off a bag."
+        ]
+    },
+    "89": {
+        "action_label": "put object into bag",
+        "captions": [
+            "A person puts an object into a bag."
+        ]
+    },
+    "90": {
+        "action_label": "take object out of bag",
+        "captions": [
+            "A person takes an object out of a bag."
+        ]
+    },
+    "91": {
+        "action_label": "open a box",
+        "captions": [
+            "A person opens a box."
+        ]
+    },
+    "92": {
+        "action_label": "move heavy objects",
+        "captions": [
+            "A person moves heavy objects."
+        ]
+    },
+    "93": {
+        "action_label": "shake fist",
+        "captions": [
+            "A person shakes their fist."
+        ]
+    },
+    "94": {
+        "action_label": "throw up cap/hat",
+        "captions": [
+            "A person throws a cap or hat upward."
+        ]
+    },
+    "95": {
+        "action_label": "capitulate",
+        "captions": [
+            "A person capitulates."
+        ]
+    },
+    "96": {
+        "action_label": "cross arms",
+        "captions": [
+            "A person crosses their arms."
+        ]
+    },
+    "97": {
+        "action_label": "arm circles",
+        "captions": [
+            "A person performs arm circles."
+        ]
+    },
+    "98": {
+        "action_label": "arm swings",
+        "captions": [
+            "A person swings their arms."
+        ]
+    },
+    "99": {
+        "action_label": "run on the spot",
+        "captions": [
+            "A person runs on the spot."
+        ]
+    },
+    "100": {
+        "action_label": "butt kicks",
+        "captions": [
+            "A person does butt kicks."
+        ]
+    },
+    "101": {
+        "action_label": "cross toe touch",
+        "captions": [
+            "A person touches opposite toes in a cross motion."
+        ]
+    },
+    "102": {
+        "action_label": "side kick",
+        "captions": [
+            "A person performs a side kick."
+        ]
+    },
+    "103": {
+        "action_label": "yawn",
+        "captions": [
+            "A person yawns."
+        ]
+    },
+    "104": {
+        "action_label": "stretch oneself",
+        "captions": [
+            "A person stretches themselves."
+        ]
+    },
+    "105": {
+        "action_label": "blow nose",
+        "captions": [
+            "A person blows their nose."
+        ]
+    },
+    "106": {
+        "action_label": "wield knife",
+        "captions": [
+            "A person wields a knife."
+        ]
+    },
+    "107": {
+        "action_label": "knock over",
+        "captions": [
+            "A person knocks something over."
+        ]
+    },
+    "108": {
+        "action_label": "grab stuff",
+        "captions": [
+            "A person grabs something."
+        ]
+    },
+    "109": {
+        "action_label": "shoot with gun",
+        "captions": [
+            "A person shoots with a gun."
+        ]
+    },
+    "110": {
+        "action_label": "step on foot",
+        "captions": [
+            "A person steps on someone's foot."
+        ]
+    },
+    "111": {
+        "action_label": "high-five",
+        "captions": [
+            "A person gives a high-five."
+        ]
+    },
+    "112": {
+        "action_label": "cheers and drink",
+        "captions": [
+            "A person says cheers and drinks."
+        ]
+    },
+    "113": {
+        "action_label": "carry object",
+        "captions": [
+            "A person carries an object."
+        ]
+    },
+    "114": {
+        "action_label": "take a photo",
+        "captions": [
+            "A person takes a photo."
+        ]
+    },
+    "115": {
+        "action_label": "follow",
+        "captions": [
+            "A person follows someone."
+        ]
+    },
+    "116": {
+        "action_label": "whisper",
+        "captions": [
+            "A person whispers."
+        ]
+    },
+    "117": {
+        "action_label": "exchange things",
+        "captions": [
+            "A person exchanges things."
+        ]
+    },
+    "118": {
+        "action_label": "support somebody",
+        "captions": [
+            "A person supports somebody."
+        ]
+    },
+    "119": {
+        "action_label": "rock-paper-scissors",
+        "captions": [
+            "A person plays rock-paper-scissors."
+        ]
+    }
+}
