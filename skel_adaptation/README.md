@@ -6,9 +6,11 @@ Contains scripts to handle skeleton annotation convertions between NTU RGB+D 60/
 * NTU $\rightarrow$ Kinect format (25 joints).
 * HumanML3D $\rightarrow$ SMPL format (without hand joints, 22 total).
 
+<center>
 | NTU Skeleton | SMPL Skeleton |
 |:------------:|:-------------:|
-| <img src="../media/ntu_skele.svg" width="30%"> | <img src="../media/smpl_skele.svg" width="30%"> |
+| <img src="../media/ntu_skele.svg" width="45%"> | <img src="../media/smpl_skele.svg" width="45%"> |
+</center>
 
 ## Usage
 
