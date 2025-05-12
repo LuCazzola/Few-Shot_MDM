@@ -1,3 +1,6 @@
 [submodule "external/motion-diffusion-model"]
 	path = external/motion-diffusion-model
 	url = https://github.com/LuCazzola/motion-diffusion-model.git
+[submodule "external/pyskl"]
+	path = external/pyskl
+	url = https://github.com/kennymckormick/pyskl.git
