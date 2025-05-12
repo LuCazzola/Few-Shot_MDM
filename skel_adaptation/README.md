@@ -9,7 +9,7 @@ Contains scripts to handle skeleton annotation convertions between NTU RGB+D 60/
 <div align="center" style="width:60%; margin:auto;">
 | NTU Skeleton | SMPL Skeleton |
 |:------------:|:-------------:|
-| <img src="../media/ntu_skele.svg" width="100%"> | <img src="../media/smpl_skele.svg" width="100%"> |
+| <img src="../media/ntu_skele.svg" width="30%"> | <img src="../media/smpl_skele.svg" width="30%"> |
 
 **Left: Kinect format from NTU RGB+D - Right: SMPL format from HumanML3D.**
 </div>
