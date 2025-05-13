@@ -174,7 +174,7 @@ cython_debug/
 .pypirc
 
 ### --- CUSTOM ----
-!data/NTU_RGBD/ntu_desc.json
+modules/skel_adaptation/out
 
 *.gif
 *.pt
