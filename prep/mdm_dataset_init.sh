@@ -15,6 +15,8 @@ ln -s modules/skel_adaptation/out/forw/*.txt external/motion-diffusion-model/dat
 ln -s modules/skel_adaptation/out/forw/annotations/ external/motion-diffusion-model/dataset/$DATASET/
 # Symlink FewShot dir
 ln -s data/$DATASET/fewshot_data/ external/motion-diffusion-model/dataset/$DATASET/
+# Symlink texts data
+ln -s data/$DATASET/texts/ external/motion-diffusion-model/dataset/$DATASET/
 # Symlink train and test files
 ln -s data/$DATASET/class_captions.json external/motion-diffusion-model/dataset/$DATASET/
 

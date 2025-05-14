@@ -175,6 +175,8 @@ cython_debug/
 
 ### --- CUSTOM ----
 modules/skel_adaptation/out
+data/NTU60/texts
+data/NTU60/fewshot_data
 
 *.gif
 *.pt
