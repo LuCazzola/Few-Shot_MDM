@@ -10,7 +10,7 @@ Contains scripts to handle skeleton annotation convertions between NTU RGB+D 60/
 
 | NTU Skeleton | SMPL Skeleton |
 |:------------:|:-------------:|
-| <img src="../media/ntu_skele.svg" width="40%"> | <img src="../media/smpl_skele.svg" width="40%"> |
+| <img src="../../media/ntu_skele.svg" width="40%"> | <img src="../../media/smpl_skele.svg" width="40%"> |
 
 </div>
 

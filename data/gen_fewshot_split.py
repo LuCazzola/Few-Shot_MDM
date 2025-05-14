@@ -8,9 +8,9 @@ def parse_args():
     parser.add_argument('--input-root', type=str, required=True, help='Path to the forw/ directory (with .txt and annotations/)')
     parser.add_argument('--class-list', type=int, nargs='+', required=True, help='List of class indices to include (e.g. 0 1 2 3 4)')
     parser.add_argument('--shots', type=int, required=True, help='Number of samples per class in training splits')
-    parser.add_argument('--eval-multiplier', type=int, default=5, help='Multiplier for eval splits')
+    parser.add_argument('--eval-multiplier', type=int, default=5, help='Defines size of validation sets as: shots * eval_multiplier')
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
-    parser.add_argument('--dataset-dir', type=str, default='NTU_RGBD', help='Dataset directory (default: NTU_RGBD)')
+    parser.add_argument('--dataset-dir', type=str, default='NTU60', help='Dataset directory')
     return parser.parse_args()
 
 def extract_label_from_name(name: str) -> int:
@@ -53,7 +53,7 @@ def main():
         with open(output_path, 'w') as f:
             for sid in selected_ids:
                 f.write(f"{sid}\n")
-        print(f"✅ Wrote {len(selected_ids)} samples to {output_path}")
+        print(f"{{output_path}} => {len(selected_ids)} samples")
 
 if __name__ == '__main__':
     main()

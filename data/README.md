@@ -9,4 +9,5 @@ python3 gen_fewshot_split.py \
   --shots 10 \
   --eval-multiplier 5 \
   --seed 123
+  --dataset-dir NTU60
 ```

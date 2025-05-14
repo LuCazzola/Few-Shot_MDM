@@ -19,4 +19,11 @@ Such things are automatically done by executing:
 bash prep/data_init.sh
 ```
 
+* < INSTRUCTIONS TO CONVERT DATASET >
+
+
+symlink data
+```
+bash prep/mdm_dataset_init.sh NTU60
+```
 
