@@ -16,7 +16,7 @@ Once you've converted data into SMPL as described in [Here](../modules/skel_adap
 
 ```
 python3 build_mdm_texts.py \
-  --json_path NTU60/class_captions.json
+  --json_path NTU60/class_captions.json \
   --npy_folder ../modules/skel_adaptation/out/forw
 ```
 
@@ -33,13 +33,13 @@ python3 action_2_caption.py \
   --training
 ```
 
-consider that the used .json within MDM model is always the one named $\textt{<dataset>/class\_captions.json}$
+consider that the used .json within MDM model is always the one named $\texttt{<dataset>/class\_captions.json}$
 
 ### 2. Generate few-shot splits
 
 Once you've defined which aciton classes you wish to use as Support-Set they can be explicited in $\texttt{--class-list}$. The script:
 * samples different motion data within the specified action classes from $\texttt{--input-root/annotations}$ 
-  * $\texttt{--shots}$ data instances are taken per $\textttt{'\_train.txt'}$ split
+  * $\texttt{--shots}$ data instances are taken per $\texttt{'\_train.txt'}$ split
   * $\texttt{--shots} \times \texttt{--eval-multiplier}$ instances are instead taken per $\texttt{'\_val.txt'}$ split
 
 consider that splits are defined within $\texttt{--input-root}$ folder as $\texttt{.txt}$ files
