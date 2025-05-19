@@ -27,3 +27,14 @@ symlink data
 bash prep/mdm_dataset_init.sh NTU60
 ```
 
+## Usage
+
+Training
+
+```
+python -m train.train_mdm \
+    --few_shot \
+    --dataset ntu60 \
+    --split 5way_10shot_seed19/xset/train \
+    --save_dir save/my_few_shot_ntu60_trans_enc_512
+```

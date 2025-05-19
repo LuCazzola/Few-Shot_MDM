@@ -2,7 +2,7 @@ import os
 import argparse
 import pickle
 import numpy as np
-import tqdm
+from tqdm import tqdm
 
 from scipy.interpolate import interp1d
 
@@ -141,7 +141,7 @@ def main_backward(args):
     annotation_dir = os.path.join(args.input_data, 'annotations')
     npy_files = [f for f in os.listdir(annotation_dir) if f.endswith('.npy')]
 
-    for npy_file in tqdm.tqdm(npy_files, desc="Reconstructing annotations"):
+    for npy_file in tqdm(npy_files, desc="Reconstructing annotations"):
         sample_name = npy_file.replace('.npy', '')
         npy_path = os.path.join(annotation_dir, npy_file)
 

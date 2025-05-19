@@ -18,12 +18,16 @@ Contains scripts to handle skeleton annotation convertions between NTU RGB+D 60/
 
 To Apply forward mapping: NTU (Kinekt) $\rightarrow$ HumanML3D (SMPL):
 ```
-python3 skel_mapping.py --input-data ../../data/NTU_RGBD/ntu60_3danno.pkl --forward
+python3 skel_mapping.py \
+    --input-data ../../data/NTU60/ntu60_3danno.pkl \
+    --forward
 ```
 
 To Apply backward mapping: HumanML3D (SMPL) $\rightarrow$ NTU (Kinekt):
 ```
-python3 skel_mapping.py --input-data out/forw --backward
+python3 skel_mapping.py \
+    --input-data out/forw \
+    --backward
 ```
 
 ## Visualization
@@ -31,7 +35,7 @@ python3 skel_mapping.py --input-data out/forw --backward
 You can inspect both format for some random action class one next to the other using the following script
 ```
 python3 viz.py \
-    --orig-data-pkl ../../data/NTU_RGBD/ntu60_3danno.pkl \
+    --orig-data-pkl ../../data/NTU60/ntu60_3danno.pkl \
     --forward-data-root out/forw \
     --backward-data-pkl out/back/ntu60_3danno_back.pkl \
     --class-idx 19

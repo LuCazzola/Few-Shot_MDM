@@ -1,3 +1,4 @@
+import os
 import json
 import argparse
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -122,11 +123,13 @@ def main(json_path, model_alias, training_mode, n_captions):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("json_file", help="Path to the input JSON file")
+    parser.add_argument("--json_file", type=str, default="NTU60" help="Path to the input JSON file")
     parser.add_argument("--model", default="mistral-7b",
                         help="Model alias: mistral-7b, mixtral-8x7b, falcon-7b, llama-2")
     parser.add_argument("--training", action="store_true", help="Use training-style prompts instead of sampling-style")
     parser.add_argument("-n", "--num-captions", type=int, default=3, help="Number of captions to generate per action")
     args = parser.parse_args()
+
+    json_file = os.path.join(args.dataset, 'class_captions.json')
 
     main(args.json_file, args.model, args.training, args.num_captions)
