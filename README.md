@@ -38,9 +38,8 @@ bash prep/data_init.sh
 ```
 
 #### Manual installation:
-* **HumanML3D**: We don't need the training dataset as we don't plan on training on this dataset, so simply download text + dataset informations accordingly to [MDM repo.](https://github.com/kennymckormick/pyskl/blob/main/tools/data/README.md#download-the-pre-processed-skeletons) we work only with 3D skeletal data, so download either `NTU RGB+D [3D skeleton]` or the `NTU RGB+D 120 [3D skeleton]`.
+* **HumanML3D**: We don't need the training dataset, so simply download text + dataset informations accordingly to [MDM repo.](https://github.com/kennymckormick/pyskl/blob/main/tools/data/README.md#download-the-pre-processed-skeletons) we work only with 3D skeletal data, so download either `NTU RGB+D [3D skeleton]` or the `NTU RGB+D 120 [3D skeleton]`.
 * **NTU RGB+D**: Download NTU data from the [PySkl repo.](https://github.com/kennymckormick/pyskl?tab=readme-ov-file#data-preparation)
-
 </details>
 
 <details>
@@ -59,7 +58,7 @@ python3 modules/skel_adaptation/skel_mapping.py \
 <details>
   <summary><b>3. Data Formatting</b></summary>
 
-Now, all raw data should be converted and stored in `modules/skel_adaptation/out`. Some other steps are required so that data is formatted accordingly to MDM expected input formatting.
+Now, all raw data should be converted and stored in `modules/skel_adaptation/out`. Some other steps are required so that data is formatted accordingly to MDM expected input formatting. You can find more details and tools in [*Data*](data/)
 
 Format data for MDM:
 ```bash
@@ -81,8 +80,6 @@ The actual modules are stored within submodule in `external/`. Respectively:
 * **motion-diffusion-model**: our adapted version of MDM.
 * **PySkl**: repository of reference of the Human Action Recognition model, ST-GCN in our case.
 
-
-
 <details>
   <summary><b>Training MDM</b></summary>
 
@@ -91,15 +88,23 @@ First enter the submodule
 cd external/motion-diffusion-model
 ```
 
-If all steps specified in sections [Data](Data) and [Setup](Setup) you should be able to run the trainig with no problem. 
+If all steps specified in sections [Data](.Data) and [Setup](.Setup) you should be able to run the trainig with no problem. 
 ```bash
-python -m train.train_mdm \
-    --few_shot \
-    --dataset ntu60 \
-    --split 5way_10shot_seed19/xset/train \
-    --save_dir save/my_few_shot_ntu60_trans_enc_512
+python -m train.train_mdm \                             
+  --dataset ntu60 \
+  --split splits/fewshot/5way_10shot_seed19/xset/train \
+  --save_dir save/my_few_shot_ntu60_trans_enc_512 \
+  --diffusion_steps 50 \
+  --few_shot \
+  --mask_frames \
+  --use_ema
 ```
 </details>
 
+<details>
+  <summary><b>Training ST-GCN</b></summary>
+
+* ...
+</details>
 
 
