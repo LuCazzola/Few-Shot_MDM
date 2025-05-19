@@ -175,8 +175,8 @@ if __name__ == '__main__':
     parser.add_argument('--out-dir', default='out', type=str, help='Directory to store outputs')
     parser.add_argument('--forward', action='store_true', help='Apply forward mapping (NTU -> SMPL)')
     parser.add_argument('--backward', action='store_true', help='Apply backward mapping (SMPL -> NTU)')
-
     args = parser.parse_args()
+    args.out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), args.out_dir)
 
     if args.forward and args.backward:
         raise ValueError("Cannot apply both forward and backward mapping at the same time.")

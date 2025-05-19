@@ -5,19 +5,6 @@ import numpy as np
 from collections import defaultdict
 from pathlib import Path
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, required=True,
-                        help='Path to the dataset directory (containing annotations/ and splits/)')
-    parser.add_argument('--class-list', type=int, nargs='+', required=True,
-                        help='List of class indices to include (e.g. 0 1 2 3 4)')
-    parser.add_argument('--shots', type=int, required=True,
-                        help='Number of samples per class in training splits')
-    parser.add_argument('--eval-multiplier', type=int, default=5,
-                        help='Defines size of validation sets as: shots * eval_multiplier')
-    parser.add_argument('--seed', type=int, default=42, help='Random seed')
-    return parser.parse_args()
-
 def extract_label_from_name(name: str) -> int:
     """Extract class index from NTU filename like S001C001P001R001A059 → 58"""
     try:
@@ -51,8 +38,8 @@ def compute_stats_from_frame_zero(filenames, annotations_dir, output_dir):
 
     print(f"✅ Saved stats to {output_dir}/Mean.npy and Std.npy")
 
-def main():
-    args = parse_args()
+def main(args):
+
     random.seed(args.seed)
 
     dataset_dir = Path(args.dataset)
@@ -114,4 +101,19 @@ def main():
                 compute_stats_from_frame_zero(selected_ids, annotations_dir, split_output_dir)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, required=True,
+                        help='Path to the dataset directory (containing annotations/ and splits/)')
+    parser.add_argument('--class-list', type=int, nargs='+', required=True,
+                        help='List of class indices to include (e.g. 0 1 2 3 4)')
+    parser.add_argument('--shots', type=int, required=True,
+                        help='Number of samples per class in training splits')
+    parser.add_argument('--eval-multiplier', type=int, default=5,
+                        help='Defines size of validation sets as: shots * eval_multiplier')
+    parser.add_argument('--seed', type=int, default=42,
+                        help='Random seed')
+
+    args = parser.parse_args()
+    args.dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), args.dataset)
+    
+    main(args)

@@ -17,7 +17,7 @@ Contains scripts to handle skeleton annotation convertions between NTU RGB+D 60/
 ## Usage
 
 To Apply forward mapping: NTU (Kinekt) $\rightarrow$ HumanML3D (SMPL):
-```
+```bash
 python3 skel_mapping.py \
     --input-data ../../data/NTU60/ntu60_3danno.pkl \
     --forward

@@ -107,4 +107,5 @@ if __name__ == "__main__":
     parser.add_argument("--smpl_data", type=str, required=True, help="Path to folder Output of forward mapping")
     args = parser.parse_args()
 
+    args.dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), args.dataset)
     main(args.dataset, args.smpl_data)

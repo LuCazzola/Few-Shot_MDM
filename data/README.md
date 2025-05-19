@@ -14,7 +14,7 @@ Structure is as follows
 ### 1. Format data for MDM
 Once you've converted data into SMPL as described in [Here](../modules/skel_adaptation/) you can run the following command to generate `texts/` folder, which formats captions to be processed as Motion-Diffusion-Model datasets
 
-```
+```bash
 python3 prep_mdm_data.py \
   --dataset NTU60 \
   --smpl_data ../modules/skel_adaptation/out/forw
