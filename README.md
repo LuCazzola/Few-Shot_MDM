@@ -1,6 +1,23 @@
 # Few-Shot Motion-Diffusion-Model for downstream Human Action Recognition tasks
 
-* .
+Official implementation of {...}
+
+## 🧠 Overview: Leveraging Text-to-Motion Priors for Few-Shot Human Action Recognition
+
+This project presents a novel pipeline that leverages **Text-to-Motion generative priors** to enhance **Few-Shot Learning** in **Human Action Recognition (HAR)**. Rather than focusing solely on classifier design, we introduce a data-centric strategy that employs powerful generative models, such as the **Motion Diffusion Model (MDM)**, to synthesize 3D skeletal motion sequences from free-form text prompts (e.g., _"A person waves"_).
+
+The generated motions act as realistic surrogates for rare or unseen classes, enriching the training set of downstream HAR models such as **ST-GCN**. This augmentation strategy boosts generalization and addresses the class imbalance common in few-shot scenarios.
+
+### 🚀 Key Contributions
+
+1. **Text-to-Motion for HAR Augmentation**  
+   We introduce the first pipeline (to the best of our knowledge) that uses pretrained Text-to-Motion models as motion data generators to augment Human Action Recognition tasks.
+
+2. **Few-Shot Mixture-of-Experts (MoE) Framework**  
+   We propose a parameter-efficient adaptation strategy based on **Mixture-of-Experts**, enabling domain adaptation of the generative model with minimal real data.
+
+This cross-modal approach bridges natural language understanding and motion synthesis, offering a scalable and modular solution to real-world data scarcity in HAR.
+
 
 ## Setup
 
@@ -21,7 +38,7 @@ bash prep/data_init.sh
 ```
 
 #### Manual installation:
-* **HumanML3D**: We don't need the training dataset as we don't plan on training on this dataset, so simply download text + dataset informations accordingly to [MDM repo.](https://github.com/kennymckormick/pyskl/blob/main/tools/data/README.md#download-the-pre-processed-skeletons) we work only with 3D skeletal data, so download either \texttt{NTU RGB+D [3D skeleton]} or the \texttt{NTU RGB+D 120 [3D skeleton]}.
+* **HumanML3D**: We don't need the training dataset as we don't plan on training on this dataset, so simply download text + dataset informations accordingly to [MDM repo.](https://github.com/kennymckormick/pyskl/blob/main/tools/data/README.md#download-the-pre-processed-skeletons) we work only with 3D skeletal data, so download either `NTU RGB+D [3D skeleton]` or the `NTU RGB+D 120 [3D skeleton]`.
 * **NTU RGB+D**: Download NTU data from the [PySkl repo.](https://github.com/kennymckormick/pyskl?tab=readme-ov-file#data-preparation)
 
 </details>
