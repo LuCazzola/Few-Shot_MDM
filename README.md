@@ -24,8 +24,16 @@ This cross-modal approach bridges natural language understanding and motion synt
 To setup MDM dependancies (after you already created a Conda .env) run:
 
 ```bash
+git clone --recursive https://github.com/LuCazzola/Few-Shot_MDM.git
 bash prep/mdm_env_init.sh
 ```
+
+<br>
+
+**NOTE**: As `gdown` might fail you may need to manually download few resources into `external/motion-diffusion-model` directory and run the bash `prep/mdm_env_init.sh` script again. Respectively download and move the files:
+* [smpl.zip](https://drive.usercontent.google.com/download?id=1INYlGA76ak_cKGzvpOV2Pe6RkYTlXTW2&authuser=1) in `external/motion-diffusion-model/body_models`
+* [t2m.zip](https://drive.usercontent.google.com/download?id=1O_GUHgjDbl2tgbyfSwZOUYXDACnk25Kb&authuser=1) in `external/motion-diffusion-model`
+* [kit.zip](https://drive.usercontent.google.com/download?id=12liZW5iyvoybXD8eOw4VanTgsMtynCuU&authuser=1) in `external/motion-diffusion-model`
 
 ## Data
 
