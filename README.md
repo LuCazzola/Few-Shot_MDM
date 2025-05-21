@@ -45,6 +45,8 @@ bash prep/data_init.sh
 <details>
   <summary><b>2. Data Convertion</b></summary>
 
+<br>
+
 Data from NTU RGB+D needs to be converted in order to be coherent with HumanML3D. Check details at [skel_adaptation](modules/skel_adaptation) for further details. Execute
 
 ```bash
@@ -57,6 +59,8 @@ python3 modules/skel_adaptation/skel_mapping.py \
 
 <details>
   <summary><b>3. Data Formatting</b></summary>
+
+<br>
 
 Now, all raw data should be converted and stored in `modules/skel_adaptation/out`. Some other steps are required so that data is formatted accordingly to MDM expected input formatting. You can find more details and tools in [*Data*](data/)
 
@@ -83,7 +87,9 @@ The actual *models* are stored within submodules defined in `external/`. Respect
 * **PySkl**: repository of reference of the Human Action Recognition model, ST-GCN in our case.
 
 <details>
-  <summary><b>MDM</b></summary>
+  <summary><b>Few-Shot MDM</b></summary>
+
+<br>
 
 First enter the submodule
 
@@ -93,7 +99,7 @@ cd external/motion-diffusion-model
 
 ### Few-Shot Training
 
-If all steps specified in sections [Data](.Data) and [Setup](.Setup) you should be able to run the trainig with no problem. 
+If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem. 
 
 ```bash
 python -m train.train_mdm \
@@ -108,8 +114,8 @@ python -m train.train_mdm \
 
 ### Text-2-Motion Action Synthesis
 
-Execute the following script to produce Synthetyze motion from free text, such that:
-* Textual prompts are natural language convertions of Action classes. Check `class_captions.json` for better understanding.
+Execute the following script to synthetyze motion from free text, such that:
+* Textual prompts are natural language convertions of Action classes. Check [`class_captions.json`](data/NTU60/class_captions.json) for better understanding.
 * At each `--shot` (repetition) all `--action_labels` are generated given a random conditioning sampled from the `.json`.
 
 ```bash
@@ -122,13 +128,15 @@ python3 -m sample.generate \
   --no_render
 ```
 
-Remove `--no_render` to trigger the rendering into `.mp4` animations and actually see the synthetic motion (its time demanding).
+Remove `--no_render` to trigger the rendering into `.mp4` animations and actually see the synthetic motion (its time demandingm recomend to use with small number of shots and action labels).
 
 </details>
 
 
 <details>
   <summary><b>Training ST-GCN</b></summary>
+
+<br>
 
 Once you've generated some synthetic data through MDM and you want to use it on your ST-GCN classifier you should first apply a format convertion back from SMPL to NTU. Assuming `--input-data` is the folder where synthetic data is stored, execute the following: 
 ```bash
