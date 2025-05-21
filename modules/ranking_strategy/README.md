@@ -15,11 +15,13 @@ This approach provides an overall sense of the *semantic alignment* between the 
 ## Usage
 
 Before executing, make sure you have text data according to ![Here](https://github.com/GuyTevet/motion-diffusion-model?tab=readme-ov-file#a-the-easy-way-text-only).
-```
-python3 rank.py --texts-root ../motion-diffusion-model/dataset/HumanML3D/texts
+```bash
+python3 rank.py \
+  --texts-root ../../external/motion-diffusion-model/dataset/HumanML3D/texts
 ```
 
 The ranking can be visualized / processed separatelly through
-```
-python3 process_rank.py results/ntu_density_k200.json
+```bash
+python3 process_rank.py \
+  results/ntu_density_k200.json
 ```

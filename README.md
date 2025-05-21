@@ -76,35 +76,94 @@ bash prep/mdm_dataset_init.sh NTU60
 
 ## Usage
 
-The actual modules are stored within submodule in `external/`. Respectively:
-* **motion-diffusion-model**: our adapted version of MDM.
+The actual *models* are stored within submodules defined in `external/`. Respectively:
+* **motion-diffusion-model**: our adapted version of MDM, enabling Few-Shot training and sampling.
 * **PySkl**: repository of reference of the Human Action Recognition model, ST-GCN in our case.
 
 <details>
-  <summary><b>Training MDM</b></summary>
+  <summary><b>MDM</b></summary>
 
 First enter the submodule
+
 ```bash
 cd external/motion-diffusion-model
 ```
 
+### Few-Shot Training
+
 If all steps specified in sections [Data](.Data) and [Setup](.Setup) you should be able to run the trainig with no problem. 
+
 ```bash
-python -m train.train_mdm \                             
+python -m train.train_mdm \
+  --few_shot \                        
   --dataset ntu60 \
   --split splits/fewshot/5way_10shot_seed19/xset/train \
   --save_dir save/my_few_shot_ntu60_trans_enc_512 \
   --diffusion_steps 50 \
-  --few_shot \
   --mask_frames \
   --use_ema
 ```
+
+### Text-2-Motion Action Synthesis
+
+Execute the following script to produce Synthetyze motion from free text, such that:
+* Textual prompts are natural language convertions of Action classes. Check `class_captions.json` for better understanding.
+* At each `--shot` (repetition) all `--action_labels` are generated given a random conditioning sampled from the `.json`.
+
+```bash
+python3 -m sample.generate \
+  --few_shot \
+  --action_labels 0 1 2 \
+  --shots 10 \
+  --class_captions ../../data/NTU60/class_captions.json \
+  --model_path save/humanml_enc_512_50steps/model000750000.pt \
+  --no_render
+```
+
+Remove `--no_render` to trigger the rendering into `.mp4` animations and actually see the synthetic motion (its time demanding).
+
 </details>
+
 
 <details>
   <summary><b>Training ST-GCN</b></summary>
 
+Once you've generated some synthetic data through MDM and you want to use it on your ST-GCN classifier you should first apply a format convertion back from SMPL to NTU. 
+
+Assuming `--input-data` is the folder where synthetic data is stored, execute the following: 
+
+```bash
+python3 modules/skel_adaptation/skel_mapping.py \
+  --input-data external/motion-diffusion-model/save/humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
+  --mode=backward
+```
+
+This produces `.pkl` file inside `modules/skel_adaptation/out/back` structured in a format compatible with `PySkl` repository and containing a custom split `synth` which stores all synthetically generate data.
+
+After that you can apply basic pre-processing to the NTU dataset by running
+This is essential as it returns a transformed copy of the original data on which few basic needs are applied, such as:
+* lowering frame-rate
+* dropping hand joints
 * ...
+
+```bash
+python3 modules/skel_adaptation/skel_mapping.py \
+  --input-data data/NTU60/ntu60_3danno.pkl \
+  --mode=format_dataset
+```
+
+Now you can simply merge such file with the original NTU RGB+D data by executing:
+```bash
+python3 data/merge_synth_data.py \
+  --dataset NTU60 \
+  --fewshot_split 5way_10shot_seed19/xset \
+  --synth_data modules/skel_adaptation/out/back/ntu60_synth_back.pkl
+```
+
+This produces a final, unique .pkl file in which all data associated to the low-represented action classes is removed, to the exception of: 
+1. Samples within `<fewshot_split>/train.txt`, which is the available low-resources real data.
+2. The synthetic data prduced by MDM in `<synth_data>`.
+
 </details>
 
 

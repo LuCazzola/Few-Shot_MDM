@@ -11,6 +11,8 @@ NTU_TO_SMPL_DIRECT_MAP = {
     8: 17, 9: 19, 10: 21, 12: 1, 13: 4, 14: 7, 15: 10,
     16: 2, 17: 5, 18: 8, 19: 11,
 }
+# Ids of hand joints to be dropped (when needed)
+OMIT_JOINTS = {7, 11, 21, 22, 23, 24}
 
 def resample_motion(motion: np.ndarray, original_fps: int = 30, target_fps: int = 20) -> np.ndarray:
     """
@@ -58,8 +60,6 @@ def backward_map(smpl_joints: np.ndarray):
     T = smpl_joints.shape[0]
     ntu_joints = np.zeros((T, 25, 3), dtype=np.float16)
 
-    # Drop hand-related joints
-    OMIT_JOINTS = {7, 11, 21, 22, 23, 24}
     # Reverse the direct mapping (collar-bone is implicitly dropped)
     smpl_to_ntu_map = {v: k for k, v in NTU_TO_SMPL_DIRECT_MAP.items() if k not in OMIT_JOINTS and k != 1}
     for smpl_idx, ntu_idx in smpl_to_ntu_map.items():
@@ -87,7 +87,8 @@ def backward_preprocess(joints: np.ndarray):
     # Example placeholder: does nothing yet
     return joints
 
-def main_forward(args):
+
+def forward_op(args):
     with open(args.input_data, 'rb') as f:
         raw_data = pickle.load(f)
 
@@ -104,7 +105,7 @@ def main_forward(args):
         if keypoint.shape[0] == 0:
             continue
 
-        ntu_joints = keypoint[0].astype(np.float16)
+        ntu_joints = keypoint[0].astype(np.float16) # We ignore multiple skeletons, only keep the first one.
         ntu_joints = resample_motion(ntu_joints, original_fps=30, target_fps=20)
         smpl_joints = forward_map(ntu_joints)
         smpl_joints = forward_preprocess(smpl_joints)
@@ -122,8 +123,62 @@ def main_forward(args):
     print(f"✅ Saved {saved_count} sequences to {args.out_dir}/forw/annotations/")
     print(f"📄 Generated split lists: {', '.join(split_lists.keys())}")
 
+def backward_op(args):
+    datapath = os.path.join(args.input_data, 'results.npy')
+    if not os.path.exists(datapath):
+        raise FileNotFoundError(f"{datapath} not found")
 
-def main_backward(args):
+    data_dict = np.load(datapath, allow_pickle=True).item()
+    motion_data = data_dict['motion']  # (N, T, J*3)
+    lengths = data_dict['lengths']     # (N,)
+    texts = data_dict['text']          # List[str]
+
+    if motion_data.ndim != 4:
+        raise ValueError("Expected motion data of shape (N, T, J, 3)")
+
+    print(f"✅ Loaded MDM motion data with shape {motion_data.shape}")
+
+    annotations = []
+    split = {'synth': []}
+
+    # Read integer labels from _csl.txt file
+    cls_path = os.path.join(args.input_data, 'results_cls.txt')
+    if not os.path.exists(cls_path):
+        raise FileNotFoundError(f"Missing label file: {cls_path}")
+
+    with open(cls_path, 'r') as f:
+        labels = [int(line.strip()) for line in f if line.strip()]
+
+    for idx, (smpl_seq, T, label) in enumerate(zip(motion_data, lengths, labels)):
+        # smpl_seq shape: (22, 3, T) → we want (T, 22, 3)
+        smpl_seq = smpl_seq[:, :, :T]           # (22, 3, T)
+        smpl_joints = np.transpose(smpl_seq, (2, 0, 1)).astype(np.float16)  # (T, 22, 3)
+
+        smpl_joints = backward_preprocess(smpl_joints)
+        ntu_joints = backward_map(smpl_joints)
+
+        frame_dir = f"seq{idx:04d}A{label + 1:03d}"
+        annotations.append({
+            'frame_dir': frame_dir,
+            'label': label,
+            'keypoint': np.expand_dims(ntu_joints, axis=0), # extra dimension to mimic number of skeletons
+            'total_frames': ntu_joints.shape[0],
+        })
+        split['synth'].append(frame_dir)
+
+    out_pkl_path = os.path.join(args.out_dir, 'back', 'ntu60_synth_back.pkl')
+    os.makedirs(os.path.dirname(out_pkl_path), exist_ok=True)
+    with open(out_pkl_path, 'wb') as f:
+        pickle.dump({'annotations': annotations, 'split': split}, f)
+
+    print(f"✅ Saved {len(annotations)} annotations to {out_pkl_path}")
+
+
+def backward_op_toy(args):
+    """
+    Reconstruct NTU annotations from SMPL joints.
+    Assumes that the input data is the outcome of a forward_op().
+    """
     split = {}
     annotations = []
 
@@ -134,9 +189,6 @@ def main_backward(args):
         with open(os.path.join(args.input_data, txt_file), 'r') as f:
             ids = [line.strip() for line in f if line.strip()]
         split[split_name] = ids
-
-    # Invert: frame_dir → split_name
-    frame_to_split = {fid: split_name for split_name, ids in split.items() for fid in ids}
 
     annotation_dir = os.path.join(args.input_data, 'annotations')
     npy_files = [f for f in os.listdir(annotation_dir) if f.endswith('.npy')]
@@ -158,7 +210,7 @@ def main_backward(args):
         annotations.append({
             'frame_dir': sample_name,
             'label': label,
-            'keypoint': [ntu_joints],
+            'keypoint': np.expand_dims(ntu_joints, axis=0),  # extra dimension to mimic number of skeletons
             'total_frames': ntu_joints.shape[0],
         })
 
@@ -169,22 +221,60 @@ def main_backward(args):
 
     print(f"✅ Reconstructed .pkl saved to {out_pkl_path}")
 
+def store_formatted_dataset(args):
+    """
+    Given the original NTU dataset, stores a formatted copy such that
+    - it's sub-sampled to 20 FPS
+    - uses 19 joints (excluding hands) instead of 25
+    """
+    with open(args.input_data, 'rb') as f:
+        raw_data = pickle.load(f)
+    annotations = raw_data['annotations']
+
+    for ann in tqdm(annotations, desc="Processing annotations"):
+        ntu_joints = ann['keypoint'].astype(np.float16)
+        N = ntu_joints.shape[0]  # number of skeletons (typically 1, sometimes 2)
+        resampled_joints = []
+        # Transform all skeletons
+        for i in range(N):
+            resampled = resample_motion(ntu_joints[i], original_fps=30, target_fps=20)  # (T_new, 25, 3)
+            # Drop hand joints
+            resampled = np.delete(resampled, list(OMIT_JOINTS), axis=1)  # (T_new, 19, 3)
+            resampled_joints.append(resampled)
+        # store back
+        ann['keypoint'] = np.stack(resampled_joints, axis=0)  # (N, T_new, 19, 3)
+    # Save the formatted dataset
+    out_pkl_path = os.path.join(
+        os.path.dirname(args.input_data),
+        os.path.splitext(os.path.basename(args.input_data))[0] + '_formatted' + os.path.splitext(args.input_data)[1]
+    )
+    os.makedirs(os.path.dirname(out_pkl_path), exist_ok=True)
+    with open(out_pkl_path, 'wb') as f:
+        pickle.dump({
+            'annotations': annotations,
+            'split': raw_data['split'],
+        }, f)
+    print(f"✅ Formatted dataset saved to {out_pkl_path}")
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input-data', type=str, required=True, help='Path to input .pkl (forward) or folder with .npy files (backward)')
-    parser.add_argument('--out-dir', default='out', type=str, help='Directory to store outputs')
-    parser.add_argument('--forward', action='store_true', help='Apply forward mapping (NTU -> SMPL)')
-    parser.add_argument('--backward', action='store_true', help='Apply backward mapping (SMPL -> NTU)')
+    parser.add_argument('--out-dir', type=str, default='out', help='Directory to store outputs')
+    parser.add_argument('--mode', type=str, default='forward', choices=['forward', 'backward', 'toy_backward', 'format_dataset'], help='Defines mode of operation')
     args = parser.parse_args()
     args.out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), args.out_dir)
 
-    if args.forward and args.backward:
-        raise ValueError("Cannot apply both forward and backward mapping at the same time.")
-    elif args.forward:
+    if args.mode == 'forward':
         print("🔄 Applying forward mapping (NTU → SMPL)")
-        main_forward(args)
-    elif args.backward:
-        print("🔄 Applying backward mapping (SMPL → NTU)")
-        main_backward(args)
+        forward_op(args)
+    elif args.mode == 'backward':
+        print("🔄 Applying backward mapping (SMPL → NTU) from MDM synthetic data")
+        backward_op(args)
+    elif args.mode == 'toy_backward':
+        print("🔄 Applying [TOY] backward mapping (SMPL → NTU)")
+        backward_op_toy(args)
+    elif args.mode == 'format_dataset':
+        print("🔄 Formatting NTU data to 20 FPS and dropping hand joints")
+        store_formatted_dataset(args)
     else:
-        raise ValueError("Please specify either --forward or --backward flag.")
+        raise ValueError(f"Mode {args.mode} is not supported.")

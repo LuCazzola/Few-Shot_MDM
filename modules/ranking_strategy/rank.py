@@ -64,7 +64,7 @@ def compute_knn_stats(
         indices = indices.flatten()
 
         mean_dist = float(np.mean(distances))
-        density = 1.0 / mean_dist if mean_dist > 0 else float('inf')
+        density = 1.0 - mean_dist if mean_dist > 0 else float('inf')
 
         top_5 = sorted(zip(distances, indices))[:5]
         top_5_closest = [
