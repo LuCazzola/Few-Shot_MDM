@@ -67,6 +67,8 @@ python3 data/prep_mdm_data.py \
   --smpl_data modules/skel_adaptation/out/forw
 ```
 
+<br>
+
 Symlink data within MDM folder (for convenience)
 ```bash
 bash prep/mdm_dataset_init.sh NTU60
@@ -128,31 +130,28 @@ Remove `--no_render` to trigger the rendering into `.mp4` animations and actuall
 <details>
   <summary><b>Training ST-GCN</b></summary>
 
-Once you've generated some synthetic data through MDM and you want to use it on your ST-GCN classifier you should first apply a format convertion back from SMPL to NTU. 
-
-Assuming `--input-data` is the folder where synthetic data is stored, execute the following: 
-
+Once you've generated some synthetic data through MDM and you want to use it on your ST-GCN classifier you should first apply a format convertion back from SMPL to NTU. Assuming `--input-data` is the folder where synthetic data is stored, execute the following: 
 ```bash
 python3 modules/skel_adaptation/skel_mapping.py \
   --input-data external/motion-diffusion-model/save/humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
   --mode=backward
 ```
-
 This produces `.pkl` file inside `modules/skel_adaptation/out/back` structured in a format compatible with `PySkl` repository and containing a custom split `synth` which stores all synthetically generate data.
 
-After that you can apply basic pre-processing to the NTU dataset by running
-This is essential as it returns a transformed copy of the original data on which few basic needs are applied, such as:
-* lowering frame-rate
-* dropping hand joints
-* ...
+<br>
 
+After that you can apply basic pre-processing to the NTU dataset by running
+This is essential as it returns a transformed copy of the original data on which few basic needs are applied, such as: lowering frame-rate, dropping un-wanted joints, ...
 ```bash
 python3 modules/skel_adaptation/skel_mapping.py \
   --input-data data/NTU60/ntu60_3danno.pkl \
   --mode=format_dataset
 ```
+This produces a `<ds_name>_formatted.pkl` file within the `--dataset` derectory. 
 
-Now you can simply merge such file with the original NTU RGB+D data by executing:
+<br>
+
+Finally, you can merge the original data together with the synthetic one to obtain a final, single `.pkl` file which can directly be ported and executed into the `PySkl` toolbox. Run:
 ```bash
 python3 data/merge_synth_data.py \
   --dataset NTU60 \
