@@ -104,22 +104,6 @@ First enter the submodule
 ```bash
 cd external/motion-diffusion-model
 ```
-
-### Few-Shot Training
-
-If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem. 
-
-```bash
-python -m train.train_mdm \
-  --few_shot \                        
-  --dataset ntu60 \
-  --split splits/fewshot/5way_10shot_seed19/xset/train \
-  --save_dir save/my_few_shot_ntu60_trans_enc_512 \
-  --diffusion_steps 50 \
-  --mask_frames \
-  --use_ema
-```
-
 ### Text-2-Motion Action Synthesis
 
 Execute the following script to synthetyze motion from free text, such that:
@@ -137,6 +121,23 @@ python3 -m sample.generate \
 ```
 
 Remove `--no_render` to trigger the rendering into `.mp4` animations and actually see the synthetic motion (its time demandingm recomend to use with small number of shots and action labels).
+
+<br>
+
+### Few-Shot Training
+
+If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem. 
+
+```bash
+python -m train.train_mdm \
+  --few_shot \
+  --dataset ntu60 \
+  --split splits/fewshot/5way_10shot_seed19/xset/train \
+  --save_dir save/my_few_shot_ntu60_trans_enc_512 \
+  --diffusion_steps 50 \
+  --mask_frames \
+  --use_ema
+```
 
 </details>
 
