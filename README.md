@@ -25,6 +25,10 @@ To setup MDM dependancies (after you already created a Conda .env) run:
 
 ```bash
 git clone --recursive https://github.com/LuCazzola/Few-Shot_MDM.git
+```
+
+```bash
+cd Few-Shot_MDM
 bash prep/mdm_env_init.sh
 ```
 
