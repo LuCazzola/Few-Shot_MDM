@@ -104,6 +104,9 @@ First enter the submodule
 ```bash
 cd external/motion-diffusion-model
 ```
+
+Pre-Trained MDM can be downloaded from the [Original Repo](https://github.com/GuyTevet/Motion-Diffusion-Model?tab=readme-ov-file#3-download-the-pretrained-models) and then stored under `save/` directory.
+
 ### Text-2-Motion Action Synthesis
 
 Execute the following script to synthetyze motion from free text, such that:
