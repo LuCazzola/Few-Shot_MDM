@@ -60,7 +60,7 @@ Data from NTU RGB+D needs to be converted in order to be coherent with HumanML3D
 ```bash
 python3 modules/skel_adaptation/skel_mapping.py \
     --input-data data/NTU60/ntu60_3danno.pkl \
-    --forward
+    --mode=forward
 ```
 
 </details>
