@@ -19,84 +19,45 @@ The generated motions act as realistic surrogates for rare or unseen classes, en
 This cross-modal approach bridges natural language understanding and motion synthesis, offering a scalable and modular solution to real-world data scarcity in HAR.
 
 
-## Setup
+## How to use
 
-To setup MDM dependancies (after you already created a Conda .env) run:
-
-```bash
-git clone --recursive https://github.com/LuCazzola/Few-Shot_MDM.git
-```
-
-```bash
-cd Few-Shot_MDM
-bash prep/mdm_env_init.sh
-```
-
-<br>
-
-**NOTE**: As `gdown` might fail you may need to manually download few resources into `external/motion-diffusion-model` directory and run the bash `prep/mdm_env_init.sh` script again. Respectively download and move the files:
-* [smpl.zip](https://drive.usercontent.google.com/download?id=1INYlGA76ak_cKGzvpOV2Pe6RkYTlXTW2&authuser=1) in `external/motion-diffusion-model/body_models`
-* [t2m.zip](https://drive.usercontent.google.com/download?id=1O_GUHgjDbl2tgbyfSwZOUYXDACnk25Kb&authuser=1) in `external/motion-diffusion-model`
-* [kit.zip](https://drive.usercontent.google.com/download?id=12liZW5iyvoybXD8eOw4VanTgsMtynCuU&authuser=1) in `external/motion-diffusion-model`
-
-## Data
-
-<details>
-  <summary><b>1. Download Datasets</b></summary>
-
-#### Automatic installation (recomended):
-```bash
-bash prep/data_init.sh
-```
-
-#### Manual installation:
-* **HumanML3D**: We don't need the training dataset, so simply download text + dataset informations accordingly to [MDM repo.](https://github.com/kennymckormick/pyskl/blob/main/tools/data/README.md#download-the-pre-processed-skeletons) we work only with 3D skeletal data, so download either `NTU RGB+D [3D skeleton]` or the `NTU RGB+D 120 [3D skeleton]`.
-* **NTU RGB+D**: Download NTU data from the [PySkl repo.](https://github.com/kennymckormick/pyskl?tab=readme-ov-file#data-preparation)
-</details>
-
-<details>
-  <summary><b>2. Data Convertion</b></summary>
-
-<br>
-
-Data from NTU RGB+D needs to be converted in order to be coherent with HumanML3D. Check details at [skel_adaptation](modules/skel_adaptation) for further details. Execute
-
-```bash
-python3 modules/skel_adaptation/skel_mapping.py \
-    --input-data data/NTU60/ntu60_3danno.pkl \
-    --mode=forward
-```
-
-</details>
-
-<details>
-  <summary><b>3. Data Formatting</b></summary>
-
-<br>
-
-Now, all raw data should be converted and stored in `modules/skel_adaptation/out`. Some other steps are required so that data is formatted accordingly to MDM expected input formatting. You can find more details and tools in [*Data*](data/)
-
-Format data for MDM:
-```bash
-python3 data/prep_mdm_data.py \
-  --dataset NTU60 \
-  --smpl_data modules/skel_adaptation/out/forw
-```
-
-<br>
-
-Symlink data within MDM folder (for convenience)
-```bash
-bash prep/mdm_dataset_init.sh NTU60
-```
-</details>
-
-
-## Usage
+First of all, **follow [setup instructions](docs/setup.md)**.
 
 The actual *models* are stored within submodules defined in `external/`. Respectively:
 * **motion-diffusion-model**: our adapted version of MDM, enabling Few-Shot training and sampling.
 * **PySkl**: repository of reference of the Human Action Recognition model, ST-GCN in our case.
+
+<details>
+  <summary><b>Generating Few-Shot splits</b></summary>
+
+You can randomly generate Few-Shot splits by executing the following command
+```bash
+python3 scripts/handle_fewshot_split.py \
+  --mode generate \
+  --dataset NTU60 \
+  --class-list 2 19 29 \
+  --shots 10 \
+  --eval-multiplier 5 \
+  --seed 19
+```
+
+This process generates a support set of size `N * len(--class-list)`, where:
+
+- `N` is set to `--shots` for training splits
+- `N` is set to `--shots * --eval-multiplier` for validation and test splits
+
+The operation is applied independently to all available splits (e.g., `xset`, `xsub`, and `xview` for the NTU60 dataset). 
+
+During generation:
+- Statistics such as `Mean` and `Std` are computed using only the training samples
+- A `pyskl_data.pkl` file is created, representing an **unbalanced** few-shot dataset
+
+This means that:
+- If `--class-list 2 19 29` is specified, the resulting dataset will retain only the sampled few-shot instances for those classes
+- All other classes will remain unchanged with their full original instances
+
+</details>
+
 
 <details>
   <summary><b>Few-Shot MDM</b></summary>
@@ -120,7 +81,7 @@ Execute the following script to synthetyze motion from free text, such that:
 ```bash
 python3 -m sample.generate \
   --few_shot \
-  --action_labels 0 1 2 \
+  --action_labels 2 19 29 \
   --shots 10 \
   --class_captions ../../data/NTU60/class_captions.json \
   --model_path save/humanml_enc_512_50steps/model000750000.pt \
@@ -139,7 +100,7 @@ If all steps specified in sections **Setup** and **Data** sections were done cor
 python -m train.train_mdm \
   --few_shot \
   --dataset ntu60 \
-  --split splits/fewshot/5way_10shot_seed19/xset/train \
+  --split splits/fewshot/0000/xset/train \
   --save_dir save/my_few_shot_ntu60_trans_enc_512 \
   --diffusion_steps 50 \
   --mask_frames \
@@ -154,38 +115,33 @@ python -m train.train_mdm \
 
 <br>
 
-Once you've generated some synthetic data through MDM and you want to use it on your ST-GCN classifier you should first apply a format convertion back from SMPL to NTU. Assuming `--input-data` is the folder where synthetic data is stored, execute the following: 
+Since **(for the moment)** we're not using a classifier-in-the-loop approach, training a classifier is straightforward: simply follow the [PySkl instructions](https://github.com/kennymckormick/pyskl) for training an ST-GCN model and substitute your dataset accordingly. Just **remember to use customized version** you can find in `external/pyskl`.
+
+Here is an overview of the "usable" data files and their purposes:
+
+1. `data/<DATASET>/<DATA>_formatted.pkl`
+  → This file contains the fully pre-processed dataset. It can be used to train and evaluate a model under standard preprocessing conditions (e.g., 20 FPS resampling, no hand joints). It also serves as a baseline to investigate whether hand joints, although noisy, contribute meaningfully to action recognition.
+
+2. `data/<DATASET>/splits/fewshot/<ID>/pyskl_data.pkl`  
+  → This file is produced after generating a few-shot split. It contains an **unbalanced** dataset where only the selected few-shot classes retain a limited number of instances. Use this to evaluate how your classifier performs under data-scarce conditions for specific classes.
+
+3. `data/<DATASET>/splits/fewshot/<ID>/<SPLIT>/pyskl_data_wsyn.pkl`
+  → This version of the dataset includes synthetic motion data generated by the MDM pipeline. It serves as the primary benchmark for evaluating whether synthetic samples improve classification performance in the few-shot setting.
+
+(1) is generated automatically after running `setup.py` on your chosen dataset. (2) is created each time you generate a new few-shot split. To produce (3), follow these steps after sampling synthetic data using our adapted version of MDM:
 ```bash
-python3 modules/skel_adaptation/skel_mapping.py \
-  --input-data external/motion-diffusion-model/save/humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
-  --mode=backward
-```
-This produces `.pkl` file inside `modules/skel_adaptation/out/back` structured in a format compatible with `PySkl` repository and containing a custom split `synth` which stores all synthetically generate data.
-
-<br>
-
-After that you can apply basic pre-processing to the NTU dataset by running
-This is essential as it returns a transformed copy of the original data on which few basic needs are applied, such as: lowering frame-rate, dropping un-wanted joints, ...
-```bash
-python3 modules/skel_adaptation/skel_mapping.py \
-  --input-data data/NTU60/ntu60_3danno.pkl \
-  --mode=format_dataset
-```
-This produces a `<ds_name>_formatted.pkl` file within the `--dataset` derectory. 
-
-<br>
-
-Finally, you can merge the original data together with the synthetic one to obtain a final, single `.pkl` file which can directly be ported and executed into the `PySkl` toolbox. Run:
-```bash
-python3 data/merge_synth_data.py \
+python3 scripts/handle_fewshot_split.py \
+  --mode convert \
   --dataset NTU60 \
-  --fewshot_split 5way_10shot_seed19/xset \
-  --synth_data modules/skel_adaptation/out/back/ntu60_synth_back.pkl
+  --synth-data humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
+  --fewshot-split-id 0000 \
+  --split xsub
 ```
 
-This produces a final, unique .pkl file in which all data associated to the low-represented action classes is removed, to the exception of: 
-1. Samples within `<fewshot_split>/train.txt`, which is the available low-resources real data.
-2. The synthetic data prduced by MDM in `<synth_data>`.
+Where:
+* `--synth-data specifies` the relative path to the synthetic sample output folder, under the `save/` directory from MDM.
+* `--fewshot-split-id` indicates the `ID` of the few-shot split you want to enrich with synthetic data.
+* `--split` selects the dataset split (`xsub`, `xset`, or `xview`) where the synthetic data will be merged.
 
 </details>
 
