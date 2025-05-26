@@ -8,18 +8,7 @@ from tqdm import tqdm
 import copy
 
 from skel_adaptation.skel_mapping import forward_preprocess, forward_map, resample_motion, OMIT_JOINTS
-
-# Dataset files formatted as in PySkl toolbox
-DATA_FILENAME = {
-    'NTU60': 'ntu60_3danno.pkl',
-    'NTU120': 'ntu120_3danno.pkl'
-}
-# File which contains a mapping from action index to a list of viable captions
-# for such action class
-CLASS_CAPTIONS_FILENAME = "class_captions.json"
-# Time Resampling parameters
-SOURCE_DATA_FPS = 30
-TARGET_DATA_FPS = 20
+from common.constants import DATA_FILENAME, CLASS_CAPTIONS_FILENAME, NTU_FPS, HML3D_FPS
 
 def filter_data_consistency(data):
     """filters from dead instances"""
@@ -52,7 +41,7 @@ def apply_forward(data, out_path):
         # NOTE: We ignore multiple skeletons, only keep the first one.
         ntu_joints = keypoint[0] 
         # Map
-        ntu_joints = resample_motion(ntu_joints, original_fps=SOURCE_DATA_FPS, target_fps=TARGET_DATA_FPS)
+        ntu_joints = resample_motion(ntu_joints, original_fps=NTU_FPS, target_fps=HML3D_FPS)
         smpl_joints = forward_map(ntu_joints)
         smpl_joints = forward_preprocess(smpl_joints)
         # Save
@@ -72,11 +61,12 @@ def store_formatted_dataset(data, out_path):
         resampled_joints = []
         # Transform
         for i in range(motion.shape[0]):
-            resampled = resample_motion(motion[i], original_fps=SOURCE_DATA_FPS, target_fps=TARGET_DATA_FPS)  # (T_new, 25, 3)
+            resampled = resample_motion(motion[i], original_fps=NTU_FPS, target_fps=HML3D_FPS)  # (T_new, 25, 3)
             resampled = np.delete(resampled, list(OMIT_JOINTS), axis=1)  # (T_new, 19, 3)
             resampled_joints.append(resampled)
         # store back
         data_copy['annotations'][idx]['keypoint'] = np.stack(resampled_joints, axis=0)  # (N, T_new, 19, 3)
+        data_copy['annotations'][idx]['total_frames'] = data_copy['annotations'][idx]['keypoint'].shape[1] # T_new
     # Save
     with open(out_path, 'wb') as f:
         pickle.dump(data_copy, f)

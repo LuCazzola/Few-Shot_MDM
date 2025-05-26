@@ -208,7 +208,7 @@ if __name__ == '__main__':
         with open(os.path.join(fewshot_splits_path, 'pyskl_data.pkl'), 'rb') as f:
             pyskl_data = pickle.load(f)
                 
-        # read the synth data 
+        # read the synth data
         synth_data = np.load(os.path.join(mdm_base_save_path, args.synth_data, 'results.npy'), allow_pickle=True).item()
         motion = synth_data['motion'].transpose(0, 3, 1, 2)
         lengths = synth_data['lengths']

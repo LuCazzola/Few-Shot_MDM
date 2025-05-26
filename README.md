@@ -32,7 +32,8 @@ The actual *models* are stored within submodules defined in `external/`. Respect
 
 You can randomly generate Few-Shot splits by executing the following command
 ```bash
-python3 scripts/handle_fewshot_split.py \
+
+python3 -m scripts.handle_fewshot_split \
   --mode generate \
   --dataset NTU60 \
   --class-list 2 19 29 \
@@ -130,7 +131,7 @@ Here is an overview of the "usable" data files and their purposes:
 
 (1) is generated automatically after running `setup.py` on your chosen dataset. (2) is created each time you generate a new few-shot split. To produce (3), follow these steps after sampling synthetic data using our adapted version of MDM:
 ```bash
-python3 scripts/handle_fewshot_split.py \
+python3 -m scripts.handle_fewshot_split \
   --mode convert \
   --dataset NTU60 \
   --synth-data humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
