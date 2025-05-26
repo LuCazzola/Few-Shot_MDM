@@ -7,9 +7,8 @@ import json
 import pickle
 from tqdm import tqdm
 
-from setup import filter_data_consistency, DATA_FILENAME
-from skel_adaptation.skel_mapping import backward_preprocess, backward_map
-
+from scripts.setup import filter_data_consistency, DATA_FILENAME
+from scripts.skel_adaptation.skel_mapping import backward_preprocess, backward_map
 
 def compute_stats(data_names, data_path):
     """Compute mean/std w.r.t. frame-0 of motion data."""

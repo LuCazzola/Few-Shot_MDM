@@ -7,7 +7,7 @@ import re
 from tqdm import tqdm
 import copy
 
-from skel_adaptation.skel_mapping import forward_preprocess, forward_map, resample_motion, OMIT_JOINTS
+from scripts.skel_adaptation.skel_mapping import forward_preprocess, forward_map, resample_motion, OMIT_JOINTS
 from common.constants import DATA_FILENAME, CLASS_CAPTIONS_FILENAME, NTU_FPS, HML3D_FPS
 
 def filter_data_consistency(data):
