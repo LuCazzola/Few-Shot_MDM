@@ -7,38 +7,38 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import animation
 import argparse
 
+from common.constants import DATA_FILENAME
+from scripts.skel_adaptation.skel_mapping import backward_map, backward_preprocess
+
 # SMPL skeleton (22 joints, no hands)
-smpl_bones = {
-    0: [1, 2, 3], 3: [6], 6: [9], 9: [12, 13, 14], 12: [15],
-    13: [16], 16: [18], 18: [20], 20: [],
-    14: [17], 17: [19], 19: [21], 21: [],
-    1: [4], 4: [7], 7: [10], 10: [],
-    2: [5], 5: [8], 8: [11], 11: []
-}
-
+SMPL_BONES = [
+    (0, 3), (3, 6), (6, 9), (9, 12), (12, 15), # Spine
+    (1, 0), (4, 1), (7, 4), (10, 7), # R. Leg
+    (2, 0), (5, 2), (8, 5), (11, 8), # L. Leg
+    (13, 9), (16, 13), (18, 16), (20, 18), # R. Arm
+    (14, 9), (17, 14), (19, 17), (21, 19) # L. Arm
+]
 # Full original NTU skeleton
-ntu_bones_original = {
-    0: [1, 12, 16], 1: [20], 20: [2, 4, 8], 2: [3], 3: [],
-    4: [5], 5: [6], 6: [7], 7: [21, 22], 21: [], 22: [],
-    8: [9], 9: [10], 10: [11], 11: [23, 24], 23: [], 24: [],
-    12: [13], 13: [14], 14: [15], 15: [],
-    16: [17], 17: [18], 18: [19], 19: []
-}
+NTU_BONES = [
+    (1, 2), (2, 21), (3, 21), (4, 3), # Torso
+    (5, 21), (6, 5), (7, 6), (8, 7), # R. Arm
+    (9, 21), (10, 9), (11, 10), (12, 11), # L. Arm
+    (13, 1), (14, 13), (15, 14), (16, 15), # R. Leg
+    (17, 1), (18, 17), (19, 18), (20, 19), # L. Leg
+    (22, 8), (23, 8), # R. Hand
+    (24, 12), (25, 12) # L. Hand
+]
+NTU_BONES = [(i-1, j-1) for i, j in NTU_BONES]  # Convert to 0-indexed
 
-# Partial NTU skeleton (19 joints, no hands)
-OMIT_JOINTS = {7, 11, 21, 22, 23, 24}
-ntu_reduced_map = [None if i in OMIT_JOINTS else i - sum(j < i for j in OMIT_JOINTS) for i in range(25)]
-ntu_bones_reduced = {
-    ntu_reduced_map[p]: [ntu_reduced_map[c] for c in children if ntu_reduced_map[c] is not None]
-    for p, children in ntu_bones_original.items()
-    if ntu_reduced_map[p] is not None
-}
+NTU_REDUCED_BONES = [
+    (1, 2), (2, 19), (3, 19), (4, 3), # Torso
+    (5, 19), (6, 5), (7, 6),# R. Arm
+    (8, 19), (9, 8), (10, 9), # L. Arm
+    (11, 1), (12, 11), (13, 12), (14, 13), # R. Leg
+    (15, 1), (16, 15), (17, 16), (18, 17), # L. Leg
+]
+NTU_REDUCED_BONES = [(i-1, j-1) for i, j in NTU_REDUCED_BONES]  # Convert to 0-indexed
 
-def get_edges_from_bones(bone_dict):
-    return [(parent, child) for parent, children in bone_dict.items() for child in children]
-
-SMPL_EDGES = get_edges_from_bones(smpl_bones)
-NTU_EDGES = get_edges_from_bones(ntu_bones_reduced)
 
 def render_dual_animation(smpl_motion: np.ndarray, ntu_motion: np.ndarray, save_path: str, fps: int = 20):
     T = smpl_motion.shape[0]
@@ -77,11 +77,11 @@ def render_dual_animation(smpl_motion: np.ndarray, ntu_motion: np.ndarray, save_
         ax_smpl.set_title(f"SMPL Frame {t+1}/{T}")
         ax_ntu.set_title(f"NTU Frame {t+1}/{T}")
 
-        for i, j in SMPL_EDGES:
+        for i, j in SMPL_BONES:
             ax_smpl.plot([smpl_joints[i, 0], smpl_joints[j, 0]],
                          [smpl_joints[i, 1], smpl_joints[j, 1]],
                          [smpl_joints[i, 2], smpl_joints[j, 2]], 'b-')
-        for i, j in NTU_EDGES:
+        for i, j in NTU_REDUCED_BONES:
             if i >= ntu_joints.shape[0] or j >= ntu_joints.shape[0]:
                 continue
             ax_ntu.plot([ntu_joints[i, 0], ntu_joints[j, 0]],
@@ -94,7 +94,7 @@ def render_dual_animation(smpl_motion: np.ndarray, ntu_motion: np.ndarray, save_
     ani = animation.FuncAnimation(fig, update, frames=T, interval=1000/fps)
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     ani.save(save_path, writer='pillow', fps=fps)
-    print(f"✅ Saved dual animation to: {save_path}")
+    print(f"Saved dual animation to: {save_path}")
 
 def render_original_ntu(raw_motion: np.ndarray, save_path: str, fps: int = 30):
     T = raw_motion.shape[0]
@@ -120,7 +120,7 @@ def render_original_ntu(raw_motion: np.ndarray, save_path: str, fps: int = 30):
         root = joints[0]
         set_axes(ax, root)
 
-        for i, j in get_edges_from_bones(ntu_bones_original):
+        for i, j in NTU_BONES:
             ax.plot([joints[i, 0], joints[j, 0]],
                     [joints[i, 1], joints[j, 1]],
                     [joints[i, 2], joints[j, 2]], 'k-')
@@ -130,54 +130,95 @@ def render_original_ntu(raw_motion: np.ndarray, save_path: str, fps: int = 30):
     ani = animation.FuncAnimation(fig, update, frames=T, interval=1000/fps)
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     ani.save(save_path, writer='pillow', fps=fps)
-    print(f"✅ Saved original NTU animation to: {save_path}")
+    print(f"Saved original NTU animation to: {save_path}")
 
-def pick_random_sample(args):
-    with open(args.backward_data_pkl, 'rb') as f:
-        data = pickle.load(f)
-    annotations = data['annotations']
-    split_dict = data['split']
-
+def pick_random_sample(orig_data, backw_data, forw_data_path, args):
+    
     # Pick from training splits only
     candidates = [(a['frame_dir'], split_name)
-                  for split_name, sample_list in split_dict.items() if split_name.endswith('_train')
-                  for a in annotations if a['label'] == args.class_idx and a['frame_dir'] in sample_list]
+                  for split_name, sample_list in orig_data['split'].items() if split_name.endswith('_train')
+                  for a in orig_data['annotations'] if a['label'] == args.class_idx and a['frame_dir'] in sample_list]
 
     if not candidates:
         raise ValueError(f"No samples found for class {args.class_idx}")
 
     selected, split = random.choice(candidates)
-    print(f"🎯 Selected sample: {selected} (class {args.class_idx}) from split: {split}")
+    print(f"Selected sample: {selected} (class {args.class_idx}) from split: {split}")
 
-    # Load NTU motion (backward converted)
-    ntu_motion = next(a['keypoint'][0] for a in annotations if a['frame_dir'] == selected)
-
-    # Load original NTU motion
-    with open(args.orig_data_pkl, 'rb') as f:
-        orig_data = pickle.load(f)
     orig_motion = next(a['keypoint'][0] for a in orig_data['annotations'] if a['frame_dir'] == selected)
-
-    # Load SMPL motion from flat structure
-    smpl_path = os.path.join(args.forward_data_root, 'annotations', f"{selected}.npy")
-    if not os.path.exists(smpl_path):
-        raise FileNotFoundError(f"❌ SMPL file not found at {smpl_path}")
-    smpl_motion = np.load(smpl_path)
-
+    ntu_motion = next(a['keypoint'][0] for a in backw_data['annotations'] if a['frame_dir'] == selected)
+    smpl_motion = np.load(os.path.join(forw_data_path, f"{selected}.npy"))
+    
     return smpl_motion, ntu_motion, orig_motion, selected
+
+def cache_backward_data(forw_data, forw_filenames, out_file_path):
+    """
+    Cache backward converted data from forward data.
+    - This is just to evaluate visually the correctness of Forward-Backward process.
+    """
+    backw_data = {
+        'annotations': [],
+        'split': {}
+    }
+    for motion, name in zip(forw_data, forw_filenames):
+        motion = backward_preprocess(motion)
+        motion = backward_map(motion)
+        backw_data['annotations'].append({
+            'frame_dir': name.replace(".npy", ""),
+            'label': -1, # Placeholder for label
+            'keypoint': np.expand_dims(motion, axis=0), # Add extra dimension to mimic number of skeletons
+            'total_frames': motion.shape[0]
+        })
+
+    with open(out_file_path, 'wb') as f:
+        pickle.dump(backw_data, f)
+
+    return backw_data
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--orig-data-pkl', type=str, required=True, help='Path to original NTU .pkl file (30 FPS)')
-    parser.add_argument('--forward-data-root', type=str, required=True, help='Path to SMPL root directory (outcome of forward)')
-    parser.add_argument('--backward-data-pkl', type=str, required=True, help='Path to NTU .pkl file (outcome of backward)')
+    parser.add_argument('--dataset', type=str, default='NTU60', choices=['NTU60', 'NTU120'], help='Dataset to visualize')
     parser.add_argument('--class-idx', type=int, required=True)
     parser.add_argument('--output-dir', type=str, default='media', help='Base output directory')
+    parser.add_argument('--cache', type=str, default='cache', help='Cache directory for data')
     args = parser.parse_args()
 
-    smpl, ntu, orig, name = pick_random_sample(args)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    base_data_path = os.path.join('data', args.dataset)
+    base_cache_path = os.path.join(script_dir, args.cache)
+    
+    orig_data_path = os.path.join(base_data_path, DATA_FILENAME[args.dataset])
+    forw_data_path = os.path.join(base_data_path, 'annotations')
+    backw_data_path = os.path.join(base_cache_path, f"{args.dataset}_backw.pkl")
+    args.output_dir = os.path.join(script_dir, args.output_dir, args.dataset)
 
+    # 1. Load data
+    print(f"Loading orignal data from: {orig_data_path}")
+    with open(orig_data_path, 'rb') as f:
+        orig_data = pickle.load(f)
+
+    print(f"Loading forward data from: {forw_data_path}")
+    forw_filenames = [f for f in os.listdir(forw_data_path) if f.endswith('.npy')]
+    forw_data = []
+    for filename in forw_filenames:
+        with open(os.path.join(forw_data_path, filename), 'rb') as file:
+           forw_data.append(np.load(file))
+
+    print(f"Loading backward data from: {backw_data_path}")
+    backw_data = []
+    if not os.path.exists(backw_data_path):
+        print(f"Cache not found at {backw_data_path}, creating new cache...")
+        os.makedirs(base_cache_path, exist_ok=True)
+        backw_data = cache_backward_data(forw_data, forw_filenames,backw_data_path)
+    else:
+        with open(backw_data_path, 'rb') as f:
+            backw_data = pickle.load(f)
+
+    # 2. Pick a random sample from the dataset
+    smpl, ntu, orig, name = pick_random_sample(orig_data, backw_data, forw_data_path, args)
+
+    # 3. Render animations
     out_dir = os.path.join(args.output_dir, name)
     os.makedirs(out_dir, exist_ok=True)
-
     render_dual_animation(smpl, ntu, os.path.join(out_dir, 'fb_process.gif'))
     render_original_ntu(orig, os.path.join(out_dir, 'orig.gif'))

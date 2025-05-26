@@ -18,3 +18,16 @@ Some custom formats employed by us:
 | <img src="../../media/ntu_skele.svg" width="40%"> | <img src="../../media/smpl_skele.svg" width="40%"> |
 
 </div>
+
+## Visualization
+
+<br>
+
+You can visually evaluate the correctness of Forward-Backward mapping as well as inspect dataset motion by running:
+```
+python3 -m scripts.skel_adaptation.viz \
+    --dataset NTU60 \
+    --class-idx 10
+```
+
+Outpus can be inspected in `media/`
