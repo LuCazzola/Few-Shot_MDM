@@ -41,14 +41,13 @@ Now launch the following script to:
 2. .
 3. ...
 ```bash
-python3 -m scripts.setup \
-    --dataset NTU60
+python3 -m scripts.setup --dataset NTU60
 ```
 
 <br>
 
 Finally, link the data to submodules
 ```bash
-bash prep/link_mdm_resources.sh
+bash prep/link_mdm_resources.sh NTU60
 ```
 
