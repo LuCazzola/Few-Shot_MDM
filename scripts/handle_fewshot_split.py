@@ -8,7 +8,7 @@ import pickle
 from tqdm import tqdm
 
 from scripts.setup import filter_data_consistency, DATA_FILENAME
-from scripts.skel_adaptation.skel_mapping import backward_preprocess, backward_map
+from scripts.skel_adaptation.skel_mapping import backward_map
 
 def compute_stats(data_names, data_path):
     """Compute mean/std w.r.t. frame-0 of motion data."""
@@ -103,8 +103,6 @@ def merge_split(data, split_names, out_path):
     with open(out_file, 'wb') as f:
         pickle.dump(data, f)
 
-def convert_synth_data(data):
-    pass
 
 def create_unique_split_dir(base_dir, run_info):
     """Creates a new uniquely numbered subfolder and stores metadata."""
@@ -148,7 +146,7 @@ if __name__ == '__main__':
     base_dataset_path = os.path.join("data", args.dataset)
     formatted_dataset_path = os.path.join(
         base_dataset_path,
-        f"{DATA_FILENAME[args.dataset].split('.')[0]}_formatted.{DATA_FILENAME[args.dataset].split('.')[1]}"
+        f"{DATA_FILENAME[args.dataset].split('.')[0]}_preproc.{DATA_FILENAME[args.dataset].split('.')[1]}"
     )
     annotations_path = os.path.join(base_dataset_path, 'annotations')
     default_splits_base_path = os.path.join(base_dataset_path, 'splits', 'default')
@@ -215,7 +213,6 @@ if __name__ == '__main__':
         synth_data_conv = []
         for i, (motion_data, length) in enumerate(zip(motion, lengths)):
             motion_data = motion_data[:length, :, :]
-            motion_data = backward_preprocess(motion_data)
             motion_data = backward_map(motion_data)
             
             synth_data_conv.append({

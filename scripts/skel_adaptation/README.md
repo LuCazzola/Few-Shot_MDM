@@ -23,11 +23,7 @@ Some custom formats employed by us:
 
 <br>
 
-You can visually evaluate the correctness of Forward-Backward mapping as well as inspect dataset motion by running:
-```
-python3 -m scripts.skel_adaptation.viz \
-    --dataset NTU60 \
-    --class-idx 10
-```
-
-Outpus can be inspected in `media/`
+You can visually evaluate the correctness of Forward-Backward mapping as well as inspect dataset motion by playing with the `animation.ipynb` script. Outputs will be stored under `media/` folder, prividing for the specified dataset:
+* forward mapping
+* backward mapping (applied to forward itself)
+* the original motion

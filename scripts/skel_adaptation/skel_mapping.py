@@ -1,13 +1,12 @@
 import numpy as np
 from scipy.interpolate import interp1d
 
-NTU_TO_SMPL_DIRECT_MAP = {
-    0: 0, 20: 9, 2: 12, 3: 15, 4: 16, 5: 18, 6: 20,
-    8: 17, 9: 19, 10: 21, 12: 1, 13: 4, 14: 7, 15: 10,
-    16: 2, 17: 5, 18: 8, 19: 11,
-}
-# Ids of hand joints to be dropped (when needed)
-OMIT_JOINTS = {7, 11, 21, 22, 23, 24}
+from typing import Optional
+
+from utils.humanml3d.quaternion import _EPS4, _FLOAT_EPS
+from utils.constants.skel import SMPL_DIRECT_MAP, JOINTS_2_DROP, FCOEFF, FLOOR_THRE
+
+EPS = _FLOAT_EPS # _FLOAT_EPS, _EPS4
 
 def resample_motion(motion: np.ndarray, original_fps: int = 30, target_fps: int = 20) -> np.ndarray:
     """
@@ -26,26 +25,42 @@ def forward_map(ntu_joints: np.ndarray):
     Returns: (T, 22, 3) joints: full HumanML3D compatible skeletons
     """
     T = ntu_joints.shape[0]
-    smpl_joints = np.zeros((T, 22, 3), dtype=np.float16)
+    source_dtype = ntu_joints.dtype
+    ntu_joints = ntu_joints.astype(np.float32)  # Convert to float32 for consistency
 
-    for ntu_idx, smpl_idx in NTU_TO_SMPL_DIRECT_MAP.items():
-        smpl_joints[:, smpl_idx, :] = ntu_joints[:, ntu_idx, :].astype(np.float16)
+    smpl_joints = np.zeros((T, 22, 3), dtype=np.float32)
+    for ntu_idx, smpl_idx in SMPL_DIRECT_MAP["KINECT"].items():
+        smpl_joints[:, smpl_idx, :] = ntu_joints[:, ntu_idx, :]
 
-    spine_base = ntu_joints[:, 0, :]
-    spine_mid  = ntu_joints[:, 1, :]
-    chest      = ntu_joints[:, 20, :]
+    spineBase = ntu_joints[:, 0, :]
+    spineMid  = ntu_joints[:, 1, :]
+    spineShoulder = ntu_joints[:, 20, :]
+    leftShoulder = ntu_joints[:, 4, :]
+    rightShoulder = ntu_joints[:, 8, :]
+    
+    # approximate "forward" = up × across
+    torso_vec = spineShoulder - spineBase
+    torso_dir = torso_vec / (np.linalg.norm(torso_vec, axis=1, keepdims=True) + EPS)
+    across = rightShoulder - leftShoulder  # side-to-side (X-axis)
+    across = across / (np.linalg.norm(across, axis=1, keepdims=True) + EPS)
+    forward_dir = np.cross(torso_dir, across)
+    forward_dir = forward_dir / (np.linalg.norm(forward_dir, axis=1, keepdims=True) + EPS)
 
-    smpl_joints[:, 3, :] = (spine_base + spine_mid) / 2.0  # spine1
-    smpl_joints[:, 6, :] = (spine_mid + chest) / 2.0       # spine2
+    # Clavicles
+    smpl_joints[:, 13, :] = spineShoulder + (leftShoulder - spineShoulder) * FCOEFF.clavicle_offset
+    smpl_joints[:, 14, :] = spineShoulder + (rightShoulder - spineShoulder) * FCOEFF.clavicle_offset
+    # Spine3
+    smpl_joints[:, 9, :] = (spineMid + spineShoulder) / 2.0
+    
+    # Spine1
+    smpl_joints[:, 3, :] = (spineMid + spineBase) / 2.0 \
+        + FCOEFF.spine1_curve * (-forward_dir) + FCOEFF.spine1_curve * (-torso_dir)
+    
+    # Spine2
+    smpl_joints[:, 6, :] = smpl_joints[:, 9, :] + (smpl_joints[:, 3, :] - smpl_joints[:, 9, :]) * FCOEFF.spine2_offset \
+        + FCOEFF.spine2_curve * (-forward_dir) + FCOEFF.spine2_curve * (-torso_dir)
 
-    neck = ntu_joints[:, 2, :]
-    left_shoulder = ntu_joints[:, 4, :]
-    right_shoulder = ntu_joints[:, 8, :]
-
-    smpl_joints[:, 13, :] = 0.75 * neck + 0.25 * left_shoulder
-    smpl_joints[:, 14, :] = 0.75 * neck + 0.25 * right_shoulder
-
-    return smpl_joints
+    return smpl_joints.astype(source_dtype)  # Convert back to original dtype
 
 def backward_map(smpl_joints: np.ndarray):
     """
@@ -53,31 +68,48 @@ def backward_map(smpl_joints: np.ndarray):
     Returns : (T, 19, 3) as hand-related joints are dropped
     """
     T = smpl_joints.shape[0]
-    ntu_joints = np.zeros((T, 25, 3), dtype=np.float16)
+    source_dtype = smpl_joints.dtype
+    smpl_joints = smpl_joints.astype(np.float32)  # Convert to float32 for consistency
 
+    ntu_joints = np.zeros((T, 25, 3), dtype=np.float32)
     # Reverse the direct mapping (collar-bone is implicitly dropped)
-    smpl_to_ntu_map = {v: k for k, v in NTU_TO_SMPL_DIRECT_MAP.items() if k not in OMIT_JOINTS and k != 1}
+    smpl_to_ntu_map = {v: k for k, v in SMPL_DIRECT_MAP["KINECT"].items() if k not in JOINTS_2_DROP["KINECT"] and k != 1}
     for smpl_idx, ntu_idx in smpl_to_ntu_map.items():
         ntu_joints[:, ntu_idx, :] = smpl_joints[:, smpl_idx, :]
 
-    # Reconstruct NTU joint 1 (spine_mid) = midpoint of spine1 (3) and spine2 (6)
+    pelvis = smpl_joints[:, 0, :]
     spine1 = smpl_joints[:, 3, :]
-    spine2 = smpl_joints[:, 6, :]
-    ntu_joints[:, 1, :] = 0.5 * (spine1 + spine2)
+    spine3 = smpl_joints[:, 9, :]
 
-    # Drop un-used joint dimensions from npy array
-    ntu_joints = np.delete(ntu_joints, list(OMIT_JOINTS), axis=1) # new shape (T, 19, 3)
+    # Project spine1 onto the torso vector and use it to compute the mid spine joint
+    torso_vec = spine3 - pelvis
+    torso_dir = torso_vec / (np.linalg.norm(torso_vec, axis=1, keepdims=True) + EPS)
+    spine1_proj = pelvis + np.sum((spine1 - pelvis) * torso_dir, axis=1, keepdims=True) * torso_dir
+    ntu_joints[:, 1, :] = (spine1_proj + spine3) / 2.0
+    # SpineShoulder (algebra inverse of forward_map)
+    ntu_joints[:, 20, :] = 2.0*spine3 - ntu_joints[:, 1, :]
+    
+    # Drop hand joints
+    ntu_joints = np.delete(ntu_joints, list(JOINTS_2_DROP["KINECT"]), axis=1) # new shape (T, 19, 3)
 
-    return ntu_joints
+    return ntu_joints.astype(source_dtype)  # Convert back to original dtype
 
-def forward_preprocess(joints: np.ndarray):
-    # Normalize root joint to [0, Y, 0] at all frames
-    root_x = joints[:, 0, 0:1]  # shape (T, 1)
-    root_z = joints[:, 0, 2:3]  # shape (T, 1)
-    joints[:, :, 0] -= root_x  # X centered
-    joints[:, :, 2] -= root_z  # Z centered
-    return joints
+def align_motion(joints: np.ndarray, displacement: Optional[np.ndarray] = None):
+    """
+    joints : (T, J, D)
+    displacement : (D,) or None
+    
+    Returns: Aligns the motion by shifting the root joint to the origin and the floor to Y=0.
+    NOTE: adding displacement is done anyway when computing the redundant motion features.
+    """
+    assert displacement is None or displacement.shape[0] == joints.shape[2], "Displacement must be None or have shape (D,)"
 
-def backward_preprocess(joints: np.ndarray):
-    # Example placeholder: does nothing yet
-    return joints
+    if displacement is None:
+        root_x, root_z = joints[0, 0, 0], joints[0, 0, 2] # XZ (horizontal plane) of root joint
+        j_heights = np.sort(joints[:, :, 1].flatten())
+        floor_y = j_heights[:FLOOR_THRE].mean() # Y (vertical) of the floor, computed as the mean of the lowest FLOOR_THRE joint heights
+        displacement = np.array([root_x, floor_y, root_z])  # (X, Y, Z) displacement vector
+
+    joints -= displacement
+
+    return joints, displacement
