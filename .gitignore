@@ -174,14 +174,12 @@ cython_debug/
 .pypirc
 
 ### --- CUSTOM ----
-modules/skel_adaptation/out
-
 data/NTU60/annotations
 data/NTU60/splits
 data/NTU60/texts
 
-
 *.gif
+*.mp4
 *.pt
 *.pkl
 *.npy
