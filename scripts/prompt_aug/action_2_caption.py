@@ -130,6 +130,6 @@ if __name__ == "__main__":
     parser.add_argument("-n", "--num-captions", type=int, default=3, help="Number of captions to generate per action")
     args = parser.parse_args()
 
-    json_file = os.path.join(args.dataset, 'class_captions.json')
+    json_file = os.path.join(args.dataset, 'action_captions.json')
 
     main(args.json_file, args.model, args.training, args.num_captions)

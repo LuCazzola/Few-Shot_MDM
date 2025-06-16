@@ -9,8 +9,9 @@ import torch
 import numpy as np
 
 _EPS4 = np.finfo(float).eps * 4.0
-
 _FLOAT_EPS = np.finfo(np.float).eps
+
+EPS = _FLOAT_EPS
 
 # PyTorch-backed implementations
 def qinv(q):
@@ -27,7 +28,7 @@ def qinv_np(q):
 
 def qnormalize(q):
     assert q.shape[-1] == 4, 'q must be a tensor of shape (*, 4)'
-    return q / (torch.norm(q, dim=-1, keepdim=True) + _FLOAT_EPS)
+    return q / (torch.norm(q, dim=-1, keepdim=True) + EPS)
 
 
 def qmul(q, r):
@@ -285,7 +286,7 @@ def quaternion_to_matrix(quaternions):
         Rotation matrices as tensor of shape (..., 3, 3).
     """
     r, i, j, k = torch.unbind(quaternions, -1)
-    two_s = 2.0 / (quaternions * quaternions).sum(-1)
+    two_s = 2.0 / ((quaternions * quaternions).sum(-1) + EPS)
 
     o = torch.stack(
         (
@@ -310,7 +311,9 @@ def quaternion_to_matrix_np(quaternions):
 
 
 def quaternion_to_cont6d_np(quaternions):
+    assert not np.isnan(quaternions).any(), "Input quaternions contain NaN values"
     rotation_mat = quaternion_to_matrix_np(quaternions)
+    assert not np.isnan(rotation_mat).any(), "Rotation matrix contains NaN values"
     cont_6d = np.concatenate([rotation_mat[..., 0], rotation_mat[..., 1]], axis=-1)
     return cont_6d
 
@@ -326,9 +329,9 @@ def cont6d_to_matrix(cont6d):
     x_raw = cont6d[..., 0:3]
     y_raw = cont6d[..., 3:6]
 
-    x = x_raw / (torch.norm(x_raw, dim=-1, keepdim=True) + _FLOAT_EPS)
+    x = x_raw / (torch.norm(x_raw, dim=-1, keepdim=True) + EPS)
     z = torch.cross(x, y_raw, dim=-1)
-    z = z / (torch.norm(z, dim=-1, keepdim=True) + _FLOAT_EPS)
+    z = z / (torch.norm(z, dim=-1, keepdim=True) + EPS)
 
     y = torch.cross(z, x, dim=-1)
 

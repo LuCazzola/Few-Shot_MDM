@@ -32,20 +32,19 @@ The actual *models* are stored within submodules defined in `external/`. Respect
 
 You can randomly generate Few-Shot splits by executing the following command
 ```bash
-
 python3 -m scripts.handle_fewshot_split \
-  --mode generate \
-  --dataset NTU60 \
-  --class-list 2 19 29 \
-  --shots 10 \
-  --eval-multiplier 5 \
-  --seed 19
+  --mode generate --dataset NTU60 --seed 19 \
+  --class-list 2 3 19 29 \
+  --shots 16 --eval-multiplier 5
 ```
 
 This process generates a support set of size `N * len(--class-list)`, where:
 
 - `N` is set to `--shots` for training splits
 - `N` is set to `--shots * --eval-multiplier` for validation and test splits
+
+You can also avoid specifying `--class-list`. Doing so, will use all classes in the dataset, apart prohibited ones (those having multiple skeletons)
+
 
 The operation is applied independently to all available splits (e.g., `xset`, `xsub`, and `xview` for the NTU60 dataset). 
 
@@ -76,20 +75,20 @@ Pre-Trained MDM can be downloaded from the [Original Repo](https://github.com/Gu
 ### Text-2-Motion Action Synthesis
 
 Execute the following script to synthetyze motion from free text, such that:
-* Textual prompts are natural language convertions of Action classes. Check [`class_captions.json`](data/NTU60/class_captions.json) for better understanding.
-* At each `--shot` (repetition) all `--action_labels` are generated given a random conditioning sampled from the `.json`.
+* Textual prompts are natural language convertions of Action classes. Check [`action_captions.json`](data/NTU60/action_captions.json) for better understanding.
+* At each `--repetitions` (shots) all `--action_labels` (0-indexed) are generated given a random conditioning sampled from the `.json`.
 
 ```bash
 python3 -m sample.generate \
-  --few_shot \
-  --action_labels 2 19 29 \
-  --shots 10 \
-  --class_captions ../../data/NTU60/class_captions.json \
-  --model_path save/humanml_enc_512_50steps/model000750000.pt \
+  --t2m_action_gen \
+  --action_labels 2 3 19 29 \
+  --num_repetitions 4 \
+  --action_captions ./dataset/NTU60/action_captions.json \
+  --model_path ./save/humanml_enc_512_50steps/model000750000.pt \
   --no_render
 ```
 
-Remove `--no_render` to trigger the rendering into `.mp4` animations and actually see the synthetic motion (its time demandingm recomend to use with small number of shots and action labels).
+Remove `--no_render` to enable rendering into `.mp4` animations and visualize the synthetic motion. Consider that doing this is time demanding, it's recomended to use render few samples when you need to.
 
 <br>
 
@@ -99,14 +98,21 @@ If all steps specified in sections **Setup** and **Data** sections were done cor
 
 ```bash
 python -m train.train_mdm \
-  --few_shot \
   --dataset ntu60 \
-  --split splits/fewshot/0000/xset/train \
-  --save_dir save/my_few_shot_ntu60_trans_enc_512 \
-  --diffusion_steps 50 \
-  --mask_frames \
-  --use_ema
+  --save_dir ./save/ntu60_trans_enc_512_50steps \
+  --starting_checkpoint ./save/humanml_enc_512_50steps/model000750000.pt \
+  --peft LoRA \
+  --eval_during_training
 ```
+
+Adapters can be easily inserted in the model through `--peft` (Parameter Efficient Fine-Tuning)
+* `--peft [LoRA, MoE]` => you can specify which adapter to plug in the model (even both as a list). where they will be placed withing the model depends on other arguments. We suggest you to check [`parser_util.py`](external/motion-diffusion-model/utils/parser_util.py) within `peft` group, and modify directly them there.
+you should avoid same modules twice (ex. LoRA on denoising head, and also MoE on denoising head).
+
+Other quality of life flags
+1. `--eval_during_training` => toggle validation during training (highly suggested given the low-shot setting)
+1. `--gen_during_training` => when performing validation, render few samples
+2. `--train_platform_type` => to log your results, we suggest `WandBPlatform` option
 
 </details>
 

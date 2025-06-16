@@ -47,6 +47,6 @@ def process_kitml(corpus):
         with cs.open(pjoin(text_save_path, name + '.txt'), 'a+') as f:
             f.write('%s#%s#%s#%s\n' % (caption, tokens, start, end))
 
-if __name__ == "__main__":
-    corpus = pd.read_csv('./dataset/kit_mocap_dataset/desc_final.csv')
-    process_humanml3d(corpus)
+#if __name__ == "__main__":
+#    corpus = pd.read_csv('./dataset/kit_mocap_dataset/desc_final.csv')
+#    process_humanml3d(corpus)

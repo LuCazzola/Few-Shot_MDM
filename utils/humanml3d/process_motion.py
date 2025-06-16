@@ -1,28 +1,34 @@
 """
 Credits: This code is motly taken from
-https://github.com/EricGuo5513/HumanML3D/blob/main/motion_representation.ipynb
+1. https://github.com/EricGuo5513/HumanML3D/blob/main/motion_representation.ipynb
+2. https://github.com/EricGuo5513/HumanML3D/blob/main/cal_mean_variance.ipynb
 
->  added compute_redundant_motion_features() to make it callable from outside
->  floor is not detected as the hard minimum height of all joints in an animation.
-    > instead, due to noise in the data, it is averaged over 'floor_thre' lowest joints
+Modifications:
++   floor is not detected as the hard minimum height of all joints in an animation.
+    instead, due to noise in the data, it is averaged over 'floor_thre' lowest joints
++   general modifications to align with the rest of the codebase
 """
-import numpy as np
 import torch
+import numpy as np
+from types import SimpleNamespace
 
-from .humanml3d.skeleton import Skeleton
-from .humanml3d.quaternion import *
-from .humanml3d.paramUtil import *
-from .humanml3d.paramUtil import t2m_raw_offsets, t2m_kinematic_chain
+from .skeleton import Skeleton
+from .quaternion import *
+from .paramUtil import *
 
 from utils.constants.skel import SKEL_INFO
-
 SKL = SKEL_INFO['HML3D']
 
-def uniform_skeleton(positions, target_offset):
-    src_skel = Skeleton(n_raw_offsets, kinematic_chain, 'cpu')
+
+"""
+DATA PROCESSING
+"""
+
+def uniform_skeleton(positions, opt):
+    src_skel = Skeleton(opt.n_raw_offsets, opt.kinematic_chain, 'cpu')
     src_offset = src_skel.get_offsets_joints(torch.from_numpy(positions[0]))
     src_offset = src_offset.numpy()
-    tgt_offset = target_offset.numpy()
+    tgt_offset = opt.target_offset.numpy()
     # print(src_offset)
     # print(tgt_offset)
     '''Calculate Scale Ratio as the ratio of legs'''
@@ -39,18 +45,23 @@ def uniform_skeleton(positions, target_offset):
     # print(quat_params.shape)
 
     '''Forward Kinematics'''
-    src_skel.set_offset(target_offset)
+    src_skel.set_offset(opt.target_offset)
     new_joints = src_skel.forward_kinematics_np(quat_params, tgt_root_pos)
 
     return new_joints
 
-def process_file(positions, floor_thre, feet_thre):
+def process_file(positions, floor_thre, feet_thre, opt):
+    """
+    Process a raw motion file (T,J,3) and returns HML feat. vec.
+    redundant representation (T-1, 263).
+    """
     # (seq_len, joints_num, 3)
     #     '''Down Sample'''
     #     positions = positions[::ds_num]
 
+
     '''Uniform Skeleton'''
-    positions = uniform_skeleton(positions, tgt_offsets)
+    positions = uniform_skeleton(positions, opt)
 
     '''Put on Floor'''
     # Floor is not detected as the hard minimum, but as
@@ -139,8 +150,8 @@ def process_file(positions, floor_thre, feet_thre):
         positions = qrot_np(np.repeat(r_rot[:, None], positions.shape[1], axis=1), positions)
         return positions
 
-    def get_quaternion(positions):
-        skel = Skeleton(n_raw_offsets, kinematic_chain, 'cpu')
+    def get_quaternion(positions, opt):
+        skel = Skeleton(opt.n_raw_offsets, opt.kinematic_chain, 'cpu')
         # (seq_len, joints_num, 4)
         quat_params = skel.inverse_kinematics_np(positions, SKL.face_joint_indx, smooth_forward=False)
 
@@ -161,8 +172,8 @@ def process_file(positions, floor_thre, feet_thre):
         # (seq_len, joints_num, 4)
         return quat_params, r_velocity, velocity, r_rot
 
-    def get_cont6d_params(positions):
-        skel = Skeleton(n_raw_offsets, kinematic_chain, 'cpu')
+    def get_cont6d_params(positions, opt):
+        skel = Skeleton(opt.n_raw_offsets, opt.kinematic_chain, 'cpu')
         # (seq_len, joints_num, 4)
         quat_params = skel.inverse_kinematics_np(positions, SKL.face_joint_indx, smooth_forward=True)
 
@@ -181,10 +192,9 @@ def process_file(positions, floor_thre, feet_thre):
         r_velocity = qmul_np(r_rot[1:], qinv_np(r_rot[:-1]))
         # (seq_len, joints_num, 4)
         return cont_6d_params, r_velocity, velocity, r_rot
-
-    cont_6d_params, r_velocity, velocity, r_rot = get_cont6d_params(positions)
+    
+    cont_6d_params, r_velocity, velocity, r_rot = get_cont6d_params(positions, opt)
     positions = get_rifke(positions)
-
     #     trejec = np.cumsum(np.concatenate([np.array([[0, 0, 0]]), velocity], axis=0), axis=0)
     #     r_rotations, r_pos = recover_ric_glo_np(r_velocity, velocity[:, [0, 2]])
 
@@ -240,6 +250,9 @@ def process_file(positions, floor_thre, feet_thre):
 # local_velocity (B, seq_len, joint_num*3)
 # foot contact (B, seq_len, 4)
 def recover_root_rot_pos(data):
+    """
+    Recover root rotation and position from HML vec.
+    """
     rot_vel = data[..., 0]
     r_rot_ang = torch.zeros_like(rot_vel).to(data.device)
     '''Get Y-axis rotation from rotation velocity'''
@@ -262,6 +275,9 @@ def recover_root_rot_pos(data):
 
 
 def recover_from_rot(data, joints_num, skeleton):
+    """
+    Recover global joint positions from rotation data in HML vec. by applying forward kinematics.
+    """
     r_rot_quat, r_pos = recover_root_rot_pos(data)
 
     r_rot_cont6d = quaternion_to_cont6d(r_rot_quat)
@@ -278,6 +294,9 @@ def recover_from_rot(data, joints_num, skeleton):
     return positions
 
 def recover_from_ric(data, joints_num):
+    """
+    Recover global joint positions from HML vec.
+    """
     r_rot_quat, r_pos = recover_root_rot_pos(data)
     positions = data[..., 4:(joints_num - 1) * 3 + 4]
     positions = positions.view(positions.shape[:-1] + (-1, 3))
@@ -294,14 +313,45 @@ def recover_from_ric(data, joints_num):
 
     return positions
 
+# root_rot_velocity (B, seq_len, 1)
+# root_linear_velocity (B, seq_len, 2)
+# root_y (B, seq_len, 1)
+# ric_data (B, seq_len, (joint_num - 1)*3)
+# rot_data (B, seq_len, (joint_num - 1)*6)
+# local_velocity (B, seq_len, joint_num*3)
+# foot contact (B, seq_len, 4)
+def mean_variance(data_list, joints_num):
+    """
+    Compute mean and variance for a HML feat. vec.
+    """
+    data = np.concatenate(data_list, axis=0)
 
-def compute_redundant_motion_features(
+    Mean = data.mean(axis=0)
+    Std = data.std(axis=0)
+
+    Std[0:1] = Std[0:1].mean() / 1.0
+    Std[1:3] = Std[1:3].mean() / 1.0
+    Std[3:4] = Std[3:4].mean() / 1.0
+    Std[4: 4+(joints_num - 1) * 3] = Std[4: 4+(joints_num - 1) * 3].mean() / 1.0
+    Std[4+(joints_num - 1) * 3: 4+(joints_num - 1) * 9] = Std[4+(joints_num - 1) * 3: 4+(joints_num - 1) * 9].mean() / 1.0
+    Std[4+(joints_num - 1) * 9: 4+(joints_num - 1) * 9 + joints_num*3] = Std[4+(joints_num - 1) * 9: 4+(joints_num - 1) * 9 + joints_num*3].mean() / 1.0
+    Std[4 + (joints_num - 1) * 9 + joints_num * 3: ] = Std[4 + (joints_num - 1) * 9 + joints_num * 3: ].mean() / 1.0
+
+    assert 8 + (joints_num - 1) * 9 + joints_num * 3 == Std.shape[-1]
+
+    return Mean, Std
+
+"""
+WRAPPERS
+"""
+
+def motion_2_hml_vec(
         motion_seq: np.ndarray,
         floor_thre: int = 1,
         feet_thre: float = 0.002
 ) -> np.ndarray:
     """
-    Convert a raw 3-D joint sequence into the 263-D redundant representation.
+    Wrapper function to convert a raw 3-D joint sequence into the 263-D redundant representation.
 
     Parameters
     ----------
@@ -309,31 +359,34 @@ def compute_redundant_motion_features(
         Shape (T, J, 3).  J must match the T2M/HumanML3D skeleton (22 joints).
     floor_thre : int, optional
         Number of joints to consider for floor detection.  Default is 1, which
-        means the lowest (Y) joint is used to detect the floor.
+        means the lowest (Y-axis) joint is used to detect the floor.
     feet_thre : float, optional
-        Foot-contact velocity threshold.  Default is 0.002 (same as the
-        original script).
+        Foot-contact velocity threshold.  Default is 0.002
+        (same as the original script).
 
     Returns
     -------
     np.ndarray
-        Shape (T-1, 263). Redundant representation of motion sequence
+        Shape (T-1, 263). Redundant representation feat. vec. for HML.
     """
     assert motion_seq.ndim == 3 and motion_seq.shape[2] == 3, \
         "Input must be (T, J, 3)."
     
     motion_seq = motion_seq.astype(np.float32)
-    # Global dependancies (for convenience)
-    global n_raw_offsets, kinematic_chain, tgt_offsets
-    
-    # These come from paramUtil (same as in the old __main__)
-    n_raw_offsets = torch.from_numpy(t2m_raw_offsets)
-    kinematic_chain = t2m_kinematic_chain
+    # NOTE: code might be extended to allow different skeletons in the future.
+    # for now always assume HumanML3D skeleton (SMPL) with 22 joints.
+    opt = SimpleNamespace(
+        n_raw_offsets=None,
+        kinematic_chain=None,
+        target_offset=None
+    )
 
+    opt.n_raw_offsets = torch.from_numpy(t2m_raw_offsets)
+    opt.kinematic_chain = t2m_kinematic_chain
     # Target offsets are determined from the first pose
-    tgt_skel = Skeleton(n_raw_offsets, kinematic_chain, 'cpu')
-    tgt_offsets = tgt_skel.get_offsets_joints(torch.from_numpy(motion_seq[0]))
-
-    features, *_ = process_file(motion_seq, floor_thre, feet_thre)   # (T-1, 263)
+    tgt_skel = Skeleton(opt.n_raw_offsets, opt.kinematic_chain, 'cpu')
+    opt.target_offset = tgt_skel.get_offsets_joints(torch.from_numpy(motion_seq[0])) # Offsets based on frame 0
+    # Process
+    features, *_ = process_file(motion_seq, floor_thre, feet_thre, opt)   # (T-1, 263)
     
     return features.astype(np.float32)
