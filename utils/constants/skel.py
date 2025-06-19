@@ -18,6 +18,21 @@ SKEL_INFO = {
         r_hip=2,
         l_hip=1,
         joints_num=22,
+    ),
+    
+    "KINECT": SimpleNamespace(
+        # Lower legs
+        l_idx1=0,
+        l_idx2=0,
+        # Right/Left foot
+        fid_r=[18, 19],
+        fid_l=[14, 15],
+        # Face direction, r_hip, l_hip, sdr_r, sdr_l
+        face_joint_indx=[16, 12, 8, 4],
+        # l_hip, r_hip
+        r_hip=16,
+        l_hip=12,
+        joints_num=25,
     )
 }
 

@@ -10,4 +10,4 @@ ROOT_DIR=$(pwd)
 mkdir -p external/motion-diffusion-model/dataset/$DATASET
 
 # Symlink the dataset directory
-ln -s "$ROOT_DIR/data/$DATASET/" external/motion-diffusion-model/dataset/$DATASET/
+ln -s "$ROOT_DIR/data/$DATASET" external/motion-diffusion-model/dataset
