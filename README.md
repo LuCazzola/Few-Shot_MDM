@@ -90,6 +90,12 @@ python3 -m sample.generate \
 
 Remove `--no_render` to enable rendering into `.mp4` animations and visualize the synthetic motion. Consider that doing this is time demanding, it's recomended to use render few samples when you need to.
 
+
+TEST: unconstrained generation from given sample
+```bash
+python3 -m sample.generate --model_path ./save/humanml_enc_512_50steps/model000750000.pt --init_motion ./dataset/NTU60/new_joint_vecs/S004C002P008R001A027.npy --num_samples 5 --num_repetitions 3 --unconstrained
+```
+
 <br>
 
 ### Few-Shot Training
