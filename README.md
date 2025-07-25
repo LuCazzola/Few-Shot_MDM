@@ -74,6 +74,8 @@ Pre-Trained MDM can be downloaded from the [Original Repo](https://github.com/Gu
 
 ### Text-2-Motion Action Synthesis
 
+(TO UPDATE)
+
 Execute the following script to synthetyze motion from free text, such that:
 * Textual prompts are natural language convertions of Action classes. Check [`action_captions.json`](data/NTU60/action_captions.json) for better understanding.
 * At each `--repetitions` (shots) all `--action_labels` (0-indexed) are generated given a random conditioning sampled from the `.json`.
@@ -91,25 +93,23 @@ python3 -m sample.generate \
 Remove `--no_render` to enable rendering into `.mp4` animations and visualize the synthetic motion. Consider that doing this is time demanding, it's recomended to use render few samples when you need to.
 
 
-TEST: unconstrained generation from given sample
-```bash
-python3 -m sample.generate --model_path ./save/humanml_enc_512_50steps/model000750000.pt --init_motion ./dataset/NTU60/new_joint_vecs/S004C002P008R001A027.npy --num_samples 5 --num_repetitions 3 --unconstrained
-```
-
 <br>
 
 ### Few-Shot Training
 
+(TO UPDATE)
+
 If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem. 
+
 
 ```bash
 python -m train.train_mdm \
-  --dataset ntu60 \
+  --model MDM \
   --save_dir ./save/ntu60_trans_enc_512_50steps \
   --starting_checkpoint ./save/humanml_enc_512_50steps/model000750000.pt \
-  --peft LoRA \
-  --eval_during_training
+  --peft LoRA
 ```
+
 
 Adapters can be easily inserted in the model through `--peft` (Parameter Efficient Fine-Tuning)
 * `--peft [LoRA, MoE]` => you can specify which adapter to plug in the model (even both as a list). where they will be placed withing the model depends on other arguments. We suggest you to check [`parser_util.py`](external/motion-diffusion-model/utils/parser_util.py) within `peft` group, and modify directly them there.

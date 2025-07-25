@@ -3,9 +3,9 @@ Credits: This code is motly taken from
 1. https://github.com/EricGuo5513/HumanML3D/blob/main/motion_representation.ipynb
 2. https://github.com/EricGuo5513/HumanML3D/blob/main/cal_mean_variance.ipynb
 
-Modifications:
+Edits:
 +   floor is not detected as the hard minimum height of all joints in an animation.
-    instead, due to noise in the data, it is averaged over 'floor_thre' lowest joints
+    instead, due to noise in the data, it is averaged over 'floor_thre' lowest joints (in height)
 +   general modifications to align with the rest of the codebase
 """
 import torch
@@ -14,10 +14,10 @@ from types import SimpleNamespace
 
 from .skeleton import Skeleton
 from .quaternion import *
-from .paramUtil import *
+from .paramUtil import t2m_kinematic_chain, t2m_raw_offsets
 
 from utils.constants.skel import SKEL_INFO
-SKL = SKEL_INFO['HML3D']
+SKL = SKEL_INFO['smpl']
 
 
 """
@@ -34,21 +34,62 @@ def uniform_skeleton(positions, opt):
     '''Calculate Scale Ratio as the ratio of legs'''
     src_leg_len = np.abs(src_offset[SKL.l_idx1]).max() + np.abs(src_offset[SKL.l_idx2]).max()
     tgt_leg_len = np.abs(tgt_offset[SKL.l_idx1]).max() + np.abs(tgt_offset[SKL.l_idx2]).max()
-
     scale_rt = tgt_leg_len / src_leg_len
+
     # print(scale_rt)
     src_root_pos = positions[:, 0]
     tgt_root_pos = src_root_pos * scale_rt
 
     '''Inverse Kinematics'''
     quat_params = src_skel.inverse_kinematics_np(positions, SKL.face_joint_indx)
-    # print(quat_params.shape)
 
     '''Forward Kinematics'''
     src_skel.set_offset(opt.target_offset)
     new_joints = src_skel.forward_kinematics_np(quat_params, tgt_root_pos)
 
     return new_joints
+
+def globalize_pos(positions, skeleton, floor_thre):
+    '''Put on Floor'''
+    # Floor is not detected as the hard minimum, but as
+    # the average of the lowest Y across floor_thres joints (for stability to noise)
+    j_heights = np.sort(positions[:, :, 1].flatten())
+    floor_height = j_heights[:floor_thre].mean()
+    positions[:, :, 1] -= floor_height
+    #     print(floor_height)
+    #     plot_3d_motion("./positions_1.mp4", kinematic_chain, positions, 'title', fps=20)
+
+    '''XZ at origin'''
+    root_pos_init = positions[0]
+    root_pose_init_xz = root_pos_init[0] * np.array([1, 0, 1])
+    positions = positions - root_pose_init_xz
+
+    # '''Move the first pose to origin '''
+    # root_pos_init = positions[0]
+    # positions = positions - root_pos_init[0]
+
+    '''All initially face Z+'''
+    r_hip, l_hip, sdr_r, sdr_l = skeleton.face_joint_indx
+    across1 = root_pos_init[r_hip] - root_pos_init[l_hip]
+    across2 = root_pos_init[sdr_r] - root_pos_init[sdr_l]
+    across = across1 + across2
+    across = across / np.sqrt((across ** 2).sum(axis=-1))[..., np.newaxis]
+
+    # forward (3,), rotate around y-axis
+    forward_init = np.cross(np.array([[0, 1, 0]]), across, axis=-1)
+    # forward (3,)
+    forward_init = forward_init / np.sqrt((forward_init ** 2).sum(axis=-1))[..., np.newaxis]
+    
+    #     print(forward_init)
+
+    target = np.array([[0, 0, 1]])
+    root_quat_init = qbetween_np(forward_init, target)
+    root_quat_init = np.ones(positions.shape[:-1] + (4,)) * root_quat_init
+
+    positions = qrot_np(root_quat_init, positions)
+
+    return positions
+
 
 def process_file(positions, floor_thre, feet_thre, opt):
     """
@@ -59,9 +100,8 @@ def process_file(positions, floor_thre, feet_thre, opt):
     #     '''Down Sample'''
     #     positions = positions[::ds_num]
 
-
     '''Uniform Skeleton'''
-    positions = uniform_skeleton(positions, opt)
+    positions = uniform_skeleton(positions, opt)    
 
     '''Put on Floor'''
     # Floor is not detected as the hard minimum, but as
@@ -70,7 +110,6 @@ def process_file(positions, floor_thre, feet_thre, opt):
     floor_height = j_heights[:floor_thre].mean()
     positions[:, :, 1] -= floor_height
     #     print(floor_height)
-
     #     plot_3d_motion("./positions_1.mp4", kinematic_chain, positions, 'title', fps=20)
 
     '''XZ at origin'''
@@ -176,12 +215,16 @@ def process_file(positions, floor_thre, feet_thre, opt):
         skel = Skeleton(opt.n_raw_offsets, opt.kinematic_chain, 'cpu')
         # (seq_len, joints_num, 4)
         quat_params = skel.inverse_kinematics_np(positions, SKL.face_joint_indx, smooth_forward=True)
+        
+        # FIXME (do i need this?)
+        #quat_params = qfix(quat_params)
 
         '''Quaternion to continuous 6D'''
         cont_6d_params = quaternion_to_cont6d_np(quat_params)
         # (seq_len, 4)
         r_rot = quat_params[:, 0].copy()
         #     print(r_rot[0])
+        
         '''Root Linear Velocity'''
         # (seq_len - 1, 3)
         velocity = (positions[1:, 0] - positions[:-1, 0]).copy()
@@ -313,6 +356,28 @@ def recover_from_ric(data, joints_num):
 
     return positions
 
+def recover_velocities(hml_features, joints_num=22):
+    """
+    Extract velocity components from HML redundant feature representation.
+    
+    Args:
+        hml_features: (T, 263) or (T, 256) HML feature vector 
+        joints_num: Number of joints (default 22 for SMPL)
+    
+    Returns:
+        root_velocity: (T, 2) - XZ linear velocity of root joint
+        joint_velocities: (T, joints_num*3) - 3D velocities of all joints
+    """
+    # Extract root linear velocity (XZ plane)
+    root_velocity = hml_features[:, 1:3]  # (T, 2)
+    
+    # Extract joint velocities 
+    local_vel_start = 4 + (joints_num - 1) * 9
+    local_vel_end = local_vel_start + joints_num * 3
+    joint_velocities = hml_features[:, local_vel_start:local_vel_end]  # (T, joints_num*3)
+    
+    return root_velocity, joint_velocities
+
 # root_rot_velocity (B, seq_len, 1)
 # root_linear_velocity (B, seq_len, 2)
 # root_y (B, seq_len, 1)
@@ -320,11 +385,11 @@ def recover_from_ric(data, joints_num):
 # rot_data (B, seq_len, (joint_num - 1)*6)
 # local_velocity (B, seq_len, joint_num*3)
 # foot contact (B, seq_len, 4)
-def mean_variance(data_list, joints_num):
+def cal_mean_variance(data, joints_num):
     """
     Compute mean and variance for a HML feat. vec.
     """
-    data = np.concatenate(data_list, axis=0)
+    #data = np.concatenate(data_list, axis=0)
 
     Mean = data.mean(axis=0)
     Std = data.std(axis=0)
@@ -356,7 +421,7 @@ def motion_2_hml_vec(
     Parameters
     ----------
     motion_seq : np.ndarray
-        Shape (T, J, 3).  J must match the T2M/HumanML3D skeleton (22 joints).
+        Shape (T, J, 3).  J must match the HumanML3D skeleton (22 joints - SMPL).
     floor_thre : int, optional
         Number of joints to consider for floor detection.  Default is 1, which
         means the lowest (Y-axis) joint is used to detect the floor.
@@ -367,10 +432,9 @@ def motion_2_hml_vec(
     Returns
     -------
     np.ndarray
-        Shape (T-1, 263). Redundant representation feat. vec. for HML.
+        Shape (T-1, 263). Redundant representation feature vector suitable for training Motion generative models.
     """
-    assert motion_seq.ndim == 3 and motion_seq.shape[2] == 3, \
-        "Input must be (T, J, 3)."
+    assert motion_seq.ndim == 3 and motion_seq.shape[2] == 3, "Input must be (T, J, 3)."
     
     motion_seq = motion_seq.astype(np.float32)
     # NOTE: code might be extended to allow different skeletons in the future.

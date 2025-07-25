@@ -12,24 +12,28 @@ def resample_motion(motion: np.ndarray, original_fps: int = 30, target_fps: int 
     """
     Subsample motion to target_fps.
     """
+    assert motion.ndim == 3 # (T, J, D)
+
     T = motion.shape[0]
-    original_times = np.linspace(0, T / original_fps, T)
-    target_T = int(T * target_fps / original_fps)
-    target_times = np.linspace(0, T / original_fps, target_T)
+    duration = (T - 1) / original_fps
+    original_times = np.linspace(0, duration, T)
+    target_T = int(duration * target_fps) + 1
+    target_times = np.linspace(0, duration, target_T)
     interp_fn = interp1d(original_times, motion, axis=0, kind='linear')
     return interp_fn(target_times).astype(motion.dtype)
 
 def forward_map(ntu_joints: np.ndarray):
     """
     Map NTU joints -> SMPL joints.
-    Returns: (T, 22, 3) joints: full HumanML3D compatible skeletons
+    Returns: (T, 22, 3) joints: HumanML3D compatible skeletons (SMPL).
     """
+    assert ntu_joints.ndim == 3 # (T, J, D)
+
     T = ntu_joints.shape[0]
-    source_dtype = ntu_joints.dtype
     ntu_joints = ntu_joints.astype(np.float32)  # Convert to float32 for consistency
 
     smpl_joints = np.zeros((T, 22, 3), dtype=np.float32)
-    for ntu_idx, smpl_idx in SMPL_DIRECT_MAP["KINECT"].items():
+    for ntu_idx, smpl_idx in SMPL_DIRECT_MAP["kinect"].items():
         smpl_joints[:, smpl_idx, :] = ntu_joints[:, ntu_idx, :]
 
     spineBase = ntu_joints[:, 0, :]
@@ -46,6 +50,16 @@ def forward_map(ntu_joints: np.ndarray):
     forward_dir = np.cross(torso_dir, across)
     forward_dir = forward_dir / (np.linalg.norm(forward_dir, axis=1, keepdims=True) + EPS)
 
+    # Flip correction (when forward direction is suddenly inverted it's likely that motion is degenerated)
+    # So we assume that it should be corrected (otherwise the spine curve is reversed)
+    #flipped = []
+    #for i in range(1, T):
+    #    if not (-0.95 < np.dot(forward_dir[i-1], forward_dir[i]) < 0.95):
+    #        forward_dir[i] *= -1
+    #        flipped.append(i)
+    #if len(flipped) > 0:
+    #    print("Flip occured: ", flipped)
+
     # Clavicles
     smpl_joints[:, 13, :] = spineShoulder + (leftShoulder - spineShoulder) * FCOEFF.clavicle_offset
     smpl_joints[:, 14, :] = spineShoulder + (rightShoulder - spineShoulder) * FCOEFF.clavicle_offset
@@ -60,7 +74,7 @@ def forward_map(ntu_joints: np.ndarray):
     smpl_joints[:, 6, :] = smpl_joints[:, 9, :] + (smpl_joints[:, 3, :] - smpl_joints[:, 9, :]) * FCOEFF.spine2_offset \
         + FCOEFF.spine2_curve * (-forward_dir) + FCOEFF.spine2_curve * (-torso_dir)
 
-    return smpl_joints.astype(source_dtype)  # Convert back to original dtype
+    return smpl_joints
 
 def backward_map(smpl_joints: np.ndarray):
     """
@@ -73,7 +87,7 @@ def backward_map(smpl_joints: np.ndarray):
 
     ntu_joints = np.zeros((T, 25, 3), dtype=np.float32)
     # Reverse the direct mapping (collar-bone is implicitly dropped)
-    smpl_to_ntu_map = {v: k for k, v in SMPL_DIRECT_MAP["KINECT"].items() if k not in JOINTS_2_DROP["KINECT"] and k != 1}
+    smpl_to_ntu_map = {v: k for k, v in SMPL_DIRECT_MAP["kinect"].items() if k not in JOINTS_2_DROP["kinect"] and k != 1}
     for smpl_idx, ntu_idx in smpl_to_ntu_map.items():
         ntu_joints[:, ntu_idx, :] = smpl_joints[:, smpl_idx, :]
 
@@ -90,7 +104,7 @@ def backward_map(smpl_joints: np.ndarray):
     ntu_joints[:, 20, :] = 2.0*spine3 - ntu_joints[:, 1, :]
     
     # Drop hand joints
-    ntu_joints = np.delete(ntu_joints, list(JOINTS_2_DROP["KINECT"]), axis=1) # new shape (T, 19, 3)
+    ntu_joints = np.delete(ntu_joints, list(JOINTS_2_DROP["kinect"]), axis=1) # new shape (T, 19, 3)
 
     return ntu_joints.astype(source_dtype)  # Convert back to original dtype
 

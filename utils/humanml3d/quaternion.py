@@ -11,10 +11,11 @@ import numpy as np
 _EPS4 = np.finfo(float).eps * 4.0
 _FLOAT_EPS = np.finfo(np.float).eps
 
-EPS = _FLOAT_EPS
+EPS = _EPS4
 
 # PyTorch-backed implementations
 def qinv(q):
+    assert not torch.isnan(q).any(), "Input quaternions contain NaN values"
     assert q.shape[-1] == 4, 'q must be a tensor of shape (*, 4)'
     mask = torch.ones_like(q)
     mask[..., 1:] = -mask[..., 1:]
@@ -22,11 +23,13 @@ def qinv(q):
 
 
 def qinv_np(q):
+    assert not np.isnan(q).any(), "Input quaternions contain NaN values"
     assert q.shape[-1] == 4, 'q must be a tensor of shape (*, 4)'
     return qinv(torch.from_numpy(q).float()).numpy()
 
 
 def qnormalize(q):
+    assert not torch.isnan(q).any(), "Input quaternions contain NaN values"
     assert q.shape[-1] == 4, 'q must be a tensor of shape (*, 4)'
     return q / (torch.norm(q, dim=-1, keepdim=True) + EPS)
 
@@ -37,6 +40,8 @@ def qmul(q, r):
     Expects two equally-sized tensors of shape (*, 4), where * denotes any number of dimensions.
     Returns q*r as a tensor of shape (*, 4).
     """
+    assert not torch.isnan(q).any(), "Input quaternions contain NaN values"
+    assert not torch.isnan(r).any(), "Input quaternions contain NaN values"
     assert q.shape[-1] == 4
     assert r.shape[-1] == 4
 
@@ -59,6 +64,8 @@ def qrot(q, v):
     where * denotes any number of dimensions.
     Returns a tensor of shape (*, 3).
     """
+    assert not torch.isnan(q).any(), "Input quaternions contain NaN values"
+    assert not torch.isnan(v).any(), "Input vectors contain NaN values"
     assert q.shape[-1] == 4
     assert v.shape[-1] == 3
     assert q.shape[:-1] == v.shape[:-1]
@@ -80,6 +87,7 @@ def qeuler(q, order, epsilon=0, deg=True, follow_order=True):
     Expects a tensor of shape (*, 4), where * denotes any number of dimensions.
     Returns a tensor of shape (*, 3).
     """
+    assert not torch.isnan(q).any(), "Input quaternions contain NaN values"
     assert q.shape[-1] == 4
 
     original_shape = list(q.shape)
@@ -131,18 +139,24 @@ def qeuler(q, order, epsilon=0, deg=True, follow_order=True):
 # Numpy-backed implementations
 
 def qmul_np(q, r):
+    assert not np.isnan(q).any(), "Input quaternions contain NaN values"
+    assert not np.isnan(r).any(), "Input quaternions contain NaN values"
     q = torch.from_numpy(q).contiguous().float()
     r = torch.from_numpy(r).contiguous().float()
     return qmul(q, r).numpy()
 
 
 def qrot_np(q, v):
+    assert not np.isnan(q).any(), "Input quaternions contain NaN values"
+    assert not np.isnan(v).any(), "Input vectors contain NaN values"
     q = torch.from_numpy(q).contiguous().float()
     v = torch.from_numpy(v).contiguous().float()
     return qrot(q, v).numpy()
 
 
 def qeuler_np(q, order, epsilon=0, use_gpu=False):
+    assert not np.isnan(q).any(), "Input quaternions contain NaN values"
+
     if use_gpu:
         q = torch.from_numpy(q).cuda().float()
         return qeuler(q, order, epsilon).cpu().numpy()
@@ -160,6 +174,7 @@ def qfix(q):
     Expects a tensor of shape (L, J, 4), where L is the sequence length and J is the number of joints.
     Returns a tensor of the same shape.
     """
+    assert not np.isnan(q).any(), "Input quaternions contain NaN values"
     assert len(q.shape) == 3
     assert q.shape[-1] == 4
 
@@ -175,6 +190,7 @@ def euler2quat(e, order, deg=True):
     """
     Convert Euler angles to quaternions.
     """
+    assert not np.isnan(e).any(), "Input Euler angles contain NaN values"
     assert e.shape[-1] == 3
 
     original_shape = list(e.shape)
@@ -223,6 +239,7 @@ def expmap_to_quaternion(e):
     Expects a tensor of shape (*, 3), where * denotes any number of dimensions.
     Returns a tensor of shape (*, 4).
     """
+    assert not np.isnan(e).any(), "Input exponential maps contain NaN values"
     assert e.shape[-1] == 3
 
     original_shape = list(e.shape)
@@ -239,6 +256,7 @@ def euler_to_quaternion(e, order):
     """
     Convert Euler angles to quaternions.
     """
+    assert not np.isnan(e).any(), "Input Euler angles contain NaN values"
     assert e.shape[-1] == 3
 
     original_shape = list(e.shape)
@@ -285,6 +303,7 @@ def quaternion_to_matrix(quaternions):
     Returns:
         Rotation matrices as tensor of shape (..., 3, 3).
     """
+    assert not torch.isnan(quaternions).any(), "Input quaternions contain NaN values"
     r, i, j, k = torch.unbind(quaternions, -1)
     two_s = 2.0 / ((quaternions * quaternions).sum(-1) + EPS)
 
@@ -306,6 +325,7 @@ def quaternion_to_matrix(quaternions):
 
 
 def quaternion_to_matrix_np(quaternions):
+    assert not np.isnan(quaternions).any(), "Input quaternions contain NaN values"
     q = torch.from_numpy(quaternions).contiguous().float()
     return quaternion_to_matrix(q).numpy()
 
@@ -319,12 +339,14 @@ def quaternion_to_cont6d_np(quaternions):
 
 
 def quaternion_to_cont6d(quaternions):
+    assert not np.isnan(quaternions).any(), "Input quaternions contain NaN values"
     rotation_mat = quaternion_to_matrix(quaternions)
     cont_6d = torch.cat([rotation_mat[..., 0], rotation_mat[..., 1]], dim=-1)
     return cont_6d
 
 
 def cont6d_to_matrix(cont6d):
+    assert not np.isnan(cont6d).any(), "Input cont6d contains NaN values"
     assert cont6d.shape[-1] == 6, "The last dimension must be 6"
     x_raw = cont6d[..., 0:3]
     y_raw = cont6d[..., 3:6]
@@ -344,11 +366,13 @@ def cont6d_to_matrix(cont6d):
 
 
 def cont6d_to_matrix_np(cont6d):
+    assert not np.isnan(cont6d).any(), "Input cont6d contains NaN values"
     q = torch.from_numpy(cont6d).contiguous().float()
     return cont6d_to_matrix(q).numpy()
 
 
 def qpow(q0, t, dtype=torch.float):
+    assert not torch.isnan(q0).any(), "Input quaternions contain NaN values"
     ''' q0 : tensor of quaternions
     t: tensor of powers
     '''
@@ -382,7 +406,9 @@ def qslerp(q0, q1, t):
     Returns:
     Tensor of Slerps: t.shape + q0.shape
     '''
-
+    assert not np.isnan(q0).any(), "Input quaternions contain NaN values"
+    assert not np.isnan(q1).any(), "Input quaternions contain NaN values"
+    
     q0 = qnormalize(q0)
     q1 = qnormalize(q1)
     q_ = qpow(qmul(q1, qinv(q0)), t)
@@ -395,19 +421,37 @@ def qbetween(v0, v1):
     '''
     find the quaternion used to rotate v0 to v1
     '''
+    assert torch.isnan(v0).any() == False, "Input vectors contain NaN values"
+    assert torch.isnan(v1).any() == False, "Input vectors contain NaN values"
     assert v0.shape[-1] == 3, 'v0 must be of the shape (*, 3)'
     assert v1.shape[-1] == 3, 'v1 must be of the shape (*, 3)'
 
     v = torch.cross(v0, v1)
     w = torch.sqrt((v0 ** 2).sum(dim=-1, keepdim=True) * (v1 ** 2).sum(dim=-1, keepdim=True)) + (v0 * v1).sum(dim=-1,
                                                                                                               keepdim=True)
+    # Handle opposite vectors case where w ≈ 0 and v ≈ [0,0,0]
+    opposite_mask = w.squeeze(-1) < 1e-6
+    if opposite_mask.any():
+        # Find perpendicular vector: use the axis with smallest component
+        abs_v0 = torch.abs(v0)
+        min_axis = torch.argmin(abs_v0, dim=-1)
+        perp = torch.zeros_like(v0)
+        perp[torch.arange(perp.shape[0]), min_axis] = 1.0
+        # Make perpendicular using Gram-Schmidt
+        perp = perp - (perp * v0).sum(dim=-1, keepdim=True) * v0 / ((v0 ** 2).sum(dim=-1, keepdim=True) + EPS)
+        perp = perp / (torch.norm(perp, dim=-1, keepdim=True) + EPS)
+        # Set w=0, v=perpendicular for opposite cases
+        w[opposite_mask] = 0.0
+        v[opposite_mask] = perp[opposite_mask]
+    
     return qnormalize(torch.cat([w, v], dim=-1))
-
 
 def qbetween_np(v0, v1):
     '''
     find the quaternion used to rotate v0 to v1
     '''
+    assert not np.isnan(v0).any(), "Input vectors contain NaN values"
+    assert not np.isnan(v1).any(), "Input vectors contain NaN values"
     assert v0.shape[-1] == 3, 'v0 must be of the shape (*, 3)'
     assert v1.shape[-1] == 3, 'v1 must be of the shape (*, 3)'
 
@@ -417,6 +461,8 @@ def qbetween_np(v0, v1):
 
 
 def lerp(p0, p1, t):
+    assert not np.isnan(p0).any(), "Input points contain NaN values"
+    assert not np.isnan(p1).any(), "Input points contain NaN values"
     if not isinstance(t, torch.Tensor):
         t = torch.Tensor([t])
 
@@ -435,7 +481,7 @@ def matrix_to_quat(R) -> torch.Tensor:
     Convert a rotation matrix to a unit quaternion.
     This uses the Shepperd’s method for numerical stability.
     '''
-
+    assert not np.isnan(R).any(), "Input rotation matrix contains NaN values"
     # The rotation matrix must be orthonormal
 
     w2 = (1 + R[..., 0, 0] + R[..., 1, 1] + R[..., 2, 2])

@@ -1,13 +1,5 @@
 cd external/motion-diffusion-model
 
-sudo apt update
-sudo apt install ffmpeg
-
-# Update environment dependancies
-#conda env update --file environment_new.yml
-python -m spacy download en_core_web_sm
-pip install git+https://github.com/openai/CLIP.git
-
 # Body models
 mkdir -p body_models
 unzip smpl.zip -d body_models/

@@ -5,22 +5,7 @@ Constants related to skeletons and their mapping to HumanML3D format.
 from types import SimpleNamespace
 
 SKEL_INFO = {
-    'HML3D': SimpleNamespace(
-        # Lower legs
-        l_idx1=5,
-        l_idx2=8,
-        # Right/Left foot
-        fid_r=[8, 11],
-        fid_l=[7, 10],
-        # Face direction, r_hip, l_hip, sdr_r, sdr_l
-        face_joint_indx=[2, 1, 17, 16],
-        # l_hip, r_hip
-        r_hip=2,
-        l_hip=1,
-        joints_num=22,
-    ),
-    
-    "KINECT": SimpleNamespace(
+    "kinect": SimpleNamespace(
         # Lower legs
         l_idx1=0,
         l_idx2=0,
@@ -33,12 +18,27 @@ SKEL_INFO = {
         r_hip=16,
         l_hip=12,
         joints_num=25,
-    )
+    ),
+
+    'smpl': SimpleNamespace(
+        # Lower legs
+        l_idx1=5,
+        l_idx2=8,
+        # Right/Left foot
+        fid_r=[8, 11],
+        fid_l=[7, 10],
+        # Face direction, r_hip, l_hip, sdr_r, sdr_l
+        face_joint_indx=[2, 1, 17, 16],
+        # l_hip, r_hip
+        r_hip=2,
+        l_hip=1,
+        joints_num=22,
+    ),    
 }
 
 # Joints directly mappable from some skeletons to HumanML3D format
 SMPL_DIRECT_MAP = {
-    "KINECT" : {
+    "kinect" : {
         0:   0, # SpineBase: Pelvis
         2:  12, # Neck: Neck
         3:  15, # Head: Head
@@ -61,7 +61,7 @@ SMPL_DIRECT_MAP = {
 
 # Joints to drop when converting some skeleton into HumanML3D format
 JOINTS_2_DROP = {
-    "KINECT": {7, 11, 21, 22, 23, 24}
+    "kinect": {7, 11, 21, 22, 23, 24}
 }
 
 # Number of joints to consider when inferring floor height
@@ -78,3 +78,9 @@ FCOEFF = SimpleNamespace(
     spine2_curve = 0.02,
     spine1_curve = 0.06
 )
+
+# kinematic tree chains (for viz.)
+kinematic_chain = {
+    'kinect' : [[0, 16, 17, 18, 19], [0, 12, 13, 14, 15], [0, 1, 20, 2, 3], [20, 8, 9, 10], [20, 4, 5, 6], [23, 11, 10, 24], [21, 7, 6, 22]],
+    'smpl' : [[0, 2, 5, 8, 11], [0, 1, 4, 7, 10], [0, 3, 6, 9, 12, 15], [9, 14, 17, 19, 21], [9, 13, 16, 18, 20]]
+}

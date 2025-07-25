@@ -174,9 +174,12 @@ cython_debug/
 .pypirc
 
 ### --- CUSTOM ----
-data/NTU60/annotations
-data/NTU60/splits
+data/NTU60/new*
 data/NTU60/texts
+data/NTU60/splits
+data/HumanML3D/new*
+data/HumanML3D/texts
+data/HumanML3D/splits
 
 *.gif
 *.mp4
