@@ -214,22 +214,19 @@ if __name__ == "__main__":
     os.makedirs(SIDE_BY_SIDE_PATH, exist_ok=True)
     os.makedirs(RAW_KINECT_PATH, exist_ok=True)
 
-    mode_parser = argparse.ArgumentParser()
-    mode_parser.add_argument('--raw-kinect', action='store_true', help='Save raw Kinect data as well (sample take directly from the dataset and untouched)')
-    args = mode_parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--raw-kinect', action='store_true', help='Save raw Kinect data as well (sample take directly from the dataset and untouched)')
+    parser.add_argument('--samples', type=str, default='samples.txt', help='File .txt with sample names to visualize')
+    parser.add_argument('--first_n', type=int, default=-1, help='Returns first N samples of the given file. negative for all')
+    args = parser.parse_args()
 
-    NTU_SAMPLES = [
-        'S016C003P021R002A042',
-        'S002C002P013R002A017',
-        'S012C002P016R001A042',
-        'S001C001P002R002A016',
-        'S001C002P004R002A006',
-        'S017C002P008R001A006',
-        'S001C002P006R002A043',
-        'S014C003P025R002A017',
-        'S012C003P016R002A027',
-        'S008C001P031R002A008',
-    ]
+    samples_path = pjoin(SCRIPT_DIR, args.samples)
+    assert os.path.exists(samples_path), "Samples file not found: {}".format(samples_path)
+    with open(pjoin(samples_path), 'r') as f:
+        ntu_samples = [line.strip() for line in f.readlines() if line.strip()]
+    if args.first_n < 0:
+        args.first_n = len(ntu_samples)
+    ntu_samples = ntu_samples[:args.first_n]
 
     DATA = {
         "kinect" : SimpleNamespace(
@@ -240,9 +237,9 @@ if __name__ == "__main__":
             fps=30,
             samples=[
                 SimpleNamespace(name=name)
-                for name in NTU_SAMPLES
+                for name in ntu_samples
             ],
-            num_samples=len(NTU_SAMPLES),
+            num_samples=len(ntu_samples),
         ),
 
         "smpl" : SimpleNamespace(
@@ -254,9 +251,9 @@ if __name__ == "__main__":
             fps=20,
             samples=[
                 SimpleNamespace(name=name)
-                for name in NTU_SAMPLES
+                for name in ntu_samples
             ],
-            num_samples=len(NTU_SAMPLES)
+            num_samples=len(ntu_samples)
         )
     }
 

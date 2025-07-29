@@ -4,7 +4,7 @@ Official implementation of {...}
 
 ## 🧠 Overview: Leveraging Text-to-Motion Priors for Few-Shot Human Action Recognition
 
-This project presents a novel pipeline that leverages **Text-to-Motion generative priors** to enhance **Few-Shot Learning** in **Human Action Recognition (HAR)**. Rather than focusing solely on classifier design, we introduce a data-centric strategy that employs powerful generative models, such as the **Motion Diffusion Model (MDM)**, to synthesize 3D skeletal motion sequences from free-form text prompts (e.g., _"A person waves"_).
+This project presents a novel pipeline that leverages **Text-to-Motion generative priors** to enhance **Few-Shot Learning** in **Human Action Recognition (HAR)**. Rather than focusing solely on classifier design, we introduce a data-centric strategy that employs powerful generative models, such as the **Motion Diffusion Model (MDM)**, to synthesize 3D skeletal motion sequences.
 
 The generated motions act as realistic surrogates for rare or unseen classes, enriching the training set of downstream HAR models such as **ST-GCN**. This augmentation strategy boosts generalization and addresses the class imbalance common in few-shot scenarios.
 
@@ -35,7 +35,7 @@ You can randomly generate Few-Shot splits by executing the following command
 python3 -m scripts.handle_fewshot_split \
   --mode generate --dataset NTU60 --seed 19 \
   --class-list 2 3 19 29 \
-  --shots 16 --eval-multiplier 5
+  --shots 128 --eval-multiplier 0.25
 ```
 
 This process generates a support set of size `N * len(--class-list)`, where:
@@ -60,7 +60,7 @@ This means that:
 
 
 <details>
-  <summary><b>Few-Shot MDM</b></summary>
+  <summary><b>Training MDM & CycleMDM</b></summary>
 
 <br>
 
@@ -72,53 +72,38 @@ cd external/motion-diffusion-model
 
 Pre-Trained MDM can be downloaded from the [Original Repo](https://github.com/GuyTevet/Motion-Diffusion-Model?tab=readme-ov-file#3-download-the-pretrained-models) and then stored under `save/` directory.
 
-### Text-2-Motion Action Synthesis
-
-(TO UPDATE)
-
-Execute the following script to synthetyze motion from free text, such that:
-* Textual prompts are natural language convertions of Action classes. Check [`action_captions.json`](data/NTU60/action_captions.json) for better understanding.
-* At each `--repetitions` (shots) all `--action_labels` (0-indexed) are generated given a random conditioning sampled from the `.json`.
+### Motion Synthesis
 
 ```bash
 python3 -m sample.generate \
-  --t2m_action_gen \
-  --action_labels 2 3 19 29 \
-  --num_repetitions 4 \
-  --action_captions ./dataset/NTU60/action_captions.json \
-  --model_path ./save/humanml_enc_512_50steps/model000750000.pt \
-  --no_render
+  --action_id 2 29 29 \
+  --num_samples 10 --num_repetitions 3 \
+  --model_path ./save/yor/action/conditioned/mdm/model
 ```
 
-Remove `--no_render` to enable rendering into `.mp4` animations and visualize the synthetic motion. Consider that doing this is time demanding, it's recomended to use render few samples when you need to.
-
+To run generation on a text-conditioned model specify instead `--text_prompt` "the person ..."
 
 <br>
 
-### Few-Shot Training
+### Training the models
 
-(TO UPDATE)
-
-If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem. 
-
+If all steps specified in sections **Setup** and **Data** sections were done correctly, you should be able to run the trainig with no problem.
 
 ```bash
 python -m train.train_mdm \
-  --model MDM \
-  --save_dir ./save/ntu60_trans_enc_512_50steps \
+  --model_type MDM --single_stream target \
+  --save_dir ./save/ntu60_trans_enc \
   --starting_checkpoint ./save/humanml_enc_512_50steps/model000750000.pt \
   --peft LoRA
 ```
 
-
-Adapters can be easily inserted in the model through `--peft` (Parameter Efficient Fine-Tuning)
-* `--peft [LoRA, MoE]` => you can specify which adapter to plug in the model (even both as a list). where they will be placed withing the model depends on other arguments. We suggest you to check [`parser_util.py`](external/motion-diffusion-model/utils/parser_util.py) within `peft` group, and modify directly them there.
-you should avoid same modules twice (ex. LoRA on denoising head, and also MoE on denoising head).
+For information about input arguments, see [`parser_util.py`](external/motion-diffusion-model/utils/parser_util.py). <u>We highly suggest to modify parameters directly there (there's a lot!)</u>. Most relevant to our work are:
+* `--model_type` => specifies the model you want to train, choosing between `MDM` and `CycleMDM`. When using `MDM` a single stream model is used (as in the original paper) and `--single_stream` need to be specified to select which dataset configuration to use.
+* `--peft [LoRA, MoE]` => you can specify which adapter to plug in the model (even both as a list). where they will be placed withing the model depends on other arguments. You should avoid same modules twice (ex. LoRA on denoising head, and also MoE on denoising head).
 
 Other quality of life flags
-1. `--eval_during_training` => toggle validation during training (highly suggested given the low-shot setting)
-1. `--gen_during_training` => when performing validation, render few samples
-2. `--train_platform_type` => to log your results, we suggest `WandBPlatform` option
+1. `--train_platform_type` => to log your results, we suggest `WandBPlatform` option
+2. .
 
 </details>
 
@@ -140,21 +125,6 @@ Here is an overview of the "usable" data files and their purposes:
 
 3. `data/<DATASET>/splits/fewshot/<ID>/<SPLIT>/pyskl_data_wsyn.pkl`
   → This version of the dataset includes synthetic motion data generated by the MDM pipeline. It serves as the primary benchmark for evaluating whether synthetic samples improve classification performance in the few-shot setting.
-
-(1) is generated automatically after running `setup.py` on your chosen dataset. (2) is created each time you generate a new few-shot split. To produce (3), follow these steps after sampling synthetic data using our adapted version of MDM:
-```bash
-python3 -m scripts.handle_fewshot_split \
-  --mode convert \
-  --dataset NTU60 \
-  --synth-data humanml_enc_512_50steps/samples_humanml_enc_512_50steps_000750000_seed10 \
-  --fewshot-split-id 0000 \
-  --split xsub
-```
-
-Where:
-* `--synth-data specifies` the relative path to the synthetic sample output folder, under the `save/` directory from MDM.
-* `--fewshot-split-id` indicates the `ID` of the few-shot split you want to enrich with synthetic data.
-* `--split` selects the dataset split (`xsub`, `xset`, or `xview`) where the synthetic data will be merged.
 
 </details>
 
