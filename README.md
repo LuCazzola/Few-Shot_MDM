@@ -32,8 +32,8 @@ The actual *models* are stored within submodules defined in `external/`. Respect
 
 You can randomly generate Few-Shot splits by executing the following command
 ```bash
-python3 -m scripts.handle_fewshot_split \
-  --mode generate --dataset NTU60 --seed 19 \
+python3 -m scripts.sample_fewshot_split \
+  --dataset NTU60 --seed 19 \
   --class-list 2 3 19 29 \
   --shots 128 --eval-multiplier 0.25
 ```
