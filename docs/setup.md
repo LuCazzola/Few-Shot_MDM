@@ -27,7 +27,7 @@ pip install git+https://github.com/openai/CLIP.git
 2. Initialize the environment
 ```bash
 conda env create -f environment.yml
-conda activate mdm
+conda activate cloudspace
 ```
 
 3. Execute to organize the downloaded `.zip` files:
@@ -55,7 +55,7 @@ python3 -m scripts.data_prep --dataset NTU60
 bash prep/link_data.sh NTU60
 ```
 
-**NOTE**: Above instructions donwloads NTU and minimum HumanML3D requirements to sample from MDM. They do not include full HumanML3D dataset. To fully replicate our experiments, you should follow the instructions in the [official HumanML3D repository](https://github.com/EricGuo5513/HumanML3D) to obtain the full dataset, as we can't directly distribute it.
+**NOTE**: Above instructions donwloads NTU and *partially* HumanML3D. They do not include full HumanML3D dataset. To fully replicate our experiments, you should follow the instructions in the [official HumanML3D repository](https://github.com/EricGuo5513/HumanML3D) to obtain the full dataset, as we can't directly distribute it.
 
 Once you've generated the dataset, you must substitute it to `./external/motion-diffusion-model/dataset/HumanML3D`.
 

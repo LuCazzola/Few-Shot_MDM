@@ -44,7 +44,10 @@ def process_split_file(split_file, class_list, N, annotations_path, out_dir, wit
         class_sample[class_idx].append(s)
 
     assert all(len(s) >= N for s in class_sample), "Some classes have fewer samples than requested."
-    low_resource_data = [random.sample(s, N) for s in class_sample]
+    
+    # NOTE: we take N shots only from 'train' split.
+    # that's because val/test should be invariant to the choice of training samples.
+    low_resource_data = [random.sample(s, N) for s in class_sample] if 'train' in split_file else class_sample
 
     # save split + labels
     split_name = os.path.splitext(os.path.basename(split_file))[0]
@@ -131,15 +134,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str, default='NTU60', choices=['NTU60'])
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument('--class-list', type=int, nargs='+', default=None, 
-                       help='List of classes to include in the few-shot split. If not provided, all classes (except black-listed ones) will be used.')
-    parser.add_argument('--shots', type=int, default=10, 
-                       help='Number of shots per class for the few-shot split.')
-    parser.add_argument('--eval-multiplier', type=float, default=5.0, 
-                       help='multiplier for the number of shots in evaluation splits (val/test).')
-    parser.add_argument('--with-stats', action='store_true', 
-                       help='Whether to compute and save mean/std for the sampled split. Default is False.')
-
+    parser.add_argument('--class-list', type=int, nargs='+', default=None, help='List of classes to include in the few-shot split. If not provided, all classes (except black-listed ones) will be used.')
+    parser.add_argument('--shots', type=int, default=10, help='Number of shots per class for the few-shot split.')
+    parser.add_argument('--with-stats', action='store_true', help='Whether to compute and save mean/std for the sampled split. Default is False.')
     args = parser.parse_args()
     random.seed(args.seed)
 
@@ -171,7 +168,6 @@ if __name__ == '__main__':
         "class_list": args.class_list,
         "seed": args.seed,
         "shots": args.shots,
-        "eval_multiplier": args.eval_multiplier
     }
     fewshot_splits_path = create_unique_split_dir(fewshot_base_path, run_metadata)
     os.makedirs(fewshot_splits_path, exist_ok=True)
@@ -183,7 +179,7 @@ if __name__ == '__main__':
     # 2. Sample from split files and save (lists + stats)
     print(f"Parsing split files...")
     for split_file in split_files:
-        N = int(args.shots if split_file.endswith('train.txt') else args.shots * args.eval_multiplier)
+        N = int(args.shots)
         split_name = os.path.basename(os.path.dirname(split_file))
         split_output_path = pjoin(fewshot_splits_path, split_name)
         os.makedirs(split_output_path, exist_ok=True)
