@@ -20,14 +20,14 @@ Download the following resources at `./external/motion-diffusion-model`:
 ```bash
 sudo apt update
 sudo apt install ffmpeg
-python -m spacy download en_core_web_sm
-pip install git+https://github.com/openai/CLIP.git
 ```
 
 2. Initialize the environment
 ```bash
 conda env create -f environment.yml
 conda activate cloudspace
+python -m spacy download en_core_web_sm
+pip install git+https://github.com/openai/CLIP.git
 ```
 
 3. Execute to organize the downloaded `.zip` files:
