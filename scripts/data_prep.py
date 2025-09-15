@@ -77,14 +77,13 @@ def apply_forward(data, out_path, default_splits_path):
     """
     Application of forward mapping on the given PySkl dataset and stores files.
     """
-
     # Apply forward mapping and store files
     for ann in tqdm(data['annotations']):
         frame_dir = ann['frame_dir'].strip()
         keypoint = ann['keypoint']
         
         if frame_dir in SKIP_LIST: # avoid forw() for samples in SKIP_LIST (still parse OUTLIER_LIST)
-            continue
+            continue # outliers will be processed, but they're excluded from split 'train.txt' and statistics computation
         ntu_joints = keypoint[0] # (1, T, 25 ,3) -> (T, 25, 3)
 
         # Map
@@ -99,8 +98,10 @@ def apply_forward(data, out_path, default_splits_path):
         np.save(pjoin(out_path.joint_vecs, f"{frame_dir}.npy"), new_joint_vecs)
         np.save(pjoin(out_path.joints, f"{frame_dir}.npy"), new_joints)
 
-    
-    # Compute statistics for default splits
+def compute_statistics(out_path, default_splits_path):
+    '''
+    Compute statistics for default splits
+    '''
     for split in tqdm(os.listdir(default_splits_path), desc="Computing statistics for splits"):
         split_dir = pjoin(default_splits_path, split)
         for attr in ['joint_vecs', 'joints']:
@@ -123,7 +124,7 @@ def apply_forward(data, out_path, default_splits_path):
 
 def store_preprocessed_dataset(data, out_path):
     """
-    Given the original NTU dataset, stores a formatted copy such that
+    Given the original NTU dataset, stores a formatted (PySkl format) such that
     - it's sub-sampled to 20 FPS
     - uses 19 joints (excluding hands) instead of 25
     - Shifting according to frame Zero :
@@ -174,29 +175,40 @@ def format_default_splits(data, out_path):
         out_file_path = pjoin(split_dir, f"{split_set}.txt")
         with open(out_file_path, 'w') as f:
             for item in split_framedirs:
-                if item not in BLACKLIST:
-                    f.write(f"{item}\n")
+                if split_set == 'train':
+                    if item not in BLACKLIST: # skip BLACKLIST for training set (SKIP_LIST + OUTLIER_LIST)
+                        f.write(f"{item}\n")
+                else :
+                    if item not in SKIP_LIST: # skip only SKIP_LIST for test/val sets
+                        f.write(f"{item}\n")
+
         # Store label file
         out_label_path = pjoin(split_dir, f"{split_set}_y.txt")
         with open(out_label_path, 'w') as f:
             for item in split_framedirs:
-                if item not in BLACKLIST:
-                    f.write(f"{framedir_2_label[item]}\n")
+                if split_set == 'train':
+                    if item not in BLACKLIST:
+                        f.write(f"{framedir_2_label[item]}\n")
+                else :
+                    if item not in SKIP_LIST:
+                        f.write(f"{framedir_2_label[item]}\n")
 
 def format_texts(data, out_path, action_captions):
     """
     Given a action_captions file, transcribes data into .txt files using HumanML3D POS tagging logic.
     """
     with open(action_captions, 'r', encoding='utf-8') as f:
-        captions_dict = json.load(f)
+        ntu_desc = json.load(f)
 
     for sample in tqdm(data['annotations']):
 
         if sample['frame_dir'] in SKIP_LIST: # skip samples in SKIP_LIST (still parse OUTLIER_LIST)
             continue
         
-        entry = captions_dict.get(str(sample['label']))
-        assert entry is not None, "No entry in {} was found for action index {}".format(action_captions, sample['label'])
+        try : 
+            entry = ntu_desc['actions'][sample['label']]
+        except KeyError:
+            raise KeyError(f"Action index {sample['label']} not found in {action_captions}.")
 
         formatted_lines = []
         for cap in entry['captions']:
@@ -211,7 +223,8 @@ def format_texts(data, out_path, action_captions):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="setup options")
-    parser.add_argument("--dataset", type=str, default='NTU60', choices=["NTU60"], help="dataset from PySKL to process")
+    parser.add_argument("--dataset", type=str, default='NTU60', choices=["NTU60", "NTU120"], help="dataset from PySKL to process")
+    parser.add_argument("--skip-forward", action="store_true", help="If set, skips data convertion computing the remaining compontent (statistics, texts, ...)")
     parser.add_argument("--include-outliers", action="store_true", help="If unset (default), uses the local outliers.txt file to exclude outliers from the dataset.")
     args = parser.parse_args()
 
@@ -236,33 +249,40 @@ if __name__ == "__main__":
     # .
     format_default_splits(data, out_defsplit_path)
     print(f"Default splits formatted and stored at {out_defsplit_path}")
-    
-    # 3.
-    print("\nPre-processing dataset...")
-    out_processed_data_path = pjoin(
-        base_dataset_path,
-        DATA_FILENAME[DATASET].replace('.pkl', '_preproc.pkl')
-    )
-    os.makedirs(os.path.dirname(out_processed_data_path), exist_ok=True)
-    # .
-    store_preprocessed_dataset(data, out_processed_data_path)
-    print(f"Pre-processed default {DATASET} dataset stored at {out_processed_data_path}")
 
-    # 4.
-    print(f"\nApplying forward mapping on {DATASET} dataset...")
+    # Prepare output folders for annotations
     out_annotations_path = SimpleNamespace(
         joints = pjoin(base_dataset_path, "new_joints"),
         joint_vecs = pjoin(base_dataset_path, "new_joint_vecs")
     )
     os.makedirs(out_annotations_path.joints, exist_ok=True)
     os.makedirs(out_annotations_path.joint_vecs, exist_ok=True)
-    # .
-    apply_forward(data, out_annotations_path, out_defsplit_path)
-    print(f"Forward mapping applied to {DATASET}")
-    print(f"{out_annotations_path.joint_vecs} : joint vector representations (hml_vec format)")
-    print(f"{out_annotations_path.joints} : joint position vectors (xyz)")
+
+    if not args.skip_forward:
+        # 3.
+        #print("\nPre-processing dataset...")
+        #out_processed_data_path = pjoin(
+        #    base_dataset_path,
+        #    DATA_FILENAME[DATASET].replace('.pkl', '_preproc.pkl')
+        #)
+        #os.makedirs(os.path.dirname(out_processed_data_path), exist_ok=True)
+        ## .
+        #store_preprocessed_dataset(data, out_processed_data_path)
+        #print(f"Pre-processed default {DATASET} dataset stored at {out_processed_data_path}")
+
+        # 4.
+        print(f"\nApplying forward mapping on {DATASET} dataset...")
+        apply_forward(data, out_annotations_path, out_defsplit_path)
+        print(f"Forward mapping applied to {DATASET}")
+        print(f"{out_annotations_path.joint_vecs} : joint vector representations (hml_vec format)")
+        print(f"{out_annotations_path.joints} : joint position vectors (xyz)")
     
     # 5.
+    print(f"\nComputing statistics...")
+    compute_statistics(out_annotations_path, out_defsplit_path)
+    print(f"Statistics computed and stored at {out_defsplit_path} for both joint_vecs and joints.")
+
+    # 6.
     print(f"\nFormatting texts...")
     action_captions = pjoin(base_dataset_path, ACTION_CAPTIONS_FILENAME)
     assert os.path.exists(action_captions), f"Input data {action_captions} not found."

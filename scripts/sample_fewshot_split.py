@@ -132,7 +132,7 @@ def create_unique_split_dir(base_dir, run_info):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='NTU60', choices=['NTU60'])
+    parser.add_argument('--dataset', type=str, default='NTU60', choices=['NTU60', 'NTU120'])
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--class-list', type=int, nargs='+', default=None, help='List of classes to include in the few-shot split. If not provided, all classes (except black-listed ones) will be used.')
     parser.add_argument('--shots', type=int, default=10, help='Number of shots per class for the few-shot split.')
@@ -187,9 +187,9 @@ if __name__ == '__main__':
         process_split_file(split_file, args.class_list, N, annotations_path, split_output_path, with_stats=args.with_stats)
 
     # 3. Merge split with formatted dataset and save it
-    with open(formatted_dataset_path, 'rb') as f:
-        formatted_data = pickle.load(f)
-    print(f"Merging splits with formatted dataset from {formatted_dataset_path}...")
-    merge_split(formatted_data, split_names, fewshot_splits_path)
+    #with open(formatted_dataset_path, 'rb') as f:
+    #    formatted_data = pickle.load(f)
+    #print(f"Merging splits with formatted dataset from {formatted_dataset_path}...")
+    #merge_split(formatted_data, split_names, fewshot_splits_path)
     
     print(f"Done! generated few-shot split at {fewshot_splits_path}.")

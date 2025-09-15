@@ -2,7 +2,7 @@
     "groups" : ["daily_actions", "medical_conditions", "mutual_actions"],
     "actions" : [
         {
-            "label": "drink water",
+            "action": "drink water",
             "tag" : "A001",
             "group" : "daily_actions",
             "captions": [
@@ -10,7 +10,7 @@
             ]
         },
         {
-            "label": "eat meal",
+            "action": "eat meal",
             "tag" : "A002",
             "group" : "daily_actions",
             "captions": [
@@ -18,7 +18,7 @@
             ]
         },
         {
-            "label": "brush teeth",
+            "action": "brush teeth",
             "tag" : "A003",
             "group" : "daily_actions",
             "captions": [
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "label": "brush hair",
+            "action": "brush hair",
             "tag" : "A004",
             "group" : "daily_actions",
             "captions": [
@@ -34,7 +34,7 @@
             ]
         },
         {
-            "label": "drop",
+            "action": "drop",
             "tag" : "A005",
             "group" : "daily_actions",
             "captions": [
@@ -42,7 +42,7 @@
             ]
         },
         {
-            "label": "pick up",
+            "action": "pick up",
             "tag" : "A006",
             "group" : "daily_actions",
             "captions": [
@@ -50,7 +50,7 @@
             ]
         },
         {
-            "label": "throw",
+            "action": "throw",
             "tag" : "A007",
             "group" : "daily_actions",
             "captions": [
@@ -58,7 +58,7 @@
             ]
         },
         {
-            "label": "sit down",
+            "action": "sit down",
             "tag" : "A008",
             "group" : "daily_actions",
             "captions": [
@@ -66,7 +66,7 @@
             ]
         },
         {
-            "label": "stand up",
+            "action": "stand up",
             "tag" : "A009",
             "group" : "daily_actions",
             "captions": [
@@ -74,7 +74,7 @@
             ]
         },
         {
-            "label": "clapping",
+            "action": "clapping",
             "tag" : "A010",
             "group" : "daily_actions",
             "captions": [
@@ -82,7 +82,7 @@
             ]
         },
         {
-            "label": "reading",
+            "action": "reading",
             "tag" : "A011",
             "group" : "daily_actions",
             "captions": [
@@ -90,7 +90,7 @@
             ]
         },
         {
-            "label": "writing",
+            "action": "writing",
             "tag" : "A012",
             "group" : "daily_actions",
             "captions": [
@@ -98,7 +98,7 @@
             ]
         },
         {
-            "label": "tear up paper",
+            "action": "tear up paper",
             "tag" : "A013",
             "group" : "daily_actions",
             "captions": [
@@ -106,7 +106,7 @@
             ]
         },
         {
-            "label": "put on jacket",
+            "action": "put on jacket",
             "tag" : "A014",
             "group" : "daily_actions",
             "captions": [
@@ -114,7 +114,7 @@
             ]
         },
         {
-            "label": "take off jacket",
+            "action": "take off jacket",
             "tag" : "A015",
             "group" : "daily_actions",
             "captions": [
@@ -122,7 +122,7 @@
             ]
         },
         {
-            "label": "put on a shoe",
+            "action": "put on a shoe",
             "tag" : "A016",
             "group" : "daily_actions",
             "captions": [
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "label": "take off a shoe",
+            "action": "take off a shoe",
             "tag" : "A017",
             "group" : "daily_actions",
             "captions": [
@@ -138,7 +138,7 @@
             ]
         },
         {
-            "label": "put on glasses",
+            "action": "put on glasses",
             "tag" : "A018",
             "group" : "daily_actions",
             "captions": [
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "label": "take off glasses",
+            "action": "take off glasses",
             "tag" : "A019",
             "group" : "daily_actions",
             "captions": [
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "label": "put on a hat/cap",
+            "action": "put on a hat/cap",
             "tag" : "A020",
             "group" : "daily_actions",
             "captions": [
@@ -162,7 +162,7 @@
             ]
         },
         {
-            "label": "take off a hat/cap",
+            "action": "take off a hat/cap",
             "tag" : "A021",
             "group" : "daily_actions",
             "captions": [
@@ -170,7 +170,7 @@
             ]
         },
         {
-            "label": "cheer up",
+            "action": "cheer up",
             "tag" : "A022",
             "group" : "daily_actions",
             "captions": [
@@ -178,7 +178,7 @@
             ]
         },
         {
-            "label": "hand waving",
+            "action": "hand waving",
             "tag" : "A023",
             "group" : "daily_actions",
             "captions": [
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "label": "kicking something",
+            "action": "kicking something",
             "tag" : "A024",
             "group" : "daily_actions",
             "captions": [
@@ -194,7 +194,7 @@
             ]
         },
         {
-            "label": "reach into pocket",
+            "action": "reach into pocket",
             "tag" : "A025",
             "group" : "daily_actions",
             "captions": [
@@ -202,7 +202,7 @@
             ]
         },
         {
-            "label": "hopping",
+            "action": "hopping",
             "tag" : "A026",
             "group" : "daily_actions",
             "captions": [
@@ -210,7 +210,7 @@
             ]
         },
         {
-            "label": "jump up",
+            "action": "jump up",
             "tag" : "A027",
             "group" : "daily_actions",
             "captions": [
@@ -218,7 +218,7 @@
             ]
         },
         {
-            "label": "phone call",
+            "action": "phone call",
             "tag" : "A028",
             "group" : "daily_actions",
             "captions": [
@@ -226,7 +226,7 @@
             ]
         },
         {
-            "label": "play with phone/tablet",
+            "action": "play with phone/tablet",
             "tag" : "A029",
             "group" : "daily_actions",
             "captions": [
@@ -234,7 +234,7 @@
             ]
         },
         {
-            "label": "type on a keyboard",
+            "action": "type on a keyboard",
             "tag" : "A030",
             "group" : "daily_actions",
             "captions": [
@@ -242,7 +242,7 @@
             ]
         },
         {
-            "label": "point to something",
+            "action": "point to something",
             "tag" : "A031",
             "group" : "daily_actions",
             "captions": [
@@ -250,7 +250,7 @@
             ]
         },
         {
-            "label": "taking a selfie",
+            "action": "taking a selfie",
             "tag" : "A032",
             "group" : "daily_actions",
             "captions": [
@@ -258,7 +258,7 @@
             ]
         },
         {
-            "label": "check time (from watch)",
+            "action": "check time (from watch)",
             "tag" : "A033",
             "group" : "daily_actions",
             "captions": [
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "label": "rub two hands",
+            "action": "rub two hands",
             "tag" : "A034",
             "group" : "daily_actions",
             "captions": [
@@ -274,7 +274,7 @@
             ]
         },
         {
-            "label": "nod head/bow",
+            "action": "nod head/bow",
             "tag" : "A035",
             "group" : "daily_actions",
             "captions": [
@@ -282,7 +282,7 @@
             ]
         },
         {
-            "label": "shake head",
+            "action": "shake head",
             "tag" : "A036",
             "group" : "daily_actions",
             "captions": [
@@ -290,7 +290,7 @@
             ]
         },
         {
-            "label": "wipe face",
+            "action": "wipe face",
             "tag" : "A037",
             "group" : "daily_actions",
             "captions": [
@@ -298,7 +298,7 @@
             ]
         },
         {
-            "label": "salute",
+            "action": "salute",
             "tag" : "A038",
             "group" : "daily_actions",
             "captions": [
@@ -306,7 +306,7 @@
             ]
         },
         {
-            "label": "put palms together",
+            "action": "put palms together",
             "tag" : "A039",
             "group" : "daily_actions",
             "captions": [
@@ -314,7 +314,7 @@
             ]
         },
         {
-            "label": "cross hands in front",
+            "action": "cross hands in front",
             "tag" : "A040",
             "group" : "daily_actions",
             "captions": [
@@ -322,7 +322,7 @@
             ]
         },
         {
-            "label": "sneeze/cough",
+            "action": "sneeze/cough",
             "tag" : "A041",
             "group" : "medical_conditions",
             "captions": [
@@ -330,7 +330,7 @@
             ]
         },
         {
-            "label": "staggering",
+            "action": "staggering",
             "tag" : "A042",
             "group" : "medical_conditions",
             "captions": [
@@ -338,7 +338,7 @@
             ]
         },
         {
-            "label": "falling down",
+            "action": "falling down",
             "tag" : "A043",
             "group" : "medical_conditions",
             "captions": [
@@ -346,7 +346,7 @@
             ]
         },
         {
-            "label": "headache",
+            "action": "headache",
             "tag" : "A044",
             "group" : "medical_conditions",
             "captions": [
@@ -354,7 +354,7 @@
             ]
         },
         {
-            "label": "chest pain",
+            "action": "chest pain",
             "tag" : "A045",
             "group" : "medical_conditions",
             "captions": [
@@ -362,7 +362,7 @@
             ]
         },
         {
-            "label": "back pain",
+            "action": "back pain",
             "tag" : "A046",
             "group" : "medical_conditions",
             "captions": [
@@ -370,7 +370,7 @@
             ]
         },
         {
-            "label": "neck pain",
+            "action": "neck pain",
             "tag" : "A047",
             "group" : "medical_conditions",
             "captions": [
@@ -378,7 +378,7 @@
             ]
         },
         {
-            "label": "nausea/vomiting",
+            "action": "nausea/vomiting",
             "tag" : "A048",
             "group" : "medical_conditions",
             "captions": [
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "label": "fan self",
+            "action": "fan self",
             "tag" : "A049",
             "group" : "medical_conditions",
             "captions": [
@@ -394,7 +394,7 @@
             ]
         },
         {
-            "label": "punch/slap",
+            "action": "punch/slap",
             "tag" : "A050",
             "group" : "mutual_actions",
             "captions": [
@@ -402,7 +402,7 @@
             ]
         },
         {
-            "label": "kicking",
+            "action": "kicking",
             "tag" : "A051",
             "group" : "mutual_actions",
             "captions": [
@@ -410,7 +410,7 @@
             ]
         },
         {
-            "label": "pushing",
+            "action": "pushing",
             "tag" : "A052",
             "group" : "mutual_actions",
             "captions": [
@@ -418,7 +418,7 @@
             ]
         },
         {
-            "label": "pat on back",
+            "action": "pat on back",
             "tag" : "A053",
             "group" : "mutual_actions",
             "captions": [
@@ -426,7 +426,7 @@
             ]
         },
         {
-            "label": "point finger",
+            "action": "point finger",
             "tag" : "A054",
             "group" : "mutual_actions",
             "captions": [
@@ -434,7 +434,7 @@
             ]
         },
         {
-            "label": "hugging",
+            "action": "hugging",
             "tag" : "A055",
             "group" : "mutual_actions",
             "captions": [
@@ -442,7 +442,7 @@
             ]
         },
         {
-            "label": "giving object",
+            "action": "giving object",
             "tag" : "A056",
             "group" : "mutual_actions",
             "captions": [
@@ -450,7 +450,7 @@
             ]
         },
         {
-            "label": "touch pocket",
+            "action": "touch pocket",
             "tag" : "A057",
             "group" : "mutual_actions",
             "captions": [
@@ -458,7 +458,7 @@
             ]
         },
         {
-            "label": "shaking hands",
+            "action": "shaking hands",
             "tag" : "A058",
             "group" : "mutual_actions",
             "captions": [
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "label": "walking towards",
+            "action": "walking towards",
             "tag" : "A059",
             "group" : "mutual_actions",
             "captions": [
@@ -474,7 +474,7 @@
             ]
         },
         {
-            "label": "walking apart",
+            "action": "walking apart",
             "tag" : "A060",
             "group" : "mutual_actions",
             "captions": [
@@ -482,7 +482,7 @@
             ]
         },
         {
-            "label": "put on headphone",
+            "action": "put on headphone",
             "tag" : "A061",
             "group" : "daily_actions",
             "captions": [
@@ -490,7 +490,7 @@
             ]
         },
         {
-            "label": "take off headphone",
+            "action": "take off headphone",
             "tag" : "A062",
             "group" : "daily_actions",
             "captions": [
@@ -498,7 +498,7 @@
             ]
         },
         {
-            "label": "shoot at basket",
+            "action": "shoot at basket",
             "tag" : "A063",
             "group" : "daily_actions",
             "captions": [
@@ -506,7 +506,7 @@
             ]
         },
         {
-            "label": "bounce ball",
+            "action": "bounce ball",
             "tag" : "A064",
             "group" : "daily_actions",
             "captions": [
@@ -514,7 +514,7 @@
             ]
         },
         {
-            "label": "tennis bat swing",
+            "action": "tennis bat swing",
             "tag" : "A065",
             "group" : "daily_actions",
             "captions": [
@@ -522,7 +522,7 @@
             ]
         },
         {
-            "label": "juggle table tennis ball",
+            "action": "juggle table tennis ball",
             "tag" : "A066",
             "group" : "daily_actions",
             "captions": [
@@ -530,7 +530,7 @@
             ]
         },
         {
-            "label": "hush",
+            "action": "hush",
             "tag" : "A067",
             "group" : "daily_actions",
             "captions": [
@@ -538,7 +538,7 @@
             ]
         },
         {
-            "label": "flick hair",
+            "action": "flick hair",
             "tag" : "A068",
             "group" : "daily_actions",
             "captions": [
@@ -546,7 +546,7 @@
             ]
         },
         {
-            "label": "thumb up",
+            "action": "thumb up",
             "tag" : "A069",
             "group" : "daily_actions",
             "captions": [
@@ -554,7 +554,7 @@
             ]
         },
         {
-            "label": "thumb down",
+            "action": "thumb down",
             "tag" : "A070",
             "group" : "daily_actions",
             "captions": [
@@ -562,7 +562,7 @@
             ]
         },
         {
-            "label": "make OK sign",
+            "action": "make OK sign",
             "tag" : "A071",
             "group" : "daily_actions",
             "captions": [
@@ -570,7 +570,7 @@
             ]
         },
         {
-            "label": "make victory sign",
+            "action": "make victory sign",
             "tag" : "A072",
             "group" : "daily_actions",
             "captions": [
@@ -578,7 +578,7 @@
             ]
         },
         {
-            "label": "staple book",
+            "action": "staple book",
             "tag" : "A073",
             "group" : "daily_actions",
             "captions": [
@@ -586,7 +586,7 @@
             ]
         },
         {
-            "label": "counting money",
+            "action": "counting money",
             "tag" : "A074",
             "group" : "daily_actions",
             "captions": [
@@ -594,7 +594,7 @@
             ]
         },
         {
-            "label": "cutting nails",
+            "action": "cutting nails",
             "tag" : "A075",
             "group" : "daily_actions",
             "captions": [
@@ -602,7 +602,7 @@
             ]
         },
         {
-            "label": "cutting paper",
+            "action": "cutting paper",
             "tag" : "A076",
             "group" : "daily_actions",
             "captions": [
@@ -610,7 +610,7 @@
             ]
         },
         {
-            "label": "snap fingers",
+            "action": "snap fingers",
             "tag" : "A077",
             "group" : "daily_actions",
             "captions": [
@@ -618,7 +618,7 @@
             ]
         },
         {
-            "label": "open bottle",
+            "action": "open bottle",
             "tag" : "A078",
             "group" : "daily_actions",
             "captions": [
@@ -626,7 +626,7 @@
             ]
         },
         {
-            "label": "sniff/smell",
+            "action": "sniff/smell",
             "tag" : "A079",
             "group" : "daily_actions",
             "captions": [
@@ -634,7 +634,7 @@
             ]
         },
         {
-            "label": "squat down",
+            "action": "squat down",
             "tag" : "A080",
             "group" : "daily_actions",
             "captions": [
@@ -642,7 +642,7 @@
             ]
         },
         {
-            "label": "toss a coin",
+            "action": "toss a coin",
             "tag" : "A081",
             "group" : "daily_actions",
             "captions": [
@@ -650,7 +650,7 @@
             ]
         },
         {
-            "label": "fold paper",
+            "action": "fold paper",
             "tag" : "A082",
             "group" : "daily_actions",
             "captions": [
@@ -658,7 +658,7 @@
             ]
         },
         {
-            "label": "ball up paper",
+            "action": "ball up paper",
             "tag" : "A083",
             "group" : "daily_actions",
             "captions": [
@@ -666,7 +666,7 @@
             ]
         },
         {
-            "label": "play magic cube",
+            "action": "play magic cube",
             "tag" : "A084",
             "group" : "daily_actions",
             "captions": [
@@ -674,7 +674,7 @@
             ]
         },
         {
-            "label": "apply cream on face",
+            "action": "apply cream on face",
             "tag" : "A085",
             "group" : "daily_actions",
             "captions": [
@@ -682,7 +682,7 @@
             ]
         },
         {
-            "label": "apply cream on hand",
+            "action": "apply cream on hand",
             "tag" : "A086",
             "group" : "daily_actions",
             "captions": [
@@ -690,7 +690,7 @@
             ]
         },
         {
-            "label": "put on bag",
+            "action": "put on bag",
             "tag" : "A087",
             "group" : "daily_actions",
             "captions": [
@@ -698,7 +698,7 @@
             ]
         },
         {
-            "label": "take off bag",
+            "action": "take off bag",
             "tag" : "A088",
             "group" : "daily_actions",
             "captions": [
@@ -706,7 +706,7 @@
             ]
         },
         {
-            "label": "put object into bag",
+            "action": "put object into bag",
             "tag" : "A089",
             "group" : "daily_actions",
             "captions": [
@@ -714,7 +714,7 @@
             ]
         },
         {
-            "label": "take object out of bag",
+            "action": "take object out of bag",
             "tag" : "A090",
             "group" : "daily_actions",
             "captions": [
@@ -722,7 +722,7 @@
             ]
         },
         {
-            "label": "open a box",
+            "action": "open a box",
             "tag" : "A091",
             "group" : "daily_actions",
             "captions": [
@@ -730,7 +730,7 @@
             ]
         },
         {
-            "label": "move heavy objects",
+            "action": "move heavy objects",
             "tag" : "A092",
             "group" : "daily_actions",
             "captions": [
@@ -738,7 +738,7 @@
             ]
         },
         {
-            "label": "shake fist",
+            "action": "shake fist",
             "tag" : "A093",
             "group" : "daily_actions",
             "captions": [
@@ -746,7 +746,7 @@
             ]
         },
         {
-            "label": "throw up cap/hat",
+            "action": "throw up cap/hat",
             "tag" : "A094",
             "group" : "daily_actions",
             "captions": [
@@ -754,7 +754,7 @@
             ]
         },
         {
-            "label": "capitulate",
+            "action": "capitulate",
             "tag" : "A095",
             "group" : "daily_actions",
             "captions": [
@@ -762,7 +762,7 @@
             ]
         },
         {
-            "label": "cross arms",
+            "action": "cross arms",
             "tag" : "A096",
             "group" : "daily_actions",
             "captions": [
@@ -770,7 +770,7 @@
             ]
         },
         {
-            "label": "arm circles",
+            "action": "arm circles",
             "tag" : "A097",
             "group" : "daily_actions",
             "captions": [
@@ -778,7 +778,7 @@
             ]
         },
         {
-            "label": "arm swings",
+            "action": "arm swings",
             "tag" : "A098",
             "group" : "daily_actions",
             "captions": [
@@ -786,7 +786,7 @@
             ]
         },
         {
-            "label": "run on the spot",
+            "action": "run on the spot",
             "tag" : "A099",
             "group" : "daily_actions",
             "captions": [
@@ -794,7 +794,7 @@
             ]
         },
         {
-            "label": "butt kicks",
+            "action": "butt kicks",
             "tag" : "A100",
             "group" : "daily_actions",
             "captions": [
@@ -802,7 +802,7 @@
             ]
         },
         {
-            "label": "cross toe touch",
+            "action": "cross toe touch",
             "tag" : "A101",
             "group" : "daily_actions",
             "captions": [
@@ -810,7 +810,7 @@
             ]
         },
         {
-            "label": "side kick",
+            "action": "side kick",
             "tag" : "A102",
             "group" : "daily_actions",
             "captions": [
@@ -818,7 +818,7 @@
             ]
         },
         {
-            "label": "yawn",
+            "action": "yawn",
             "tag" : "A103",
             "group" : "medical_conditions",
             "captions": [
@@ -826,7 +826,7 @@
             ]
         },
         {
-            "label": "stretch oneself",
+            "action": "stretch oneself",
             "tag" : "A104",
             "group" : "medical_conditions",
             "captions": [
@@ -834,7 +834,7 @@
             ]
         },
         {
-            "label": "blow nose",
+            "action": "blow nose",
             "tag" : "A105",
             "group" : "medical_conditions",
             "captions": [
@@ -842,7 +842,7 @@
             ]
         },
         {
-            "label": "hit with object",
+            "action": "hit with object",
             "tag" : "A106",
             "group" : "mutual_actions",
             "captions": [
@@ -850,7 +850,7 @@
             ]
         },
         {
-            "label": "wield knife",
+            "action": "wield knife",
             "tag" : "A107",
             "group" : "mutual_actions",
             "captions": [
@@ -858,7 +858,7 @@
             ]
         },
         {
-            "label": "knock over",
+            "action": "knock over",
             "tag" : "A108",
             "group" : "mutual_actions",
             "captions": [
@@ -866,7 +866,7 @@
             ]
         },
         {
-            "label": "grab stuff",
+            "action": "grab stuff",
             "tag" : "A109",
             "group" : "mutual_actions",
             "captions": [
@@ -874,7 +874,7 @@
             ]
         },
         {
-            "label": "shoot with gun",
+            "action": "shoot with gun",
             "tag" : "A110",
             "group" : "mutual_actions",
             "captions": [
@@ -882,7 +882,7 @@
             ]
         },
         {
-            "label": "step on foot",
+            "action": "step on foot",
             "tag" : "A111",
             "group" : "mutual_actions",
             "captions": [
@@ -890,7 +890,7 @@
             ]
         },
         {
-            "label": "high-five",
+            "action": "high-five",
             "tag" : "A112",
             "group" : "mutual_actions",
             "captions": [
@@ -898,7 +898,7 @@
             ]
         },
         {
-            "label": "cheers and drink",
+            "action": "cheers and drink",
             "tag" : "A113",
             "group" : "mutual_actions",
             "captions": [
@@ -906,7 +906,7 @@
             ]
         },
         {
-            "label": "carry object",
+            "action": "carry object",
             "tag" : "A114",
             "group" : "mutual_actions",
             "captions": [
@@ -914,7 +914,7 @@
             ]
         },
         {
-            "label": "take a photo",
+            "action": "take a photo",
             "tag" : "A115",
             "group" : "mutual_actions",
             "captions": [
@@ -922,7 +922,7 @@
             ]
         },
         {
-            "label": "follow",
+            "action": "follow",
             "tag" : "A116",
             "group" : "mutual_actions",
             "captions": [
@@ -930,7 +930,7 @@
             ]
         },
         {
-            "label": "whisper",
+            "action": "whisper",
             "tag" : "A117",
             "group" : "mutual_actions",
             "captions": [
@@ -938,7 +938,7 @@
             ]
         },
         {
-            "label": "exchange things",
+            "action": "exchange things",
             "tag" : "A118",
             "group" : "mutual_actions",
             "captions": [
@@ -946,7 +946,7 @@
             ]
         },
         {
-            "label": "support somebody",
+            "action": "support somebody",
             "tag" : "A119",
             "group" : "mutual_actions",
             "captions": [
@@ -954,7 +954,7 @@
             ]
         },
         {
-            "label": "rock-paper-scissors",
+            "action": "rock-paper-scissors",
             "tag" : "A120",
             "group" : "mutual_actions",
             "captions": [

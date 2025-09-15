@@ -617,6 +617,7 @@ if __name__ == "__main__":
 
     import argparse
     parser = argparse.ArgumentParser(description="Exploratory Data Analysis (EDA) for NTU RGB+D vs. HumanML3D Datasets")
+    parser.add_argument('--dataset', default='NTU60', type=str, choices=['NTU60', 'NTU120'], help='Which NTU dataset to use')
     parser.add_argument('--data-rep', default='xyz', type=str, required=True, choices=['xyz', 'hml_vec'], help='data representation format')
     parser.add_argument('--hml-set', default='', type=str, help='Path to .txt listing a specific set of HML filenames to analyze, if empty all files are used')
     parser.add_argument('--ntu-set', default='', type=str, help='Path to .txt listing a specific set of NTU filenames to analyze, if empty all files are used')
@@ -633,8 +634,8 @@ if __name__ == "__main__":
         raise ValueError("Unrecognized data representation format : {}".format(args.data_rep))
     
     ROOT = Path('.').resolve()
-    OUT_PATH = Path(__file__).parent.relative_to(ROOT)
-    NTU_DIR = pjoin(ROOT, 'data', 'NTU60', data_folder)
+    OUT_PATH = pjoin(Path(__file__).parent.relative_to(ROOT), 'outputs', args.dataset)
+    NTU_DIR = pjoin(ROOT, 'data', args.dataset, data_folder)
     HML_DIR = pjoin(ROOT, 'data', 'HumanML3D', data_folder)
     CACHE_DIR = 'cache'
 
