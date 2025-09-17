@@ -177,6 +177,9 @@ cython_debug/
 data/NTU60/new*
 data/NTU60/texts
 data/NTU60/splits
+data/NTU120/new*
+data/NTU120/texts
+data/NTU120/splits
 data/HumanML3D/new*
 data/HumanML3D/texts
 data/HumanML3D/splits
