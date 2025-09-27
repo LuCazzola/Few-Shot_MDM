@@ -12,6 +12,8 @@ from textwrap import wrap
 from moviepy.editor import VideoClip
 from moviepy.video.io.bindings import mplfig_to_npimage
 
+from utils.constants.data import DATA_FILENAME
+
 COLORS = {
     5 : {
         'blue' : ["#4D84AA", "#5B9965", "#61CEB9", "#34C1E2", "#80B79A"],
@@ -215,6 +217,7 @@ if __name__ == "__main__":
     os.makedirs(RAW_KINECT_PATH, exist_ok=True)
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, default='NTU120', choices=['NTU60', 'NTU120'], help='Dataset to visualize')
     parser.add_argument('--raw-kinect', action='store_true', help='Save raw Kinect data as well (sample take directly from the dataset and untouched)')
     parser.add_argument('--samples', type=str, default='samples.txt', help='File .txt with sample names to visualize')
     parser.add_argument('--first_n', type=int, default=-1, help='Returns first N samples of the given file. negative for all')
@@ -230,8 +233,8 @@ if __name__ == "__main__":
 
     DATA = {
         "kinect" : SimpleNamespace(
-            dataset='ntu60',
-            data_root=pjoin('.', 'data', 'NTU60', 'ntu60_3danno.pkl'),
+            dataset=args.dataset.lower(),
+            data_root=pjoin('.', 'data', args.dataset, DATA_FILENAME[args.dataset]),
             kinematic_chain=kinematic_chain['kinect'],
             n_joints=25,
             fps=30,
@@ -243,9 +246,9 @@ if __name__ == "__main__":
         ),
 
         "smpl" : SimpleNamespace(
-            dataset='ntu60',
-            data_root=pjoin('.', 'data', 'NTU60', 'new_joints'),
-            texts_root=pjoin('.', 'data', 'NTU60', 'texts'),
+            dataset=args.dataset.lower(),
+            data_root=pjoin('.', 'data', args.dataset, 'new_joints'),
+            texts_root=pjoin('.', 'data', args.dataset, 'texts'),
             kinematic_chain=kinematic_chain['smpl'],
             n_joints=22,
             fps=20,

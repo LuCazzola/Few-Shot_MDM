@@ -43,6 +43,7 @@ dependencies:
   - ffmpeg=4.3=hf484d3e_0
   - fftw=3.3.9=h5eee18b_2
   - flit-core=3.6.0=pyhd3eb1b0_0
+  - fvcore==0.1.5.post20221221
   - fontconfig=2.14.1=h52c9d5c_1
   - freetype=2.13.3=h4a9f257_0
   - giflib=5.2.2=h5eee18b_0
@@ -221,6 +222,7 @@ dependencies:
       - filelock==3.12.2
       - fsspec==2023.1.0
       - ftfy==6.1.1
+      - fvcore==0.1.5.post20221221 
       - huggingface-hub==0.16.4
       - imageio==2.31.2
       - imageio-ffmpeg==0.5.1
@@ -229,6 +231,9 @@ dependencies:
       - lxml==4.9.1
       - moviepy==1.0.3
       - murmurhash==1.0.8
+      - mmcv-full==1.5.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html
+      - mmdet==2.23.0
+      - mmpose==0.24.0
       - preshed==3.0.7
       - proglog==0.1.12
       - pycryptodomex==3.15.0
@@ -244,4 +249,5 @@ dependencies:
       - trimesh==4.4.1
       - urllib3==1.26.12
       - wcwidth==0.2.5
+      - yapf==0.32.0
 prefix: /home/disi/miniconda3/envs/cloudspace
